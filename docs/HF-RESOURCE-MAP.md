@@ -9,15 +9,17 @@ without quietly turning every remote object into trusted KINGDOM state.
 | --- | --- | --- | --- |
 | Hub model/dataset/Space metadata | Catalog exact public repos and revisions | `hf-kingdom-resource/v1` snapshot + run receipt | Implemented |
 | Dataset Viewer Parquet + DuckDB | Small, reproducible aggregate analysis | digest-bound `hf-kingdom-dataset-aggregate/v1` | Implemented for MCPShield |
-| `datasets` streaming | Iterate large datasets without a full local download | bounded batch receipts and resumable cursors | Next; policy gate needed |
-| `transformers` / MLX model weights | Local inference on the M4 Max | model revision + command + timing + output receipt | One accepted run; output capture incomplete |
+| Repository tree metadata | Revision-pinned inventory without file bodies | bounded aggregate census + completeness marker | Implemented for DTap |
+| `datasets` streaming | Iterate large datasets without a full local download | bounded batch receipts and resumable cursors | Next; trajectory privacy gate needed |
+| Transformers.js embeddings | Local navigation over minimized evidence | source-bound vectors + model manifest receipt | Implemented for fixed MiniLM CPU/q8 |
+| `transformers` / MLX generative weights | Local inference on the M4 Max | model revision + command + timing + output receipt | One accepted MLX run; output capture incomplete |
 | Spaces / MCP tools | Graphs, images, audio, and specialist tools | invocation receipt with inputs, outputs, remote effects, quota class | Metadata only in this lab |
 | `smolagents` / `tiny-agents` | Prototype tool-using agents | state ledger + preflight policy decision + tool receipt | Research |
-| Collections | Curated reading lists and experiment manifests | snapshot collection membership and observation time | Research |
+| Collections + Papers | Curated reading lists and design inputs | exact-root graph + observation/provenance edges | Implemented for one Collection/two papers |
 | Storage Buckets | Fast mutable artifacts or intermediate data | object digest, ETag, region, writer, and retention receipt | Keep out of canonical evidence |
 | Jobs | Reproducible remote batch compute | immutable job spec, budget ceiling, logs, artifact digests | Off; explicit authorization required |
 | Inference Providers | Remote model calls | provider/model/cost/data-boundary receipt | Off; explicit authorization required |
-| Papers | Ground design decisions in primary research | paper ID, metadata, claim pointer, observation time | Research input |
+| Trackio | Local experiment observability | AgentTool-to-run/config/metrics mapping + separate future import receipt | Mapping implemented; runtime off |
 
 Official starting points:
 
@@ -64,7 +66,12 @@ positives in its manually checked alert sample.
 contains nested trajectory JSON. The Dataset Viewer currently reports no
 supported data files, so it must not be treated as a Parquet-ready table.
 
-A useful next experiment is a bounded file inventory followed by:
+A bounded public tree inventory is now implemented. At revision
+`836caf2fdd78b888ddd14fb62dc038e932e17898`, the normal live run reached the
+ten-page/10,000-entry cap. It retained aggregate path counts only and labelled
+the result truncated and non-representative.
+
+A useful separate next experiment is a content-minimized subset reader:
 
 1. select a small, explicitly named subset;
 2. record path, byte size, repository revision, and digest;
@@ -72,6 +79,9 @@ A useful next experiment is a bounded file inventory followed by:
    records;
 4. compare those traces with AgentTool Collab reports and receipts;
 5. keep participant content minimized and untrusted until reviewed.
+
+The existing census does not authorize or perform these five body-reading
+steps.
 
 ### Papers as design inputs
 
@@ -120,10 +130,13 @@ review or KINGDOM trust.
   later bounded trajectory pipeline; use explicit revisions and batch limits.
 - DuckDB: local SQL over Parquet. Best fit for aggregation where row-level
   data should not enter AgentTool search.
+- `@huggingface/transformers`: JavaScript/WASM/native-ONNX inference. The lab
+  pins 4.2.0 and one 23.7 MB community MiniLM conversion for local English
+  navigation; model loading is network-trapped after hash verification.
 - `transformers`: general Python model loading and inference. On this Mac,
-  MLX-native weights and `mlx-lm` are a better first local text-generation
-  path; `transformers` remains valuable for model families and tasks not
-  available in MLX.
+  MLX-native weights and `mlx-lm` remain the better first local
+  text-generation path; Python Transformers remains valuable for model
+  families and tasks not available in MLX.
 - `diffusers`: image/audio/video diffusion pipelines. Prefer local execution
   when supported; a remote Space requires a separate data/quota receipt.
 - `peft` and `trl`: adaptation and post-training. They belong in an isolated,
@@ -132,6 +145,10 @@ review or KINGDOM trust.
 - `smolagents` and `tiny-agents`: useful agent runtimes, but tool access must
   remain behind the same explicit input, policy, authority, and receipt
   boundary used by AgentTool Collab.
+- `trackio`: run/config/numeric-metric observability. The current bridge emits
+  a deterministic capability mapping only. Native SQLite/Parquet layout,
+  runtime import, hardware logging, dashboard, MCP, and HF sync are all
+  explicitly false and need a separate validator/receipt if ever enabled.
 
 ## KINGDOM route
 

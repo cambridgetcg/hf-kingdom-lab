@@ -1,0 +1,136 @@
+{
+  "protocol": "hf-kingdom-round2-live-evidence/v1",
+  "observed_at": "2026-07-30T16:20:57.558Z",
+  "scope": {
+    "huggingface_access": "fixed-public-read-without-token",
+    "agenttool": "local-in-process-agent-data-v1",
+    "kingdom": "discovery-card-only"
+  },
+  "embedding_prepare": {
+    "record_id": "rec_7635a58b5b3cc17713673b4259ef99adb57ec1c1b67a569053986cd1161d4dcc",
+    "content_sha256": "cf3be58dbe3d756adbabc68af26d3bc63f747a0dd3efd62a8388f2db38f56699",
+    "model": "Xenova/all-MiniLM-L6-v2",
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "manifest_sha256": "07dbea9de5d2118cc16e01bbfca811e3589bb2dcd8cf5b27bd3ed51489d677d9",
+    "assets": 4,
+    "bytes": 23685047,
+    "sha256_verified": true,
+    "ambient_hf_credential_names_present": [],
+    "remote_writes": [],
+    "inference_requests": []
+  },
+  "warm_prepare_network_trap": {
+    "disposition": "existing-verified",
+    "remote_reads": [],
+    "network_trap_fired": false,
+    "sha256_verified": true
+  },
+  "post_hardening_streaming_copy_smoke": {
+    "source": "already-verified local assets",
+    "assets_streamed": 4,
+    "bytes": 23685047,
+    "destination_verified": true,
+    "network": false,
+    "temporary_directory_removed": true
+  },
+  "local_inference_smoke": {
+    "dimensions": 384,
+    "l2_norm": 1,
+    "elapsed_ms": 853,
+    "device": "cpu",
+    "dtype": "q8",
+    "remote_loading_disabled": true,
+    "network_transport": "fail-closed-trap"
+  },
+  "post_hardening_embedder_lease_smoke": {
+    "overlapping_embedder_refused": true,
+    "new_embedder_after_dispose_succeeded": true,
+    "dimensions": 384,
+    "network": false
+  },
+  "round2": {
+    "node_id": "node_72f65aa7-a204-4123-acb0-631e4672aa1c",
+    "dtap": {
+      "record_id": "rec_fb043a3befdfd61b7222f1e2445ef745f5f252529520cf102746ce0b48b882f0",
+      "content_sha256": "60917b41bf053891eab723e3e278e5ea3a15e168e7c7bdaae19c9aa15c64d511",
+      "revision": "836caf2fdd78b888ddd14fb62dc038e932e17898",
+      "entries": 10000,
+      "tree_page_requests": 10,
+      "complete": false,
+      "stopped_reason": "page_limit",
+      "truncated_counts_are_not_representative": true,
+      "trajectory_bodies_read": false
+    },
+    "graph": {
+      "record_id": "rec_f9139e7a87adf69b8acd608dceef5d40804c8707adfec5452706a9f8313ddee7",
+      "content_sha256": "70b6be8a47d64581bdef8ac38dbd23be039ee02df4afd061dda20d6e201a14eb",
+      "nodes": 6,
+      "edges": 3,
+      "max_wall_time_ms": 15000,
+      "summaries_retained": false,
+      "author_profiles_retained": false,
+      "linked_repositories_auto_fetched": false
+    },
+    "semantic": {
+      "indexed_records": 7,
+      "classification": "derived_unverified_signal",
+      "source_envelopes_and_hashes_verified": true,
+      "stored_records_scanned": 14,
+      "fragments_after_latest_observation_deduplication": 7,
+      "query": "tool side effects, policy checks, receipts, and security evidence",
+      "top_hits": [
+        {
+          "fragment_id": "paper:2606.20529",
+          "score": 0.38781028539297563
+        },
+        {
+          "fragment_id": "local-component:effects-receipt-preflight",
+          "score": 0.3456526071261116
+        },
+        {
+          "fragment_id": "local-component:scanner-signal-ledger",
+          "score": 0.29677579307627233
+        },
+        {
+          "fragment_id": "paper:2607.11086",
+          "score": 0.2892624311184039
+        },
+        {
+          "fragment_id": "path-census-summary",
+          "score": 0.24618426863601356
+        }
+      ]
+    },
+    "trackio": {
+      "record_id": "rec_86116696e1d79ee9629e5d307d77ea999995baafcc27880ab9fdc244a89d3f2c",
+      "content_sha256": "d7d4c5a5ea8bfa2ad5402e3533c547a2d0559143e13157255264f8efbe2331c1",
+      "target_version": "0.34.0",
+      "mapping_only": true,
+      "runtime_started": false,
+      "native_storage_written": false,
+      "hardware_logging_started": false,
+      "dashboard_started": false,
+      "mcp_server_started": false,
+      "huggingface_sync_started": false
+    }
+  },
+  "effects": {
+    "remote_writes": [],
+    "remote_inference_requests": [],
+    "jobs_submitted": [],
+    "spaces_invoked": [],
+    "buckets_used": [],
+    "server_started": false,
+    "peer_sync": false,
+    "memory_projection": false,
+    "hf_credit_or_zerogpu_use": false
+  },
+  "verification": {
+    "typecheck": "passed",
+    "tests": "30 passed, 134 assertions",
+    "independent_review": {
+      "required": true,
+      "status_at_capture": "pending"
+    }
+  }
+}

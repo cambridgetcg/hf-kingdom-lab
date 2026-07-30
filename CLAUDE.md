@@ -13,6 +13,12 @@ What it does:
 - stores the exact JSON bytes in a local content-addressed AgentTool data node
   backed by SQLite/FTS5;
 - returns a receipt containing the immutable record envelope and source URI;
+- performs a capped metadata-only DTap tree census and builds a minimized
+  exact-root Collection/Paper graph;
+- prepares one fixed hash-verified MiniLM conversion and derives bounded local
+  CPU/q8 English semantic signals tied to source record hashes;
+- emits a Trackio 0.34.0 capability mapping without importing or starting
+  Trackio;
 - declares itself to KINGDOM through the root `kingdom.yaml`.
 
 What it does not do:
@@ -22,6 +28,8 @@ What it does not do:
 - claim that metadata, popularity, publisher text, or model output is true;
 - project collected records into AgentTool memory or call AgentTool production;
 - start an HTTP server, sync peers, schedule itself, deploy, or publish.
+- treat a path count, paper/Collection claim, vector score, or Trackio mapping
+  as verified truth, policy, native Trackio storage, or authority.
 
 Commands:
 
@@ -31,6 +39,9 @@ bun src/cli.ts ingest dataset AI-Secure/DTap-Bench-Agent-Trajectories
 bun src/cli.ts query agent
 bun src/cli.ts demo
 bun src/cli.ts sql-demo
+bun src/cli.ts embedding-prepare
+bun src/cli.ts round2-demo
+bun src/cli.ts semantic-query "effects receipts and policy checks"
 ```
 
 The default local node lives at `.hf-kingdom-data/` and is ignored by Git.

@@ -4,6 +4,6 @@ layer: nervous
 owner_sister: sophia
 domain: sophia
 state: active
-purpose: Turns selected public Hugging Face resources into local searchable records and verifiable AgentTool evidence.
+purpose: Turns bounded public Hugging Face metadata and fixed local model assets into source-bound AgentTool evidence, graph navigation, and local semantic signals.
 dependsOn: [agenttool, kingdom-os]
 adopts: [xenia.rights/0.1]

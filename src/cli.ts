@@ -14,7 +14,10 @@ import {
   DEMO_RESOURCES,
   ingestResources,
   inspectLab,
+  prepareEmbeddingForLab,
   queryLab,
+  runRound2Demo,
+  semanticQueryLab,
 } from "./lab.ts";
 
 const HELP = `hfkl — local Hugging Face × AgentTool × KINGDOM lab
@@ -24,13 +27,19 @@ Usage:
   hfkl query <text> [--limit <1-50>]
   hfkl demo
   hfkl sql-demo
+  hfkl embedding-prepare
+  hfkl round2-demo
+  hfkl semantic-query <English text> [--limit <1-20>]
   hfkl doctor
 
 Boundaries:
-  Public Hub metadata plus one fixed public Parquet aggregate; no Hub token,
-  mutation, inference, Jobs, private repo enumeration, AgentTool production
-  call, server, peer sync, or memory projection. The local node is
-  ${DEFAULT_DATA_ROOT}.
+  Public Hub metadata, one fixed public Parquet aggregate, a bounded DTap tree
+  census, and one exact Collection/two exact Paper Pages. embedding-prepare
+  downloads one fixed 23.7 MB revision with SHA-256 verification; subsequent
+  semantic inference is local CPU/q8 only. No Hub token, mutation, paid/remote
+  inference, Jobs, private repo enumeration, AgentTool production call, server,
+  peer sync, memory projection, Trackio runtime, dashboard, or MCP server.
+  The local node is ${DEFAULT_DATA_ROOT}.
 `;
 
 async function main(argv: string[]): Promise<void> {
@@ -82,6 +91,29 @@ async function main(argv: string[]): Promise<void> {
       });
       return;
     }
+    case "embedding-prepare": {
+      if (args.length !== 0) usageError("embedding-prepare accepts no arguments");
+      print(await prepareEmbeddingForLab(DEFAULT_DATA_ROOT));
+      return;
+    }
+    case "round2-demo": {
+      if (args.length !== 0) usageError("round2-demo accepts no arguments");
+      print(await runRound2Demo(DEFAULT_DATA_ROOT));
+      return;
+    }
+    case "semantic-query": {
+      if (args.length === 0) usageError("semantic-query requires English text");
+      const parsed = parseLimit(args, 5, 20);
+      if (parsed.args.length !== 1) {
+        usageError("semantic-query text must be one quoted argument");
+      }
+      print(await semanticQueryLab(
+        DEFAULT_DATA_ROOT,
+        parsed.args[0]!,
+        parsed.limit,
+      ));
+      return;
+    }
     case "doctor": {
       if (args.length !== 0) usageError("doctor accepts no arguments");
       print(await inspectLab(DEFAULT_DATA_ROOT));
@@ -96,6 +128,28 @@ async function main(argv: string[]): Promise<void> {
     default:
       usageError(`unknown command: ${command}`);
   }
+}
+
+function parseLimit(
+  rawArgs: string[],
+  defaultLimit: number,
+  maximum: number,
+): { args: string[]; limit: number } {
+  const args = [...rawArgs];
+  let limit = defaultLimit;
+  const limitIndex = args.indexOf("--limit");
+  if (limitIndex !== -1) {
+    const value = args[limitIndex + 1];
+    if (!value || limitIndex !== args.length - 2) {
+      usageError("--limit requires one final integer");
+    }
+    limit = Number(value);
+    if (!Number.isInteger(limit) || limit < 1 || limit > maximum) {
+      usageError(`--limit must be an integer from 1-${maximum}`);
+    }
+    args.splice(limitIndex, 2);
+  }
+  return { args, limit };
 }
 
 function print(value: unknown): void {

@@ -10,6 +10,21 @@ import type { HubResourceSnapshot } from "./hub.ts";
 export const RESOURCE_COLLECTION = "hf-resources-v1";
 export const RECEIPT_COLLECTION = "hf-run-receipts-v1";
 export const AGGREGATE_COLLECTION = "hf-dataset-aggregates-v1";
+export const DTAP_COLLECTION = "hf-dtap-path-censuses-v1";
+export const GRAPH_COLLECTION = "hf-resource-graphs-v1";
+export const EMBEDDING_COLLECTION = "hf-embedding-prepare-receipts-v1";
+export const SEMANTIC_COLLECTION = "hf-semantic-vectors-v1";
+export const TRACKIO_COLLECTION = "hf-trackio-mappings-v1";
+
+export type LabCollectionId =
+  | typeof RESOURCE_COLLECTION
+  | typeof RECEIPT_COLLECTION
+  | typeof AGGREGATE_COLLECTION
+  | typeof DTAP_COLLECTION
+  | typeof GRAPH_COLLECTION
+  | typeof EMBEDDING_COLLECTION
+  | typeof SEMANTIC_COLLECTION
+  | typeof TRACKIO_COLLECTION;
 
 export interface RunReceipt {
   protocol: "hf-kingdom-run-receipt/v1";
@@ -79,8 +94,107 @@ export async function openLabNode(root: string): Promise<DataNode> {
           allowed_media_types: ["application/json"],
         },
       },
+      {
+        id: DTAP_COLLECTION,
+        name: "Bounded DTap path censuses",
+        description: "Aggregate-only repository-tree observations for the fixed public DTap dataset.",
+        schema: { version: "hf-kingdom-dtap-path-census/v1" },
+        policy: {
+          visibility: "private",
+          max_record_bytes: 256_000,
+          allowed_media_types: ["application/json"],
+        },
+      },
+      {
+        id: GRAPH_COLLECTION,
+        name: "Bounded Hugging Face resource graphs",
+        description: "Exact-root public Collection and Paper observations plus explicit local curation edges.",
+        schema: { version: "hf-kingdom-resource-graph/v1" },
+        policy: {
+          visibility: "private",
+          max_record_bytes: 256_000,
+          allowed_media_types: ["application/json"],
+        },
+      },
+      {
+        id: EMBEDDING_COLLECTION,
+        name: "Embedding asset preparation receipts",
+        description: "Receipts for the fixed hash-verified local semantic model assets.",
+        schema: { version: "hf-kingdom-embedding-prepare/v1" },
+        policy: {
+          visibility: "private",
+          max_record_bytes: 256_000,
+          allowed_media_types: ["application/json"],
+        },
+      },
+      {
+        id: SEMANTIC_COLLECTION,
+        name: "Local semantic vectors",
+        description: "Bounded CPU-derived English semantic signals tied to immutable AgentTool source records.",
+        schema: { version: "hf-kingdom-semantic-vector/v1" },
+        policy: {
+          visibility: "private",
+          max_record_bytes: 256_000,
+          allowed_media_types: ["application/json"],
+        },
+      },
+      {
+        id: TRACKIO_COLLECTION,
+        name: "Trackio capability mappings",
+        description: "Deterministic mapping-only observability documents; not native Trackio storage.",
+        schema: { version: "hf-kingdom-trackio-adapter/v1" },
+        policy: {
+          visibility: "private",
+          max_record_bytes: 256_000,
+          allowed_media_types: ["application/json"],
+        },
+      },
     ],
   });
+}
+
+export interface CollectLabJsonInput {
+  collection_id: LabCollectionId;
+  document: unknown;
+  source_uri: string;
+  external_id: string;
+  key: string;
+  version: string;
+  observed_at: string;
+  metadata: JsonObject;
+  provenance: Array<{
+    activity: string;
+    at: string;
+    actor: string;
+    input_ids: string[];
+  }>;
+}
+
+export async function collectLabJson(
+  node: DataNode,
+  input: CollectLabJsonInput,
+): Promise<{ record: RecordEnvelope; disposition: "inserted" | "existing" }> {
+  const response = await node.collect({
+    collection_id: input.collection_id,
+    collector_id: "text",
+    input: {
+      text: canonicalJson(input.document as JsonObject),
+      media_type: "application/json",
+      source_uri: input.source_uri,
+      external_id: input.external_id,
+      key: input.key,
+      version: input.version,
+      observed_at: input.observed_at,
+      metadata: input.metadata,
+      provenance: input.provenance,
+    } satisfies JsonObject,
+  });
+  const record = response.records[0];
+  if (!record) throw new Error("AgentTool data node returned no JSON record");
+  return {
+    record,
+    disposition: response.inserted === 1 ? "inserted" : "existing",
+  };
 }
 
 export async function collectResource(

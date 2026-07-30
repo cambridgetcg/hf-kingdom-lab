@@ -20,6 +20,35 @@ not an undeclared side effect of an aggregate run.
 `src/aggregate.ts` accepts only the exact dataset, URL, query, effect boundary,
 and closed output schema before storing the result.
 
+`src/dtap.ts` resolves one fixed public DTap dataset revision and walks only
+its tree-metadata API. It caps pages, entries, response/path bytes, depth, and
+time; never exposes a repository/URL/path argument; never reads `/resolve`
+file bodies; and marks normal cap stops partial and non-representative.
+
+`src/graph.ts` reads one exact public Collection and two exact Paper APIs. It
+retains minimized nodes, observed Collection-membership edges, and two
+explicit local-curation edges. Remote summaries, profiles, comments, nested
+Collections, and linked repositories are discarded.
+The entire graph observation has a 15-second default deadline; injected tests
+may shorten but cannot extend it, and an injected transport that ignores its
+AbortSignal is still raced against that deadline.
+
+`src/embedding.ts` owns a four-file, revision-qualified MiniLM asset manifest.
+Cold prepare refuses common ambient HF token variables and validates exact
+bytes/SHA-256 before atomic installation. Warm prepare rehashes locally.
+Inference uses Transformers.js 4.2.0 on CPU/q8 with remote models disabled and
+the library fetch transport replaced by a failing network trap. Vectors remain
+derived, English-oriented, source-hash-bound evidence.
+The collector and bounded query both resolve the AgentTool source record,
+allowlist its source collection, and compare the envelope content SHA-256.
+Only one local embedder may hold the process-global Transformers.js network
+trap at a time; an overlapping construction fails closed.
+
+`src/trackio.ts` maps bounded numeric run metrics and JSON-primitive config to
+a versioned Trackio 0.34.0 capability document. It neither imports Trackio nor
+writes native Trackio SQLite/Parquet, and it starts no hardware logger,
+dashboard, MCP server, or Hugging Face sync.
+
 `kingdom.yaml` is a discovery card. It describes this repository; it does not
 activate or deploy it.
 
@@ -36,18 +65,26 @@ referenced by digest in the coordination journal.
 
 ## Records
 
-The local node declares three collections:
+The local node declares eight collections:
 
 | Collection | Canonical content |
 | --- | --- |
 | `hf-resources-v1` | `hf-kingdom-resource/v1` |
 | `hf-run-receipts-v1` | `hf-kingdom-run-receipt/v1` |
 | `hf-dataset-aggregates-v1` | `hf-kingdom-dataset-aggregate/v1` |
+| `hf-dtap-path-censuses-v1` | `hf-kingdom-dtap-path-census/v1` |
+| `hf-resource-graphs-v1` | `hf-kingdom-resource-graph/v1` |
+| `hf-embedding-prepare-receipts-v1` | `hf-kingdom-embedding-prepare/v1` |
+| `hf-semantic-vectors-v1` | `hf-kingdom-semantic-vector/v1` |
+| `hf-trackio-mappings-v1` | `hf-kingdom-trackio-adapter/v1` |
 
 Resource records hold normalized Hub metadata and the observation boundary.
 Run receipts independently hold requested resources, effects, local record
 IDs, content hashes, and limitations. Aggregate records hold source bytes,
 digest, fixed SQL, aggregate rows, tool versions, effects, and limitations.
+Round-two records separately hold the DTap census, graph, model-asset receipt,
+source-bound vector, and observability mapping. A vector never substitutes for
+its named source record.
 
 The separation is essential. In AgentTool Data 0.3.1, record identity is based
 on canonical content and key identity; metadata, `observed_at`, provenance,
@@ -66,6 +103,16 @@ The application currently enforces:
 - separate effect receipts;
 - fixed URL, byte ceiling, fixed SQL, aggregate-only output, and closed-schema
   validation for the DuckDB path;
+- fixed DTap identity plus page, entry, byte, depth, and wall-time limits;
+- exact graph roots, manual redirect refusal, closed edge relations, and
+  minimized retained fields under one 15-second deadline;
+- fixed embedding asset paths/sizes/hashes, cold-run credential refusal,
+  plain-directory/symlink checks, preallocated exact-size reads,
+  256-wordpiece/384-dimension checks, and local-only network-trapped inference;
+- bounded 64-record dot-product scans whose result surface omits vectors;
+- source-record existence, source-collection allowlist, and source content-hash
+  verification during semantic collection and query;
+- finite, closed Trackio mapping metrics and explicit runtime non-effects;
 - local-only AgentTool access.
 
 AgentTool Data currently provides:
@@ -105,6 +152,17 @@ digest-pinned artifact or adding a preinstall verifier would be needed for
 that stronger property. On 2026-07-30, a fresh HTTPS download was verified as
 exactly 101008 bytes with the manifest SHA-256 above; the temporary verifier
 copy was then removed.
+
+`@huggingface/transformers` is exactly 4.2.0 in `package.json` and Bun's
+lockfile. Its model is the Apache-2.0 community conversion
+`Xenova/all-MiniLM-L6-v2` at commit
+`751bff37182d3f1213fa05d7196b954e230abad9`; the four-file application
+manifest totals 23,685,047 bytes and has canonical manifest SHA-256
+`07dbea9de5d2118cc16e01bbfca811e3589bb2dcd8cf5b27bd3ed51489d677d9`.
+Bun blocked lifecycle scripts for `onnxruntime-node` and `protobufjs`; no trust
+command was run. The packaged Darwin arm64 runtime nevertheless passed the
+local network-trapped smoke test. This is observed compatibility on this
+checkout, not a universal supply-chain or platform guarantee.
 
 ## Safe extensions
 
