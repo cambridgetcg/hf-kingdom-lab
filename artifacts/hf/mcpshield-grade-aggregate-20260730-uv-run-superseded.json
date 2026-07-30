@@ -1,0 +1,82 @@
+{
+  "artifact_protocol": "hf-kingdom-lab-artifact/v1",
+  "correction": {
+    "reason": "The original TypeScript wrapper invoked plain `uv run`, whose first execution may sync the project environment or contact package indexes outside this aggregate's declared effects.",
+    "replacement": "artifacts/hf/mcpshield-grade-aggregate-20260730-direct-python.json",
+    "review_id": "review_091b8d60-0048-4654-9e02-6ff506fe38f7"
+  },
+  "status": "superseded",
+  "agenttool": {
+    "collection_id": "hf-dataset-aggregates-v1",
+    "content_sha256": "14a637b27f232a90ea61087bb2ae7bf1ecf23b1760b8c432415f7b505da09453",
+    "record_id": "rec_5df6c3e06a8f782258bc0428bec3d7f367e63bf32a4b60c66c8457a39403908d"
+  },
+  "aggregate": {
+    "classification": "unverified_signal",
+    "effects": {
+      "local_temporary_file": true,
+      "remote_reads": [
+        "https://huggingface.co/datasets/MCPShield/mcp-security-scan-2026/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet"
+      ],
+      "remote_writes": [],
+      "temporary_file_removed": true
+    },
+    "limits": [
+      "Fixed public dataset and fixed aggregate-only SQL",
+      "No target, slug, or raw finding rows are returned",
+      "Scanner grades and scores are unverified signals, not vulnerability findings",
+      "The source export is capped at 5000000 bytes",
+      "No Hugging Face token, inference request, Job, or repository write is used"
+    ],
+    "observed_at": "2026-07-30T12:25:12.131Z",
+    "protocol": "hf-kingdom-dataset-aggregate/v1",
+    "query": "SELECT\n  grade,\n  count(*)::BIGINT AS repository_count,\n  round(avg(score), 2) AS average_score,\n  sum(findingCount)::BIGINT AS reported_finding_count,\n  round(avg(toolCount), 2) AS average_tool_count\nFROM read_parquet(?)\nGROUP BY grade\nORDER BY grade",
+    "rows": [
+      {
+        "average_score": 98.9,
+        "average_tool_count": 25.67,
+        "grade": "A",
+        "reported_finding_count": 552,
+        "repository_count": 3815
+      },
+      {
+        "average_score": 80.85,
+        "average_tool_count": 30.73,
+        "grade": "B",
+        "reported_finding_count": 1289,
+        "repository_count": 923
+      },
+      {
+        "average_score": 65.93,
+        "average_tool_count": 31.93,
+        "grade": "C",
+        "reported_finding_count": 1254,
+        "repository_count": 499
+      },
+      {
+        "average_score": 48.9,
+        "average_tool_count": 32.87,
+        "grade": "D",
+        "reported_finding_count": 1442,
+        "repository_count": 419
+      },
+      {
+        "average_score": 9.11,
+        "average_tool_count": 32.53,
+        "grade": "F",
+        "reported_finding_count": 10914,
+        "repository_count": 1111
+      }
+    ],
+    "source": {
+      "bytes": 1382608,
+      "dataset_id": "MCPShield/mcp-security-scan-2026",
+      "sha256": "72ca7adeafcca5ee99f3bce6964474b88200b157ecdad9a2e82e0931012ffba0",
+      "url": "https://huggingface.co/datasets/MCPShield/mcp-security-scan-2026/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet"
+    },
+    "tools": {
+      "duckdb": "1.5.5",
+      "python": "3.14.5"
+    }
+  }
+}

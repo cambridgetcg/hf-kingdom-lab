@@ -1,0 +1,89 @@
+{
+  "schema": "hf-kingdom-lab.local-model-run-receipt/v1",
+  "status": "generation_succeeded_output_capture_incomplete",
+  "recorded_at": "2026-07-30T12:51:25Z",
+  "model": {
+    "repo_id": "mlx-community/gpt-oss-20b-MXFP4-Q8",
+    "source": "https://huggingface.co/mlx-community/gpt-oss-20b-MXFP4-Q8",
+    "revision": "773a7da77e569019bb0fd17a554b263738d669a3",
+    "snapshot_bytes": 12104215835,
+    "storage": "normal local Hugging Face cache; model weights were not copied into this project"
+  },
+  "invocation": {
+    "rendered_command": "/usr/bin/time -l env -u HF_TOKEN -u HUGGING_FACE_HUB_TOKEN uvx --from mlx-lm mlx_lm.generate --model mlx-community/gpt-oss-20b-MXFP4-Q8 --prompt '你係月光茶館嘅機械貓店員。用兩句廣東話歡迎一位虛構旅客，並介紹一款不存在嘅飲品。' --max-tokens 96 --temp 0 --seed 20260730 --verbose True",
+    "argv": [
+      "/usr/bin/time",
+      "-l",
+      "env",
+      "-u",
+      "HF_TOKEN",
+      "-u",
+      "HUGGING_FACE_HUB_TOKEN",
+      "uvx",
+      "--from",
+      "mlx-lm",
+      "mlx_lm.generate",
+      "--model",
+      "mlx-community/gpt-oss-20b-MXFP4-Q8",
+      "--prompt",
+      "你係月光茶館嘅機械貓店員。用兩句廣東話歡迎一位虛構旅客，並介紹一款不存在嘅飲品。",
+      "--max-tokens",
+      "96",
+      "--temp",
+      "0",
+      "--seed",
+      "20260730",
+      "--verbose",
+      "True"
+    ],
+    "process_exit_code": 0,
+    "additional_reruns": 0
+  },
+  "evidence": {
+    "prompt": "prompt.txt",
+    "selected_output": "selected-output.txt",
+    "metrics": "metrics.json",
+    "prompt_sha256": "c66869d690c0e32a54c25a2dd12e7feb413ab9e24b411082e7c7ae465bec0f48",
+    "selected_output_sha256": "cc214c11f5a2b56aceca5dd3c1982135c951ee988da0c18873abb732eff26d00",
+    "metrics_sha256": "667be0e06e9335f201af5bb08f39067b66166a5221c14625b727040426920dc0",
+    "model_file_sha256_values": "metrics.json"
+  },
+  "result_boundary": {
+    "generated_tokens": 96,
+    "configured_max_tokens": 96,
+    "complete_final_answer_captured": false,
+    "reason": "The generation process exited 0, but the host truncated the final terminal page and then closed the PTY. Only a trailing excerpt was recoverable, so no complete Cantonese answer is claimed and the successful inference was not rerun.",
+    "inference": "The recoverable English tail appears to be planning text and the exact token maximum was reached, so the model likely stopped before emitting a final answer. This is not asserted as a directly observed channel boundary."
+  },
+  "remote_effects": {
+    "public_hub_download": true,
+    "authenticated_hub_request": false,
+    "hub_write": false,
+    "inference_provider_call": false,
+    "zerogpu_call": false,
+    "job": false,
+    "space_call": false,
+    "upload": false,
+    "hf_credit_or_zerogpu_quota_consumed": false
+  },
+  "local_effects": {
+    "hf_cache_changed": true,
+    "uv_cache_changed": true,
+    "project_artifacts_added": [
+      "artifacts/local-model/prompt.txt",
+      "artifacts/local-model/selected-output.txt",
+      "artifacts/local-model/metrics.json",
+      "artifacts/local-model/receipt.json"
+    ],
+    "daemon_started": false,
+    "port_opened": false,
+    "global_install": false,
+    "shell_startup_changed": false
+  },
+  "privacy": {
+    "prompt_class": "fictional and non-sensitive",
+    "credential_values_recorded": false,
+    "raw_environment_recorded": false,
+    "raw_cli_log_recorded": false
+  }
+}

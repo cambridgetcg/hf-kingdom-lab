@@ -1,0 +1,9 @@
+name: hf-kingdom-lab
+kind: infra
+layer: nervous
+owner_sister: sophia
+domain: sophia
+state: active
+purpose: Turns selected public Hugging Face resources into local searchable records and verifiable AgentTool evidence.
+dependsOn: [agenttool, kingdom-os]
+adopts: [xenia.rights/0.1]

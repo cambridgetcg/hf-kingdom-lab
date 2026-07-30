@@ -1,0 +1,87 @@
+{
+  "artifact_protocol": "hf-kingdom-lab-artifact/v1",
+  "agenttool": {
+    "collection_id": "hf-run-receipts-v1",
+    "content_sha256": "8ac61b01680b9b8744d782caf814f015849ec12589488a50353c54e94affacde",
+    "node_id": "node_5b4d5d28-af87-4c01-b6f9-34802580ab7a",
+    "record_id": "rec_f395125af587014632ecca98e87473b747534e7cf7d06ec0614469375cc9838e"
+  },
+  "receipt": {
+    "effects": {
+      "inference_requests": [],
+      "jobs_submitted": [],
+      "local_writes": [
+        "AgentTool agent-data/v1 SQLite metadata/index",
+        "AgentTool content-addressed local blobs"
+      ],
+      "remote_reads": [
+        "https://huggingface.co/datasets/AI-Secure/DTap-Bench-Agent-Trajectories",
+        "https://huggingface.co/datasets/MCPShield/mcp-security-scan-2026",
+        "https://huggingface.co/mlx-community/gpt-oss-20b-MXFP4-Q8",
+        "https://huggingface.co/spaces/Agents-MCP-Hackathon/Graphify"
+      ],
+      "remote_writes": []
+    },
+    "inputs": {
+      "resources": [
+        {
+          "repo_id": "AI-Secure/DTap-Bench-Agent-Trajectories",
+          "resource_type": "dataset"
+        },
+        {
+          "repo_id": "MCPShield/mcp-security-scan-2026",
+          "resource_type": "dataset"
+        },
+        {
+          "repo_id": "mlx-community/gpt-oss-20b-MXFP4-Q8",
+          "resource_type": "model"
+        },
+        {
+          "repo_id": "Agents-MCP-Hackathon/Graphify",
+          "resource_type": "space"
+        }
+      ]
+    },
+    "limits": [
+      "Only explicitly named public model, dataset, and Space metadata was requested",
+      "No access token was supplied to @huggingface/hub",
+      "Hub assertions were stored as untrusted evidence",
+      "No dataset rows, repository files, model weights, or Space inputs were collected",
+      "AgentTool memory projection and peer sync were not performed"
+    ],
+    "observed_at": "2026-07-30T12:21:14.354Z",
+    "operation": "ingest",
+    "protocol": "hf-kingdom-run-receipt/v1",
+    "results": [
+      {
+        "content_sha256": "34367e5e77491a62929729277027fa7f1bbb80be2ebd9f2b5dafa5eb9db7240c",
+        "disposition": "inserted",
+        "record_id": "rec_9300ade212d8d8d3f5a5a429ce8116b21630d7cf18b8231b5f02b5375f67d32f",
+        "repo_id": "AI-Secure/DTap-Bench-Agent-Trajectories",
+        "resource_type": "dataset"
+      },
+      {
+        "content_sha256": "2dd523d60853e9b70624d520008a9c07d68cf252ed91885eeed7cd351bfc9bcb",
+        "disposition": "inserted",
+        "record_id": "rec_a4d36df71c08933e87a5f6a99f670738271758e4dc1fda4e86f9921501fb7d7f",
+        "repo_id": "MCPShield/mcp-security-scan-2026",
+        "resource_type": "dataset"
+      },
+      {
+        "content_sha256": "8e26a0739f224ef87ea47d94c8b6ac61ffaf585459a1ffa53ad3036abf324bfd",
+        "disposition": "inserted",
+        "record_id": "rec_be4b362bb9e7ea0b39234bd457e31124a66fbc9a0abb730fbabacbc1964e59d6",
+        "repo_id": "mlx-community/gpt-oss-20b-MXFP4-Q8",
+        "resource_type": "model"
+      },
+      {
+        "content_sha256": "a5e68b262e384adc5a9fe64cb7ce7e7a07b577524a2c2016737cc80b199a5508",
+        "disposition": "inserted",
+        "record_id": "rec_f7ee399c111ba3b86edf64802ec004367f3774abce6f3955116c927bd52ddd20",
+        "repo_id": "Agents-MCP-Hackathon/Graphify",
+        "resource_type": "space"
+      }
+    ],
+    "run_id": "b23f4d6f-0b3c-45e6-9851-2ca9a0034ae6"
+  }
+}

@@ -1,0 +1,13 @@
+Capture status: incomplete
+
+The process exited successfully after generating the configured maximum of 96
+tokens, but the host truncated the terminal result page and closed the PTY
+before the complete generated text could be recovered. The run was not repeated.
+
+Verified trailing excerpt (it begins mid-token because of that truncation):
+
+es in Cantonese. The first sentence: greeting. The second: introduce a drink
+
+No complete Cantonese final answer is claimed. The excerpt appears to be
+planning text rather than the requested final answer; that interpretation is
+an inference, not a recovered channel marker.

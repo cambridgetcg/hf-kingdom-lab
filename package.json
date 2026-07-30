@@ -1,0 +1,28 @@
+{
+  "name": "hf-kingdom-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first Hugging Face resource experiments with AgentTool evidence and KINGDOM discovery.",
+  "bin": {
+    "hfkl": "./src/cli.ts"
+  },
+  "scripts": {
+    "check": "bun run typecheck && bun test",
+    "demo": "bun src/cli.ts demo",
+    "demo:sql": "bun src/cli.ts sql-demo",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agenttool/data": "https://docs.agenttool.dev/packages/v1/@agenttool/data/0.3.1/agenttool-data-0.3.1.tgz",
+    "@huggingface/hub": "2.14.4"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.14",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  }
+}
