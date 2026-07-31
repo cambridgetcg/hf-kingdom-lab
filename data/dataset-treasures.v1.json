@@ -1,0 +1,969 @@
+{
+  "protocol": "hf-kingdom-dataset-treasures/v1",
+  "observed_at": "2026-07-31T18:01:52Z",
+  "purpose": "A phase-aware atlas of unusually informative Hugging Face dataset artifacts. It preserves why each artifact matters, where its authority ends, and the smallest honest KINGDOM integration route.",
+  "boundary": {
+    "catalogue_is_evidence_not_authority": true,
+    "remote_rows_collected": false,
+    "remote_files_collected": false,
+    "hub_mutation": false,
+    "license_claims_are_publisher_assertions": true,
+    "popularity_is_not_quality": true
+  },
+  "entries": [
+    {
+      "rank": 1,
+      "repo_id": "allenai/DataDecide-data-recipes",
+      "hub_object_id": "67e193282922d53b8bb585c5",
+      "revision": "3baf34baf5b636f0943401b5c6a2ccb7e5cf3bb9",
+      "canonical_url": "https://huggingface.co/datasets/allenai/DataDecide-data-recipes",
+      "phase": "pretraining-recipe-selection",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-05-06T00:24:55.000Z",
+        "downloads": 1299,
+        "likes": 8,
+        "hub_license_tag": "license:odc-by"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "ODC-By-1.0",
+        "scope": "The dataset repository declares ODC-By. Source recipes and downstream checkpoints still need their own provenance retained."
+      },
+      "viewer": {
+        "status": "unsupported",
+        "configs": [],
+        "schema": [],
+        "note": "The payload is 6,192 OLMo-oriented NumPy token shards, not a Dataset Viewer table."
+      },
+      "scale": "25 recipes, 14 model sizes from 4M to 1B parameters, three seeds, more than 30,000 checkpoints, and about 19.27 TB of token shards.",
+      "treasure": "It exposes the pilot experiments normally discarded before a final pretraining corpus is chosen, allowing recipe rankings to be studied across scale instead of guessed from one large run.",
+      "kingdom_route": {
+        "mode": "metadata-only",
+        "next_artifact": "A recipe -> scale -> seed -> checkpoint -> evaluation ledger built from pinned cards and evaluation metadata, without mirroring token shards.",
+        "does_not": [
+          "Download the 19 TB payload",
+          "Claim that <=1B English-model rankings transfer universally",
+          "Treat a recipe rank as a moral or policy score"
+        ]
+      },
+      "known_drift": [
+        "No Viewer schema exists; an OLMo-specific token adapter would be required for body reads."
+      ],
+      "risks": [
+        "Tokenizer and framework coupling",
+        "Scale and language transfer limits",
+        "Source-specific rights remain relevant"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/allenai/DataDecide-data-recipes",
+        "https://arxiv.org/abs/2504.11393",
+        "https://github.com/allenai/DataDecide"
+      ]
+    },
+    {
+      "rank": 2,
+      "repo_id": "HuggingFaceTB/finemath_contamination_report",
+      "hub_object_id": "67486e0621d3a007d89c6b3b",
+      "revision": "3dc3725bac1125fb17a12b742102b91a45198f0e",
+      "canonical_url": "https://huggingface.co/datasets/HuggingFaceTB/finemath_contamination_report",
+      "phase": "contamination-audit",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-01-07T16:20:41.000Z",
+        "downloads": 25,
+        "likes": 1,
+        "hub_license_tag": null
+      },
+      "license": {
+        "status": "missing",
+        "expression": null,
+        "scope": "No dataset-level licence was declared in Hub metadata at observation time. Keep rows remote-reference only until clarified."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "finemath-3plus/train",
+          "finemath-4plus/train",
+          "infiwebmath-3plus/train",
+          "infiwebmath-4plus/train"
+        ],
+        "schema": [
+          "text",
+          "ngram",
+          "bench_name",
+          "bench_text",
+          "diff",
+          "diff_length",
+          "longest_diff_part",
+          "longest_diff_part_length",
+          "diff_ratio"
+        ],
+        "note": "Viewer exposes four Parquet-backed configs and overlap witnesses for 5,326 rejected rows."
+      },
+      "scale": "5,326 pages rejected from FineMath or InfiMM-WebMath after 13-gram checks against GSM8K, MATH, MMLU, and ARC.",
+      "treasure": "It preserves negative evidence: the removed page, benchmark overlap, and diff. Most releases keep only the sanitized corpus and erase why a row was excluded.",
+      "kingdom_route": {
+        "mode": "schema-only",
+        "next_artifact": "A remote-reference exclusion-witness schema and synthetic local regression fixtures; no copied web or benchmark text.",
+        "does_not": [
+          "Redistribute rows without licence clarification",
+          "Equate an n-gram overlap with proven contamination",
+          "Expose held-out benchmark text to a judged agent"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "False-positive overlap matches",
+        "Uncovered benchmark contamination",
+        "Missing repository licence"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/HuggingFaceTB/finemath_contamination_report",
+        "https://huggingface.co/datasets/HuggingFaceTB/finemath",
+        "https://arxiv.org/abs/2502.02737",
+        "https://github.com/huggingface/smollm"
+      ]
+    },
+    {
+      "rank": 3,
+      "repo_id": "NJU-LINK/CodeTraceBench",
+      "hub_object_id": "69ddfca027c330638d50da61",
+      "revision": "aa213b84ffb6690fc37ca15766d6ca174ec36d4d",
+      "canonical_url": "https://huggingface.co/datasets/NJU-LINK/CodeTraceBench",
+      "phase": "agent-process-evaluation",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2026-04-14T09:07:53.000Z",
+        "downloads": 1867,
+        "likes": 6,
+        "hub_license_tag": "license:mit"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "MIT",
+        "scope": "The dataset repository declares MIT. Embedded benchmark tasks, patches, logs, and tool output remain untrusted evidence with their own provenance."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/full",
+          "default/verified"
+        ],
+        "schema": [
+          "traj_id",
+          "agent",
+          "model",
+          "task_name",
+          "task_slug",
+          "difficulty",
+          "category",
+          "tags",
+          "solved",
+          "step_count",
+          "stages",
+          "stage_count",
+          "incorrect_error_stage_count",
+          "trial_name",
+          "source_relpath",
+          "annotation_relpath",
+          "incorrect_stages",
+          "generated_at",
+          "artifact_path"
+        ],
+        "note": "The verified split has 1,000 curated trajectories; the full split has 3,316. The repository also contains untrusted compressed trace artifacts."
+      },
+      "scale": "4,316 manifest rows across two views: full contains 3,316 trajectories and verified is a curated 1,000-row subset, not 1,000 additional unique trajectories.",
+      "treasure": "It localizes incorrect and merely unuseful steps inside explicit stages, which is far more diagnostic than a final solved/failed bit.",
+      "kingdom_route": {
+        "mode": "aggregate-first",
+        "next_artifact": "A verified-split trajectory -> stage -> step -> label census, followed by a separately authorized inert adapter for selected examples.",
+        "does_not": [
+          "Execute archived trajectories, actions, or patches",
+          "Treat Whitehack attention signals as benchmark ground truth",
+          "Assume a localized failure includes a correct repair"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Secrets or private paths inside logs",
+        "Prompt injection in tool output",
+        "Archive and patch execution hazards"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/NJU-LINK/CodeTraceBench",
+        "https://arxiv.org/abs/2604.11641",
+        "https://github.com/NJU-LINK/CodeTracer"
+      ]
+    },
+    {
+      "rank": 4,
+      "repo_id": "NJU-LINK/TELBench",
+      "hub_object_id": "6a17b91545ea825103a6a883",
+      "revision": "307d870d7424be265653bb7a566793cc217105be",
+      "canonical_url": "https://huggingface.co/datasets/NJU-LINK/TELBench",
+      "phase": "research-safety-evaluation",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2026-06-04T03:14:37.000Z",
+        "downloads": 338,
+        "likes": 2,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "Apache-2.0",
+        "scope": "The repository declares Apache-2.0. Retrieved third-party page text and URLs remain separate untrusted inputs."
+      },
+      "viewer": {
+        "status": "encrypted",
+        "configs": [],
+        "schema": [
+          "id",
+          "source_id",
+          "question",
+          "spans[].id",
+          "spans[].raw",
+          "gold.error_span_ids",
+          "meta.bench",
+          "meta.difficulty",
+          "meta.framework",
+          "meta.model",
+          "meta.answer_status",
+          "annotations.stage",
+          "annotations.error_type"
+        ],
+        "note": "The 20.23 MB encrypted JSONL artifact is accompanied by a public passphrase and hashes, so Dataset Viewer is intentionally unavailable. The listed fields come from the pinned README example, not Viewer introspection."
+      },
+      "scale": "1,000 expert-reviewed instances selected from 2,790 deep-research trajectories across two frameworks, three backbones, and three benchmarks.",
+      "treasure": "It marks the semantic span where unsupported or conflicting evidence becomes harmful while separating failed searches and harmless exploration.",
+      "kingdom_route": {
+        "mode": "sealed-eval-only",
+        "next_artifact": "A hermetic claim -> evidence evaluation deck whose gold span IDs are sealed from agent retrieval and training indexes.",
+        "does_not": [
+          "Automatically decrypt or ingest the archive",
+          "Refetch URLs embedded in trajectories",
+          "Expose gold labels to the evaluated research agent"
+        ]
+      },
+      "known_drift": [
+        "Encryption blocks automatic Viewer expansion but is not an access-control guarantee."
+      ],
+      "risks": [
+        "Gold-label leakage",
+        "Untrusted retrieved text and URLs",
+        "LLM-assisted annotation error"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/NJU-LINK/TELBench",
+        "https://arxiv.org/abs/2606.02060",
+        "https://github.com/NJU-LINK/DRIFT"
+      ]
+    },
+    {
+      "rank": 5,
+      "repo_id": "common-pile/data_provenance_initiative_filtered",
+      "hub_object_id": "683012bc2c98b5e9966e1ddf",
+      "revision": "8f5afcf585e4618ff12f5b6d49cb5242faf5afbd",
+      "canonical_url": "https://huggingface.co/datasets/common-pile/data_provenance_initiative_filtered",
+      "phase": "provenance-audit",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-06-06T03:54:08.000Z",
+        "downloads": 110,
+        "likes": 0,
+        "hub_license_tag": null
+      },
+      "license": {
+        "status": "component-specific",
+        "expression": null,
+        "scope": "There is no blanket repository licence. Each record carries source dataset, licence list, licence URL, and source URL metadata that must remain attached."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/train"
+        ],
+        "schema": [
+          "id",
+          "text",
+          "source",
+          "added",
+          "metadata.dataset_id",
+          "metadata.language",
+          "metadata.license",
+          "metadata.license_url",
+          "metadata.provenance",
+          "metadata.response",
+          "metadata.url"
+        ],
+        "note": "Viewer reports 3,508,390 rows while the card reports 3,508,518; the 128-row discrepancy is retained as evidence."
+      },
+      "scale": "Three compressed JSON sources, about 1.23 GB of files and roughly 3.5 million documents drawn from supervised-dataset sources with per-record provenance metadata.",
+      "treasure": "It keeps source and licence lineage at document granularity instead of laundering a heterogeneous mixture behind one reassuring repository tag.",
+      "kingdom_route": {
+        "mode": "aggregate-first",
+        "next_artifact": "A source/licence/provenance census that omits text, plus a sidecar schema requiring component licence and transform lineage on every derivative.",
+        "does_not": [
+          "Copy raw text into YUTABASE",
+          "Collapse record licences into a blanket open flag",
+          "Treat audited metadata as infallible legal advice"
+        ]
+      },
+      "known_drift": [
+        "Dataset card and Viewer row totals differ by 128 rows.",
+        "No repository-level licence is declared."
+      ],
+      "risks": [
+        "Licence laundering",
+        "Incorrect upstream metadata",
+        "Sensitive or copyrighted source text"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/common-pile/data_provenance_initiative_filtered",
+        "https://arxiv.org/abs/2506.05209",
+        "https://arxiv.org/abs/2310.16787",
+        "https://github.com/r-three/common-pile"
+      ]
+    },
+    {
+      "rank": 6,
+      "repo_id": "allenai/dolma3_dolmino_mix-10B-1025",
+      "hub_object_id": "68ec28951934492ab9e866f3",
+      "revision": "275d00e588098d2658e36be74ffd010dfb54d8a6",
+      "canonical_url": "https://huggingface.co/datasets/allenai/dolma3_dolmino_mix-10B-1025",
+      "phase": "midtraining-annealing",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2026-01-05T16:25:38.000Z",
+        "downloads": 414,
+        "likes": 10,
+        "hub_license_tag": "license:odc-by"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "ODC-By-1.0",
+        "scope": "The Dolmino repository declares ODC-By and links responsible-use guidance. Individual ingredients retain provenance requirements."
+      },
+      "viewer": {
+        "status": "partial",
+        "configs": [
+          "default/train",
+          "code_meta_reasoning/train",
+          "common_crawl_hq/train",
+          "cranecode/train",
+          "cranemath/train",
+          "dolmino1_math/train",
+          "dolmino_1_flan/train",
+          "gemini_reasoning_traces/train",
+          "llamanemotron_reasoning_traces/train",
+          "math_meta_reasoning/train",
+          "megamatt/train",
+          "nemotron_synth_qa/train",
+          "olmocr_science_pdfs/train",
+          "omr_rewrite_fullthoughts/train",
+          "openthoughts2_reasoning_traces/train",
+          "qwq_reasoning_traces/train",
+          "r1_reasoning_traces/train",
+          "reddit_high/train",
+          "reddit_low/train",
+          "stack_edu_fim/train",
+          "stem_heavy_crawl/train",
+          "tinyMATH_mind/train",
+          "tinyMATH_pot/train",
+          "tulu_3_sft/train",
+          "verifiable_gpt41/train",
+          "verifiable_o4mini/train",
+          "wiki_to_rcqa/train"
+        ],
+        "schema": [
+          "id",
+          "text",
+          "source (component-dependent)",
+          "version (component-dependent)",
+          "metadata (component-dependent)"
+        ],
+        "note": "A default first-row preview exists with id/text, but the full default size/Parquet conversion fails on heterogeneous component schemas. Every body reader must be config-specific."
+      },
+      "scale": "About 10B tokens, 1,113 compressed JSONL files plus one plain JSONL, roughly 27.4 GB, and 27 declared configs total: default plus 26 ingredients.",
+      "treasure": "This is the smaller mixture used for OLMo 3 stage-two micro-anneals, exposing the usually hidden bridge between base pretraining and later reasoning or tool capability.",
+      "kingdom_route": {
+        "mode": "metadata-only",
+        "next_artifact": "A per-config micro-anneal ingredient map with schema fingerprints and reported evaluation deltas before any sample read.",
+        "does_not": [
+          "Load the heterogeneous default config as one table",
+          "Mirror reasoning traces",
+          "Attribute capability gains without controlled comparisons"
+        ]
+      },
+      "known_drift": [
+        "Default Viewer generation fails because some files add source, version, and metadata columns.",
+        "Dataset Server size metadata materializes 6 of 27 configs and reports failures for the other 21, including default."
+      ],
+      "risks": [
+        "Schema drift between ingredients",
+        "Model-generated reasoning artifacts",
+        "Causal overclaiming from mixture membership"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/allenai/dolma3_dolmino_mix-10B-1025",
+        "https://arxiv.org/abs/2512.13961",
+        "https://github.com/allenai/dolma3"
+      ]
+    },
+    {
+      "rank": 7,
+      "repo_id": "EleutherAI/pile-preshuffled-seeds",
+      "hub_object_id": "66e31182bd824568da541337",
+      "revision": "6373a55fa65a3602fcff20a67bcf05cce61debd4",
+      "canonical_url": "https://huggingface.co/datasets/EleutherAI/pile-preshuffled-seeds",
+      "phase": "pretraining-order",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2026-02-12T04:11:02.000Z",
+        "downloads": 326,
+        "likes": 1,
+        "hub_license_tag": "license:mit"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "MIT",
+        "scope": "The precomputed index-map repository declares MIT. The underlying Pile-derived corpus is separate and is not relicensed by these maps."
+      },
+      "viewer": {
+        "status": "unsupported",
+        "configs": [],
+        "schema": [
+          "pile_20B_tokenizer_text_document.idx",
+          "*_doc_idx.npy",
+          "*_sample_idx.npy",
+          "*_shuffle_idx.npy",
+          "dataset.py"
+        ],
+        "note": "These are precomputed GPT-NeoX NumPy index maps for seeds 0-9, not row-oriented dataset files."
+      },
+      "scale": "Ten seed directories plus root index maps; about 32.1 GB total.",
+      "treasure": "It preserves exact data-order machinery, enabling controlled studies of when examples appeared without pretending that dataset membership alone determines a checkpoint's history.",
+      "kingdom_route": {
+        "mode": "metadata-only",
+        "next_artifact": "An index-map manifest linking seed, file digest, loader configuration, and checkpoint lineage; underlying text remains out of scope.",
+        "does_not": [
+          "Download index arrays by default",
+          "Grant rights to the underlying corpus",
+          "Claim exact consumption without the matching loader configuration"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Underlying corpus licence separation",
+        "Loader-version dependence",
+        "Large binary artifacts"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/EleutherAI/pile-preshuffled-seeds",
+        "https://arxiv.org/abs/2304.01373",
+        "https://arxiv.org/abs/2503.09543",
+        "https://github.com/EleutherAI/pythia"
+      ]
+    },
+    {
+      "rank": 8,
+      "repo_id": "sail/regmix-data",
+      "hub_object_id": "6683ff6c1b36315676c00355",
+      "revision": "0db514aa78fd8ce3db09332d7640831ebf15a54c",
+      "canonical_url": "https://huggingface.co/datasets/sail/regmix-data",
+      "phase": "pretraining-mixture-search",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2024-09-12T08:12:18.000Z",
+        "downloads": 2069,
+        "likes": 4,
+        "hub_license_tag": "license:mit"
+      },
+      "license": {
+        "status": "component-specific",
+        "expression": "MIT repository declaration",
+        "scope": "The repository declares MIT, while the 17 Pile-Uncopyrighted-derived domains retain source-level rights and provenance."
+      },
+      "viewer": {
+        "status": "partial",
+        "configs": [
+          "default/train",
+          "default/validation"
+        ],
+        "schema": [
+          "text"
+        ],
+        "note": "Viewer exposes a partial conversion. The tree has 977 JSONL payload files and 979 repository entries total, not the 34 JSONL files stated by the card."
+      },
+      "scale": "Approximately 1.038 TB and 250B tokens across 960 training and 17 validation JSONL files in 17 domains.",
+      "treasure": "It turns data-mixture choice into an inspectable regression problem: 512 tiny proxy models were used to predict stronger mixtures before large training runs.",
+      "kingdom_route": {
+        "mode": "metadata-only",
+        "next_artifact": "A 17-domain mixture-recipe and proxy-result graph, later reusable only with explicitly permitted KINGDOM source pools.",
+        "does_not": [
+          "Mirror the one-terabyte corpus",
+          "Assume the wrapper licence replaces component terms",
+          "Treat proxy-model optima as universally transferable"
+        ]
+      },
+      "known_drift": [
+        "The card says 34 JSONL files; the observed tree contains 977 JSONL payloads and 979 repository entries total.",
+        "Dataset Viewer conversion is partial."
+      ],
+      "risks": [
+        "Component-specific source rights",
+        "Proxy objective overfitting",
+        "Card-to-tree inconsistency"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/sail/regmix-data",
+        "https://arxiv.org/abs/2407.01492",
+        "https://github.com/sail-sg/regmix"
+      ]
+    },
+    {
+      "rank": 9,
+      "repo_id": "HuggingFaceFW/fineweb-edu-llama3-annotations",
+      "hub_object_id": "665db44bf4f755768470c897",
+      "revision": "72df4c92fb1b48beceb16016e8f695ec40a6c3a5",
+      "canonical_url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu-llama3-annotations",
+      "phase": "quality-label-generation",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2024-06-03T18:29:31.000Z",
+        "downloads": 374,
+        "likes": 50,
+        "hub_license_tag": "license:odc-by"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "ODC-By-1.0",
+        "scope": "The annotation dataset declares ODC-By. Underlying Common Crawl text can still carry privacy, copyright, and removal concerns."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/train"
+        ],
+        "schema": [
+          "text",
+          "metadata",
+          "prompt",
+          "score"
+        ],
+        "note": "Viewer exposes 467,424 Llama-3-70B-Instruct-labelled examples and the exact scoring prompt."
+      },
+      "scale": "Eight Parquet files, 467,424 rows, and about 1.59 GB.",
+      "treasure": "The parent corpus is famous, but this sidecar reveals the hidden teacher-label stage used to train its educational-quality classifier.",
+      "kingdom_route": {
+        "mode": "aggregate-first",
+        "next_artifact": "A score-distribution and source calibration report, followed by a consented comparison between teacher, classifier, human, and agent lenses.",
+        "does_not": [
+          "Treat one model's educational score as truth",
+          "Copy web text into canonical KINGDOM knowledge",
+          "Infer full-document quality from a truncated judgment prompt"
+        ]
+      },
+      "known_drift": [
+        "The published scoring process considered only the first 1,000 characters and does not expose full teacher rationales."
+      ],
+      "risks": [
+        "Single-teacher bias",
+        "English and academic-style bias",
+        "Web text privacy and rights"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu-llama3-annotations",
+        "https://arxiv.org/abs/2406.17557",
+        "https://huggingface.co/HuggingFaceFW/fineweb-edu-classifier",
+        "https://github.com/huggingface/cosmopedia/tree/main/classification"
+      ]
+    },
+    {
+      "rank": 10,
+      "repo_id": "HuggingFaceTB/cosmopedia-meta",
+      "hub_object_id": "65d361533b2d8958559a5c5c",
+      "revision": "3cf5749272bf937e8d63c0e4ba32711171c9bbb8",
+      "canonical_url": "https://huggingface.co/datasets/HuggingFaceTB/cosmopedia-meta",
+      "phase": "synthetic-data-planning",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2024-02-20T17:44:58.000Z",
+        "downloads": 31,
+        "likes": 4,
+        "hub_license_tag": null
+      },
+      "license": {
+        "status": "missing",
+        "expression": null,
+        "scope": "This metadata sidecar has no Hub licence declaration. The parent corpus licence must not be silently inherited."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/train"
+        ],
+        "schema": [
+          "text_token_length",
+          "seed_data",
+          "format",
+          "audience"
+        ],
+        "note": "Viewer exposes only generation-shape metadata, not the generated document text or prompt."
+      },
+      "scale": "31,064,744 metadata rows in four Parquet files, about 161 MB compressed.",
+      "treasure": "It gives a remarkably cheap view of synthetic-data design choices across seed families, formats, audiences, and lengths without processing the 25B-token text corpus.",
+      "kingdom_route": {
+        "mode": "schema-only",
+        "next_artifact": "A local synthetic shape simulator implemented from the four public dimensions, using invented fixtures until the sidecar licence is clarified.",
+        "does_not": [
+          "Copy metadata rows without licence clarification",
+          "Infer factuality or quality from shape metadata",
+          "Assume the parent dataset licence applies"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Missing sidecar licence",
+        "No per-row prompt or factuality evidence",
+        "Synthetic generator bias"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/HuggingFaceTB/cosmopedia-meta",
+        "https://huggingface.co/blog/cosmopedia",
+        "https://github.com/huggingface/cosmopedia"
+      ]
+    },
+    {
+      "rank": 11,
+      "repo_id": "princeton-nlp/QuRating-GPT3.5-Judgments",
+      "hub_object_id": "65d6cfbbbf4c0ccb4746f3b6",
+      "revision": "b553523cf6e15b7af6744166ef144e9dc54695f0",
+      "canonical_url": "https://huggingface.co/datasets/princeton-nlp/QuRating-GPT3.5-Judgments",
+      "phase": "multidimensional-quality",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2024-03-29T07:07:11.000Z",
+        "downloads": 37,
+        "likes": 6,
+        "hub_license_tag": null
+      },
+      "license": {
+        "status": "missing",
+        "expression": null,
+        "scope": "Neither the Hub dataset metadata nor the linked code repository clearly declares a dataset redistribution licence."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/train"
+        ],
+        "schema": [
+          "texts",
+          "source_domains",
+          "educational_value_votes_a",
+          "educational_value_votes_b",
+          "educational_value_average",
+          "facts_and_trivia_votes_a",
+          "facts_and_trivia_votes_b",
+          "facts_and_trivia_average",
+          "required_expertise_votes_a",
+          "required_expertise_votes_b",
+          "required_expertise_average",
+          "writing_style_votes_a",
+          "writing_style_votes_b",
+          "writing_style_average"
+        ],
+        "note": "Viewer exposes paired texts plus votes and averages across four separate quality dimensions."
+      },
+      "scale": "250,000 paired judgments in two Parquet files, about 529 MB.",
+      "treasure": "It retains multiple quality axes and vote structure instead of collapsing usefulness, expertise, facts, and style into a single supposedly universal number.",
+      "kingdom_route": {
+        "mode": "schema-only",
+        "next_artifact": "A synthetic quality-lens protocol preserving axes, raters, missing votes, disagreement, and uncertainty; remote rows remain reference-only.",
+        "does_not": [
+          "Redistribute judgments without licence clarification",
+          "Turn the averages into a universal KARMA score",
+          "Hide GPT-3.5 and provider filtering biases"
+        ]
+      },
+      "known_drift": [
+        "The value -100 marks diagonal or insufficient-vote cells and must not be treated as an ordinary rating."
+      ],
+      "risks": [
+        "Missing licence",
+        "Model-rater bias",
+        "Scalarization of plural judgments"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/princeton-nlp/QuRating-GPT3.5-Judgments",
+        "https://arxiv.org/abs/2402.09739",
+        "https://github.com/princeton-nlp/QuRating"
+      ]
+    },
+    {
+      "rank": 12,
+      "repo_id": "PrimeIntellect/INTELLECT-2-RL-Dataset",
+      "hub_object_id": "67f45f2b7468cbe12716d79f",
+      "revision": "d237eba2890e7addc4bf3bf9d95832b65a9c90a7",
+      "canonical_url": "https://huggingface.co/datasets/PrimeIntellect/INTELLECT-2-RL-Dataset",
+      "phase": "reinforcement-learning-data-filtering",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-05-13T03:14:35.000Z",
+        "downloads": 183,
+        "likes": 66,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "Apache-2.0",
+        "scope": "The dataset repository declares Apache-2.0. Problem-source and verifier provenance still belongs in every derived run receipt."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/train"
+        ],
+        "schema": [
+          "problem_id",
+          "task_type",
+          "prompt",
+          "verification_info",
+          "solve_rate_qwen_r1_distill_7b"
+        ],
+        "note": "Viewer exposes about 285,000 prompts with task type, verifier information, and a reference-model solve rate."
+      },
+      "scale": "Approximately 285,000 RL prompts spanning multiple verifiable task types.",
+      "treasure": "The solve-rate field preserves a reference-model difficulty signal before reinforcement learning. The paper separately describes offline pass@8 filtering and online zero-advantage filtering.",
+      "kingdom_route": {
+        "mode": "aggregate-first",
+        "next_artifact": "A task-type and solve-rate difficulty-filter census, with verifier class and source lineage separated from policy performance.",
+        "does_not": [
+          "Execute verifier payloads",
+          "Treat one model's solve rate as intrinsic task difficulty",
+          "Mix evaluation prompts into an agent's retrieval context"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Reference-model-specific difficulty",
+        "Verifier bugs or leakage",
+        "Prompt contamination across training and evaluation"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/PrimeIntellect/INTELLECT-2-RL-Dataset",
+        "https://arxiv.org/abs/2505.07291"
+      ]
+    },
+    {
+      "rank": 13,
+      "repo_id": "DataAttributionEval/ftrace",
+      "hub_object_id": "6826eb3fa27313eddac6bb2f",
+      "revision": "e18a5ab1eed0d6dd82a29f7fbb37cb903df3557c",
+      "canonical_url": "https://huggingface.co/datasets/DataAttributionEval/ftrace",
+      "phase": "data-attribution-evaluation",
+      "discovery_class": "buried-artifact",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-05-16T08:07:53.000Z",
+        "downloads": 21,
+        "likes": 0,
+        "hub_license_tag": null
+      },
+      "license": {
+        "status": "missing",
+        "expression": null,
+        "scope": "No dataset-level licence was declared in Hub metadata at observation time."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "Pythia-1b/train",
+          "Pythia-1b/ref",
+          "Llama-3.2-1B/train",
+          "Llama-3.2-1B/ref",
+          "Llama-3.1-8B/train",
+          "Llama-3.1-8B/ref"
+        ],
+        "schema": [
+          "data_id",
+          "prompt",
+          "response",
+          "facts"
+        ],
+        "note": "Viewer exposes paired train/reference configs for three model configurations: Pythia-1b and two Llama variants."
+      },
+      "scale": "Six model/split surfaces in the DATE-LM data-attribution evaluation suite.",
+      "treasure": "It provides an explicit train/reference fact-tracing surface for testing whether attribution methods recover influential training evidence rather than merely plausible citations.",
+      "kingdom_route": {
+        "mode": "schema-only",
+        "next_artifact": "A synthetic attribution contract separating source record, derived claim, candidate influence, and verified evidence while the dataset licence remains unresolved.",
+        "does_not": [
+          "Copy rows without licence clarification",
+          "Treat similarity as causal attribution",
+          "Expose reference facts to the evaluated method"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Missing licence",
+        "Reference-set leakage",
+        "Confusing retrieval similarity with influence"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/DataAttributionEval/ftrace",
+        "https://arxiv.org/abs/2507.09424"
+      ]
+    },
+    {
+      "rank": 14,
+      "repo_id": "ai-hyz/MemoryAgentBench",
+      "hub_object_id": "6868d8885d6d51931f1eb698",
+      "revision": "7ea066982b140a19337e17e60d45d4076e042faf",
+      "canonical_url": "https://huggingface.co/datasets/ai-hyz/MemoryAgentBench",
+      "phase": "memory-continuity-evaluation",
+      "discovery_class": "calibration-anchor",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2026-06-21T10:21:33.000Z",
+        "downloads": 12096,
+        "likes": 39,
+        "hub_license_tag": "license:mit"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "MIT",
+        "scope": "The benchmark repository declares MIT. Reformatted source tasks and very large contexts retain their own provenance and privacy review needs."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "default/Accurate_Retrieval",
+          "default/Test_Time_Learning",
+          "default/Long_Range_Understanding",
+          "default/Conflict_Resolution"
+        ],
+        "schema": [
+          "context",
+          "questions",
+          "answers",
+          "metadata"
+        ],
+        "note": "The 146 rows are large grouped episodes, not 146 ordinary independent question-answer examples."
+      },
+      "scale": "146 grouped episodes: 22 accurate retrieval, 6 test-time learning, 110 long-range understanding, and 8 conflict resolution.",
+      "treasure": "It tests continuity as four different abilities, including updating conflicts and whole-session understanding, instead of reducing memory to nearest-neighbour retrieval.",
+      "kingdom_route": {
+        "mode": "sealed-eval-only",
+        "next_artifact": "A held-out event-time and version-aware YUTABASE/AgentTool continuity evaluation with answers and keypoints outside normal retrieval.",
+        "does_not": [
+          "Index gold answers or keypoints into evaluated retrieval",
+          "Report grouped row count as ordinary sample count",
+          "Claim conflict resolution proves secure forgetting"
+        ]
+      },
+      "known_drift": [
+        "The paper calls the fourth ability selective forgetting; the current Hub split is named Conflict_Resolution."
+      ],
+      "risks": [
+        "Gold leakage through metadata",
+        "Huge and heterogeneous contexts",
+        "Small grouped sample counts"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/ai-hyz/MemoryAgentBench",
+        "https://arxiv.org/abs/2507.05257",
+        "https://github.com/HUST-AI-HYZ/MemoryAgentBench"
+      ]
+    },
+    {
+      "rank": 15,
+      "repo_id": "locuslab/TOFU",
+      "hub_object_id": "6553f3c578594ac5477f6c1e",
+      "revision": "324592d84ae4f482ac7249b9285c2ecdb53e3a68",
+      "canonical_url": "https://huggingface.co/datasets/locuslab/TOFU",
+      "phase": "unlearning-evaluation",
+      "discovery_class": "calibration-anchor",
+      "hub_observation": {
+        "observed_at": "2026-07-31T18:01:52Z",
+        "last_modified": "2025-03-27T22:38:57.000Z",
+        "downloads": 107370,
+        "likes": 56,
+        "hub_license_tag": "license:mit"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "MIT",
+        "scope": "The dataset repository declares MIT. The benchmark measures model behaviour; it does not certify physical data erasure."
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": [
+          "full/train",
+          "forget01/train",
+          "forget05/train",
+          "forget10/train",
+          "retain99/train",
+          "retain95/train",
+          "retain90/train",
+          "holdout01/train",
+          "holdout05/train",
+          "holdout10/train",
+          "forget01_perturbed/train",
+          "forget05_perturbed/train",
+          "forget10_perturbed/train",
+          "real_authors/train",
+          "real_authors_perturbed/train",
+          "retain_perturbed/train",
+          "world_facts/train",
+          "world_facts_perturbed/train"
+        ],
+        "schema": [
+          "question",
+          "answer",
+          "paraphrased_question (perturbed configs)",
+          "paraphrased_answer (some perturbed configs)",
+          "perturbed_answer (forget/retain perturbed configs)",
+          "config-dependent real-author and world-fact fields"
+        ],
+        "note": "The repository exposes 18 configurations across forget, retain, holdout, perturbed, world-fact, and real-author controls; their schemas are not uniform."
+      },
+      "scale": "4,000 core question-answer pairs about 200 fictitious authors, with 18 evaluation configurations and about 6.33 MB of files.",
+      "treasure": "It offers a controlled, fictitious-person laboratory for distinguishing behavioural unlearning, retained utility, cache removal, index removal, and actual storage erasure.",
+      "kingdom_route": {
+        "mode": "sealed-eval-only",
+        "next_artifact": "A revocation matrix testing YUTABASE rows, vectors, caches, AgentTool projections, derived summaries, and model behaviour as separate layers.",
+        "does_not": [
+          "Call benchmark forgetting secure physical erasure",
+          "Use real-person private profiles",
+          "Expose forget-set answers to the evaluated model"
+        ]
+      },
+      "known_drift": [],
+      "risks": [
+        "Synthetic-to-real transfer limits",
+        "Benchmark contamination",
+        "Confusing behavioural suppression with deletion"
+      ],
+      "primary_sources": [
+        "https://huggingface.co/datasets/locuslab/TOFU",
+        "https://arxiv.org/abs/2401.06121",
+        "https://github.com/locuslab/tofu"
+      ]
+    }
+  ]
+}
