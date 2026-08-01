@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { resolve } from "node:path";
+import { homedir } from "node:os";
+import { isAbsolute, join, resolve } from "node:path";
 import {
   censusPublicDtapPaths,
   DTAP_DATASET,
@@ -79,7 +80,41 @@ const MAX_RESOURCES_PER_RUN = 12;
 const MAX_QUERY_LENGTH = 200;
 const MAX_QUERY_LIMIT = 50;
 
-export const DEFAULT_DATA_ROOT = resolve(import.meta.dir, "..", ".hf-kingdom-data");
+export const DEFAULT_DATA_ROOT = resolveDefaultDataRoot();
+
+export function resolveDefaultDataRoot(
+  env: Readonly<Record<string, string | undefined>> = process.env,
+  platform: NodeJS.Platform = process.platform,
+  home = homedir(),
+): string {
+  const explicit = env.HFKL_DATA_ROOT;
+  if (explicit !== undefined) {
+    if (
+      explicit.length === 0
+      || explicit.length > 4_096
+      || explicit.includes("\0")
+      || !isAbsolute(explicit)
+    ) {
+      throw new TypeError("HFKL_DATA_ROOT must be a bounded absolute path");
+    }
+    return resolve(explicit);
+  }
+  if (platform === "darwin") {
+    return join(home, "Library", "Application Support", "hf-kingdom-lab");
+  }
+  if (platform === "win32") {
+    const local = env.LOCALAPPDATA;
+    const base = local && isAbsolute(local)
+      ? local
+      : join(home, "AppData", "Local");
+    return join(base, "hf-kingdom-lab");
+  }
+  const xdg = env.XDG_DATA_HOME;
+  const base = xdg && isAbsolute(xdg)
+    ? xdg
+    : join(home, ".local", "share");
+  return join(base, "hf-kingdom-lab");
+}
 
 export const DEMO_RESOURCES: ResourceRequest[] = [
   {

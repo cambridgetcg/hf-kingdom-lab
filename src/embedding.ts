@@ -339,20 +339,22 @@ async function assertPlainDirectory(path: string, label: string): Promise<void> 
  * fetch transport disabled. The fixed assets must already pass verification.
  */
 export async function createLocalEmbedder(root: string): Promise<LocalEmbedder> {
+  let transformers: typeof import("@huggingface/transformers");
+  try {
+    transformers = await import("@huggingface/transformers");
+  } catch (error) {
+    throw new Error(
+      "local semantic inference runtime is not installed; the npm package intentionally omits it while upstream dependency ranges include known high-severity versions—use this repository's audited source lock or provide a separately reviewed compatible runtime",
+      { cause: error },
+    );
+  }
+
   const modelDirectory = embeddingModelDirectory(root);
   await verifyEmbeddingAssets(modelDirectory, true);
   if (localEmbedderActive) {
     throw new Error("only one local semantic embedder may be active in a process");
   }
   localEmbedderActive = true;
-
-  let transformers: typeof import("@huggingface/transformers");
-  try {
-    transformers = await import("@huggingface/transformers");
-  } catch (error) {
-    localEmbedderActive = false;
-    throw error;
-  }
   const previous = {
     allowRemoteModels: transformers.env.allowRemoteModels,
     allowLocalModels: transformers.env.allowLocalModels,

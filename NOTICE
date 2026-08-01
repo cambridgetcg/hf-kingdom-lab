@@ -1,0 +1,14 @@
+HF Kingdom Lab
+Copyright 2026 Cambridge TCG
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+This repository contains locally authored software, documentation, and
+bounded metadata/provenance contracts. Names, metadata, and links referring to
+third-party Hugging Face repositories, papers, models, datasets, media, or
+services remain subject to their respective owners' terms. This distribution
+does not include or relicense those remote dataset bodies, model weights,
+artistic media, participant profiles, prompts, responses, or training shards.
+
+RIGHTS.md is a collaboration commitment. It is not a software licence, proof
+of consent, legal-personhood determination, or grant of external authority.

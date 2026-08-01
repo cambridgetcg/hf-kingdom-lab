@@ -1,0 +1,291 @@
+{
+  "protocol": "hf-kingdom-dpi-provenance-contract/v1",
+  "observed_at": "2026-08-01T07:28:51Z",
+  "purpose": "A static, fail-closed provenance contract for the Data Provenance Initiative filtered Common Pile export. It pins public metadata and conversion identities without authorizing a dataset reader.",
+  "identity": {
+    "dataset_id": "common-pile/data_provenance_initiative_filtered",
+    "hub_object_id": "683012bc2c98b5e9966e1ddf",
+    "canonical_url": "https://huggingface.co/datasets/common-pile/data_provenance_initiative_filtered",
+    "main_revision": "8f5afcf585e4618ff12f5b6d49cb5242faf5afbd",
+    "viewer_source_revision": "6e4d4d169effc075f0556a06b1c1c043f1cdf661",
+    "convert_revision": "a6219c6ca0e28d9c5eb2b325bd1305ff5cf13fc5",
+    "config": "default",
+    "split": "train",
+    "public": true,
+    "gated": false,
+    "disabled": false
+  },
+  "original_exports": {
+    "revision": "6e4d4d169effc075f0556a06b1c1c043f1cdf661",
+    "total_bytes": 1225618177,
+    "manifest_digest": "955ed01b942dfc1e7648b23fb56bfa74956cadf2e0569ce68b60fa68d2916c94",
+    "manifest_digest_serialization": "path, decimal size, and lowercase LFS SHA-256 separated by TAB; paths sorted lexicographically; every record terminated by LF",
+    "files": [
+      {
+        "path": "dpi-common-pile-0000.json.gz",
+        "size": 633553694,
+        "lfs_sha256": "52634e4bc6a36173c7c45e41d03add9dd4c2f90523044568dea7cbb2224c20c0"
+      },
+      {
+        "path": "dpi-common-pile-0001.json.gz",
+        "size": 284305547,
+        "lfs_sha256": "1fbc108998b1c4fda253c2ea75e866dcdeb8388591ff7f99c0e8caa6ffcf14d5"
+      },
+      {
+        "path": "dpi-common-pile-0002.json.gz",
+        "size": 307758936,
+        "lfs_sha256": "3ff90707d712601aca1c8f1028e3491bdf71a9ef0d15b47a079dbad6718d445f"
+      }
+    ]
+  },
+  "parquet_exports": {
+    "revision": "a6219c6ca0e28d9c5eb2b325bd1305ff5cf13fc5",
+    "total_bytes": 1891733238,
+    "manifest_digest": "48489544cad439e5f706a18ddebd7f2ed84f70f684b952457df289e490bf5b21",
+    "manifest_digest_serialization": "path, decimal size, and lowercase LFS SHA-256 separated by TAB; paths sorted lexicographically; every record terminated by LF",
+    "files": [
+      {
+        "path": "default/train/0000.parquet",
+        "size": 191142381,
+        "lfs_sha256": "6df626ce8cc2a61521e06d1a480adbc98cfafa1add9731e9f7f208d59c82eefd"
+      },
+      {
+        "path": "default/train/0001.parquet",
+        "size": 179378517,
+        "lfs_sha256": "ce4bd1f0136724e4691d76363e8c120483fa222d79f1fd2d7b29e48afa99ed4a"
+      },
+      {
+        "path": "default/train/0002.parquet",
+        "size": 122161026,
+        "lfs_sha256": "c7d670f7f832aefd769dc019057549d5a2ac1f04f4af8c348306179c76881e62"
+      },
+      {
+        "path": "default/train/0003.parquet",
+        "size": 171610509,
+        "lfs_sha256": "c3790e5c5bb5eefbc6ac8fafa642fa79198a45f836023ec987da99b711efffbf"
+      },
+      {
+        "path": "default/train/0004.parquet",
+        "size": 222544416,
+        "lfs_sha256": "0f113cb3b0729a0ace558a1b45c490c34b781f489465087e39238e14a0066f82"
+      },
+      {
+        "path": "default/train/0005.parquet",
+        "size": 182548035,
+        "lfs_sha256": "23c3073fadd4de63a6310a9bacb40d46237c559608bf330c0246d3b1bcf5b10e"
+      },
+      {
+        "path": "default/train/0006.parquet",
+        "size": 250037969,
+        "lfs_sha256": "cb8f4e297e1f399600b4a11f5285834f3dc8168d77280be6cdeff1eb92d43ac2"
+      },
+      {
+        "path": "default/train/0007.parquet",
+        "size": 243615465,
+        "lfs_sha256": "21c0e670ae341397d127a576992f2de164748aed4d16ab626083388bb9b4c023"
+      },
+      {
+        "path": "default/train/0008.parquet",
+        "size": 247262461,
+        "lfs_sha256": "fdfac20e37fdc5283b092bc749672e2975d9a6634a94841d6c14e9e0bf83b7d4"
+      },
+      {
+        "path": "default/train/0009.parquet",
+        "size": 81432459,
+        "lfs_sha256": "ddf2ae8537f95b7d204810a32ad38375d1c346e69b523eaeb4626c7f3da57a0d"
+      }
+    ]
+  },
+  "viewer": {
+    "rows": 3508390,
+    "columns": 5,
+    "memory_bytes": 4712748443,
+    "partial": false,
+    "pending": [],
+    "failed": [],
+    "shard_lengths": [
+      314270,
+      574897,
+      697640,
+      403886,
+      254262,
+      454422,
+      191601,
+      269669,
+      254150,
+      93593
+    ],
+    "schema": {
+      "digest": "ac1a8ea25ff81141f51b9682df6567a7be8084d924ceb15c37f4dd56f9681913",
+      "digest_serialization": "sorted-key compact UTF-8 JSON followed by LF",
+      "features": {
+        "added": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "id": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "metadata": {
+          "dataset_id": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "language": {
+            "feature": {
+              "dtype": "string",
+              "_type": "Value"
+            },
+            "_type": "Sequence"
+          },
+          "license": {
+            "feature": {
+              "dtype": "string",
+              "_type": "Value"
+            },
+            "_type": "Sequence"
+          },
+          "license_url": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "provenance": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "response": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "url": {
+            "dtype": "string",
+            "_type": "Value"
+          }
+        },
+        "source": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "text": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      }
+    }
+  },
+  "count_reconciliation": {
+    "dataset_card_documents": 3508518,
+    "viewer_rows": 3508390,
+    "card_minus_viewer": 128,
+    "resolved": false,
+    "interpretation": "The publisher card and Dataset Viewer disagree by 128 documents. This contract preserves both observations and does not silently choose one as truth."
+  },
+  "access": {
+    "mode": "static-local-contract-only",
+    "allowed_metadata_urls": [
+      "https://huggingface.co/api/datasets/common-pile/data_provenance_initiative_filtered",
+      "https://huggingface.co/api/datasets/common-pile/data_provenance_initiative_filtered/revision/refs%2Fconvert%2Fparquet",
+      "https://huggingface.co/api/datasets/common-pile/data_provenance_initiative_filtered/tree/6e4d4d169effc075f0556a06b1c1c043f1cdf661?recursive=true&expand=true",
+      "https://huggingface.co/api/datasets/common-pile/data_provenance_initiative_filtered/tree/a6219c6ca0e28d9c5eb2b325bd1305ff5cf13fc5/default/train?recursive=true&expand=true",
+      "https://datasets-server.huggingface.co/splits?dataset=common-pile%2Fdata_provenance_initiative_filtered",
+      "https://datasets-server.huggingface.co/parquet?dataset=common-pile%2Fdata_provenance_initiative_filtered",
+      "https://datasets-server.huggingface.co/size?dataset=common-pile%2Fdata_provenance_initiative_filtered",
+      "https://datasets-server.huggingface.co/info?dataset=common-pile%2Fdata_provenance_initiative_filtered&config=default"
+    ],
+    "forbidden_dataset_server_paths": [
+      "/first-rows",
+      "/rows",
+      "/filter",
+      "/search"
+    ],
+    "default_deny": true,
+    "bodyless_get_only": true,
+    "credentials_omitted": true,
+    "redirects_followed": false,
+    "max_metadata_requests": 8,
+    "max_response_body_bytes_per_request": 65536,
+    "max_total_response_body_bytes": 262144,
+    "max_wall_time_ms": 15000,
+    "partial_results_permitted": false,
+    "malformed_or_drifted_metadata_fails_closed": true,
+    "dataset_rows_read": false,
+    "remote_writes": []
+  },
+  "column_boundary": {
+    "projected_logical_columns": [
+      "id",
+      "metadata.dataset_id",
+      "metadata.language",
+      "metadata.license",
+      "metadata.license_url",
+      "metadata.provenance",
+      "metadata.url"
+    ],
+    "excluded_content_columns": [
+      "text",
+      "metadata.response"
+    ],
+    "unprojected_logical_columns": [
+      "added",
+      "source"
+    ],
+    "select_star_permitted": false,
+    "row_level_output_permitted": false
+  },
+  "design_measurement": {
+    "method": "Bounded HTTPS range reads over all ten immutable Parquet files; footer metadata only, with no column data pages requested",
+    "tool": "pyarrow 23.0.0",
+    "shards_inspected": 10,
+    "rows": 3508390,
+    "row_groups": 3768,
+    "serialized_footer_bytes": 9798821,
+    "range_bytes_received": 10454181,
+    "projected_compressed_column_bytes": 56455411,
+    "excluded_compressed_column_bytes": 1791329876,
+    "other_compressed_column_bytes": 24465143,
+    "text_min_max_statistics_observed": true,
+    "raw_statistic_values_retained": false,
+    "column_data_pages_read": false
+  },
+  "reader": {
+    "reader_implemented": false,
+    "reader_runtime_available": false,
+    "reader_execution_in_scope": false,
+    "reason": "The project runtime has no prepared httpfs extension, and DuckDB HTTP reads do not by themselves provide a hard enforceable transport-byte ceiling.",
+    "guarantee_ceiling": "A future projected reader can avoid text and response data pages and persist only aggregates, but Parquet footers may transiently contain string min/max statistics; it must not claim that no text bytes enter memory.",
+    "required_prerequisites": {
+      "immutable_commit_urls_only": true,
+      "core_httpfs_prepared_and_hash_pinned": true,
+      "automatic_extension_install_and_load_disabled": true,
+      "community_extensions_disabled": true,
+      "credentials_and_proxy_environment_scrubbed": true,
+      "fixed_sql_and_column_projection_only": true,
+      "hard_wall_deadline_with_process_group_kill": true,
+      "memory_thread_temp_and_output_caps": true,
+      "redirect_targets_allowlisted_and_not_logged": true,
+      "hard_network_byte_cap_enforced": true,
+      "closed_aggregate_output_schema": true
+    }
+  },
+  "evidence_boundary": {
+    "classification": "publisher_provenance_assertion",
+    "contract_loader_network_access": false,
+    "contract_contains_raw_dataset_text": false,
+    "remote_dataset_rows_collected": false,
+    "remote_column_data_pages_collected": false,
+    "parquet_footer_metadata_inspected_during_design": true,
+    "lfs_sha256_locally_verified": false,
+    "manifest_digests_cover_metadata_assertions_not_file_bytes": true,
+    "license_metadata_is_legal_advice_or_authorization": false,
+    "dataset_card_warns_of_license_laundering_or_inaccuracy": true
+  },
+  "official_docs": [
+    "https://huggingface.co/docs/dataset-viewer/quick_start",
+    "https://huggingface.co/docs/dataset-viewer/parquet",
+    "https://huggingface.co/docs/hub/main/datasets-viewer-sql-console",
+    "https://huggingface.co/docs/hub/xet/overview",
+    "https://duckdb.org/docs/current/core_extensions/httpfs/https.html",
+    "https://duckdb.org/docs/current/operations_manual/securing_duckdb/overview.html"
+  ]
+}

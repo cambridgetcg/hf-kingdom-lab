@@ -49,6 +49,33 @@ a versioned Trackio 0.34.0 capability document. It neither imports Trackio nor
 writes native Trackio SQLite/Parquet, and it starts no hardware logger,
 dashboard, MCP server, or Hugging Face sync.
 
+`src/treasures.ts` validates the phase-aware dataset archaeology catalogue.
+Its exact-allowlist drift and record paths read one public Hub metadata object,
+validate every retained value, and reconstruct a narrow snapshot for the local
+AgentTool resource/receipt path. They never read a curated dataset body merely
+because it appears in the atlas.
+
+`src/datadecide.ts` validates a static five-stage
+recipe → scale → seed → checkpoint → evaluation ledger. It preserves exact
+alias namespaces, branch target SHAs, scientific-versus-operational seed roles,
+licence routes, and bounded aggregate witnesses. It performs no network call
+and does not include token shards, weights, or evaluation-instance bodies.
+
+`src/dpi-provenance.ts` validates a static provenance contract for the filtered
+Data Provenance Initiative artifact. It pins source and conversion identities,
+file manifests, schema, count drift, endpoint/column boundaries, and the
+prerequisites for a future reader. It is deliberately not a reader: no
+DuckDB/httpfs execution or data URL is accepted.
+
+`src/flow-lenses.ts` validates ten situated writing, art, music, and
+conversation lenses. Human, model, and mixed origins; descriptive, normative,
+and control layers; identity surfaces; licence scope; Viewer representation;
+and transformation losses remain separate. `src/flow-cli.ts` is exact-allowlist
+only. Its optional record path writes the already-observed public metadata and
+normal effects receipt through the existing AgentTool collections; it does not
+store prompts, responses, media, profiles, dataset participant/user
+identifiers, or dataset rows. Public repository identity is retained.
+
 `kingdom.yaml` is a discovery card. It describes this repository; it does not
 activate or deploy it.
 
@@ -86,6 +113,11 @@ Round-two records separately hold the DTap census, graph, model-asset receipt,
 source-bound vector, and observability mapping. A vector never substitutes for
 its named source record.
 
+The DataDecide, DPI, treasure, and flow catalogues are checked-in versioned
+evidence, not extra AgentTool collections. A flow/treasure `record` operation
+uses `hf-resources-v1` and `hf-run-receipts-v1`; the richer local analysis stays
+reviewable in Git and cannot be mistaken for live Hub observation.
+
 The separation is essential. In AgentTool Data 0.3.1, record identity is based
 on canonical content and key identity; metadata, `observed_at`, provenance,
 and signature fields do not change that identity. A duplicate record keeps
@@ -113,6 +145,12 @@ The application currently enforces:
 - source-record existence, source-collection allowlist, and source content-hash
   verification during semantic collection and query;
 - finite, closed Trackio mapping metrics and explicit runtime non-effects;
+- exact pinned DataDecide aliases, stages, branch revisions, evidence drift,
+  licence gates, and non-network/static boundaries;
+- exact DPI source/conversion identities, asserted manifests, schema/count
+  drift, default-deny endpoint/column rules, and false reader-runtime flags;
+- non-scalar flow-lens boundaries, explicit observer/epistemic origins,
+  privacy/licence/Viewer gates, and metadata-only live recording;
 - local-only AgentTool access.
 
 AgentTool Data currently provides:
@@ -139,30 +177,36 @@ KINGDOM integration.
 
 ## Dependency provenance
 
-`@agenttool/data` is pinned to the public 0.3.1 tarball URL. The corresponding
-AgentTool LOVE manifest identifies source revision
+`@agenttool/data` is pinned to public registry version 0.3.1, and Bun's lock
+records the registry artifact's SHA-512 integrity. The corresponding AgentTool
+LOVE manifest identifies source revision
 `d0e131cbf6610552b23cff143d6499dfb2c51eb1`, tarball size `101008`, and
 SHA-256 `8be9c7950e3479d356e62abc624d602d6d6e949d57509a2a8cae2924731ce0b7`.
 
-Bun's URL lock entry does not carry that integrity digest. A separate
-point-in-time tarball verification can establish that the downloaded public
-artifact matched the manifest during verification, but it does not make every
-future install cryptographically bound to that digest. Vendoring a
-digest-pinned artifact or adding a preinstall verifier would be needed for
-that stronger property. On 2026-07-30, a fresh HTTPS download was verified as
-exactly 101008 bytes with the manifest SHA-256 above; the temporary verifier
-copy was then removed.
+On 2026-07-30, a fresh HTTPS download was independently verified as exactly
+101008 bytes with the manifest SHA-256 above; the current registry artifact is
+byte-identical. The lock integrity binds installs to those registry bytes. It
+does not prove the source revision, package ownership, or safety of the code;
+those remain separate provenance and review claims.
 
-`@huggingface/transformers` is exactly 4.2.0 in `package.json` and Bun's
-lockfile. Its model is the Apache-2.0 community conversion
+The source checkout keeps `@huggingface/transformers` exactly 4.2.0 as a
+development-only research runtime. Its declared `adm-zip` and `sharp` ranges
+still admit versions covered by high-severity advisories, so the root lock
+overrides them to patched `adm-zip` 0.6.0 and `sharp` 0.35.3. Both a complete
+dependency audit and the real 384-dimensional local inference smoke pass with
+that graph. npm consumers do not inherit root-package overrides, so the public
+package intentionally omits the Transformers runtime instead of presenting an
+unsafe transitive graph as a normal dependency.
+
+The fixed model is the Apache-2.0 community conversion
 `Xenova/all-MiniLM-L6-v2` at commit
 `751bff37182d3f1213fa05d7196b954e230abad9`; the four-file application
 manifest totals 23,685,047 bytes and has canonical manifest SHA-256
 `07dbea9de5d2118cc16e01bbfca811e3589bb2dcd8cf5b27bd3ed51489d677d9`.
 Bun blocked lifecycle scripts for `onnxruntime-node` and `protobufjs`; no trust
-command was run. The packaged Darwin arm64 runtime nevertheless passed the
-local network-trapped smoke test. This is observed compatibility on this
-checkout, not a universal supply-chain or platform guarantee.
+command was run. The Darwin arm64 runtime nevertheless passed the local
+network-trapped smoke test. This is observed compatibility on this checkout,
+not a universal supply-chain or platform guarantee.
 
 ## Safe extensions
 
@@ -176,3 +220,8 @@ New readers should keep the same shape:
 6. write a separate receipt for reads, writes, inference, Jobs, cost, quota,
    and local side effects;
 7. require scoped authority before an environment-changing remote action.
+
+For subjective or artistic evidence, also retain the observer/cohort, context,
+moment or branch, instrument, transform, disagreement, and uncertainty. Never
+replace those fields with one universal quality, culture, alignment, KARMA, or
+person-worth score.

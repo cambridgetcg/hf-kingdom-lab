@@ -1,0 +1,832 @@
+{
+  "protocol": "hf-kingdom-datadecide-ledger/v1",
+  "observed_at": "2026-08-01T07:27:49Z",
+  "purpose": "A small, pinned recipe -> scale -> seed -> checkpoint -> evaluation ledger for DataDecide. It preserves the joins and known evidence drift without mirroring token shards, checkpoint weights, or evaluation-instance archives.",
+  "boundary": {
+    "static_pinned_evidence": true,
+    "runtime_network": false,
+    "token_shards_included": false,
+    "checkpoint_weights_included": false,
+    "evaluation_instance_bodies_included": false,
+    "bounded_aggregate_witnesses_included": true,
+    "publisher_metadata_is_evidence_not_authority": true,
+    "license_metadata_is_not_legal_advice": true
+  },
+  "identities": {
+    "collection": {
+      "collection_id": "allenai/datadecide-67edb1d2bacba40b5d3ed633",
+      "canonical_url": "https://huggingface.co/collections/allenai/datadecide-67edb1d2bacba40b5d3ed633",
+      "item_count": 354,
+      "dataset_members": [
+        "allenai/DataDecide-eval-results",
+        "allenai/DataDecide-eval-instances",
+        "allenai/DataDecide-data-recipes"
+      ],
+      "model_member_count": 350,
+      "paper_members": [
+        "2504.11393"
+      ]
+    },
+    "model_release": {
+      "owner": "allenai",
+      "repo_pattern": "allenai/DataDecide-{public_recipe_slug}-{scale_label}",
+      "repo_count": 350,
+      "complete_recipe_scale_cartesian_product": true,
+      "license_expression": "Apache-2.0"
+    },
+    "artifacts": [
+      {
+        "artifact_id": "datadecide-source",
+        "kind": "github-repository",
+        "repo_id": "allenai/DataDecide",
+        "canonical_url": "https://github.com/allenai/DataDecide",
+        "revision": "68abc496587935b7211e9894206e78f15d535832",
+        "collection_member": false,
+        "license": {
+          "status": "declared",
+          "expression": "Apache-2.0",
+          "evidence": "repository-license"
+        },
+        "content_route": "pinned-small-file"
+      },
+      {
+        "artifact_id": "olmo-recipe-manifest",
+        "kind": "github-file",
+        "repo_id": "allenai/OLMo",
+        "canonical_url": "https://github.com/allenai/OLMo/blob/7094aab0448096f4994cae881edbd629d6c2f3de/olmo/data/named_data_mixes.py",
+        "revision": "7094aab0448096f4994cae881edbd629d6c2f3de",
+        "path": "olmo/data/named_data_mixes.py",
+        "blob_sha": "3db799996c952a14b32efb9ff67488f7100f1b2a",
+        "collection_member": false,
+        "license": {
+          "status": "declared",
+          "expression": "Apache-2.0",
+          "evidence": "repository-license"
+        },
+        "content_route": "pinned-small-file"
+      },
+      {
+        "artifact_id": "data-recipes",
+        "kind": "huggingface-dataset",
+        "repo_id": "allenai/DataDecide-data-recipes",
+        "canonical_url": "https://huggingface.co/datasets/allenai/DataDecide-data-recipes",
+        "revision": "3baf34baf5b636f0943401b5c6a2ccb7e5cf3bb9",
+        "collection_member": true,
+        "license": {
+          "status": "declared",
+          "expression": "ODC-By-1.0",
+          "evidence": "hub-metadata"
+        },
+        "content_route": "metadata-only"
+      },
+      {
+        "artifact_id": "eval-results",
+        "kind": "huggingface-dataset",
+        "repo_id": "allenai/DataDecide-eval-results",
+        "canonical_url": "https://huggingface.co/datasets/allenai/DataDecide-eval-results",
+        "revision": "9919b5a0e61e57a85021263918fa82d6ceaee038",
+        "collection_member": true,
+        "license": {
+          "status": "declared",
+          "expression": "ODC-By-1.0",
+          "evidence": "hub-metadata"
+        },
+        "content_route": "bounded-aggregate"
+      },
+      {
+        "artifact_id": "eval-instances",
+        "kind": "huggingface-dataset",
+        "repo_id": "allenai/DataDecide-eval-instances",
+        "canonical_url": "https://huggingface.co/datasets/allenai/DataDecide-eval-instances",
+        "revision": "23f3b2e186ca6c39026e3efa00e4af397680c075",
+        "collection_member": true,
+        "license": {
+          "status": "declared",
+          "expression": "ODC-By-1.0",
+          "evidence": "hub-metadata"
+        },
+        "content_route": "bounded-schema"
+      },
+      {
+        "artifact_id": "ppl-results",
+        "kind": "huggingface-dataset",
+        "repo_id": "allenai/DataDecide-ppl-results",
+        "canonical_url": "https://huggingface.co/datasets/allenai/DataDecide-ppl-results",
+        "revision": "c4a9fa360a0c8351e71f3ede04dd165995fab68c",
+        "collection_member": false,
+        "license": {
+          "status": "missing",
+          "expression": null,
+          "evidence": "absent-from-hub-metadata"
+        },
+        "content_route": "metadata-only"
+      }
+    ]
+  },
+  "study": {
+    "recipe_count": 25,
+    "scale_count": 14,
+    "scientific_seeds_per_recipe_scale": 3,
+    "scientific_model_run_count": 1050,
+    "operational_run_manifest_count": 1100,
+    "usable_checkpoint_revision_count": 31404,
+    "token_parameter_ratio": 100,
+    "chinchilla_multiple": "5xC",
+    "non_target_auxiliary_stop_rule": "min(full scale schedule, 25% of the 1B target compute budget)",
+    "sequence_length_evidence": {
+      "paper": {
+        "version": "2504.11393v2",
+        "table_value": 2024,
+        "source": "https://arxiv.org/html/2504.11393v2"
+      },
+      "code": {
+        "revision": "68abc496587935b7211e9894206e78f15d535832",
+        "constant_value": 2048,
+        "source": "https://github.com/allenai/DataDecide/blob/68abc496587935b7211e9894206e78f15d535832/utils/constants.py#L254"
+      },
+      "released_arithmetic": {
+        "scale_id": "scale:1B",
+        "training_steps": 69369,
+        "batch_sequences": 704,
+        "released_tokens": 100015669248
+      },
+      "resolution": {
+        "status": "documented-drift",
+        "ledger_value": 2048,
+        "reason": "The pinned code constant and released step x batch x sequence arithmetic agree on 2048; the paper table's 2024 is retained as contradictory evidence rather than silently corrected."
+      }
+    }
+  },
+  "tables": {
+    "recipes": {
+      "stage": "recipe",
+      "coverage": "complete",
+      "primary_key": [
+        "recipe_id"
+      ],
+      "path_key": [
+        "recipe_id"
+      ],
+      "foreign_keys": [],
+      "rows": [
+        {
+          "recipe_id": "recipe:dolma17",
+          "aliases": {
+            "internal_slug": "dolma17",
+            "public_slug": "dolma1_7",
+            "evaluation_name": "Dolma1.7"
+          }
+        },
+        {
+          "recipe_id": "recipe:no_code",
+          "aliases": {
+            "internal_slug": "no_code",
+            "public_slug": "dolma1_7-no-code",
+            "evaluation_name": "Dolma1.7 (no code)"
+          }
+        },
+        {
+          "recipe_id": "recipe:no_math_no_code",
+          "aliases": {
+            "internal_slug": "no_math_no_code",
+            "public_slug": "dolma1_7-no-math-code",
+            "evaluation_name": "Dolma1.7 (no math, code)"
+          }
+        },
+        {
+          "recipe_id": "recipe:no_reddit",
+          "aliases": {
+            "internal_slug": "no_reddit",
+            "public_slug": "dolma1_7-no-reddit",
+            "evaluation_name": "Dolma1.7 (no Reddit)"
+          }
+        },
+        {
+          "recipe_id": "recipe:no_flan",
+          "aliases": {
+            "internal_slug": "no_flan",
+            "public_slug": "dolma1_7-no-flan",
+            "evaluation_name": "Dolma1.7 (no Flan)"
+          }
+        },
+        {
+          "recipe_id": "recipe:dolma-v1-6-and-sources-baseline",
+          "aliases": {
+            "internal_slug": "dolma-v1-6-and-sources-baseline",
+            "public_slug": "dolma1_6plus",
+            "evaluation_name": "Dolma1.6++"
+          }
+        },
+        {
+          "recipe_id": "recipe:c4",
+          "aliases": {
+            "internal_slug": "c4",
+            "public_slug": "c4",
+            "evaluation_name": "C4"
+          }
+        },
+        {
+          "recipe_id": "recipe:prox_fineweb_pro",
+          "aliases": {
+            "internal_slug": "prox_fineweb_pro",
+            "public_slug": "fineweb-pro",
+            "evaluation_name": "FineWeb-Pro"
+          }
+        },
+        {
+          "recipe_id": "recipe:fineweb_edu_dedup",
+          "aliases": {
+            "internal_slug": "fineweb_edu_dedup",
+            "public_slug": "fineweb-edu",
+            "evaluation_name": "FineWeb-Edu"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon",
+          "aliases": {
+            "internal_slug": "falcon",
+            "public_slug": "falcon",
+            "evaluation_name": "Falcon"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon_and_cc",
+          "aliases": {
+            "internal_slug": "falcon_and_cc",
+            "public_slug": "falcon-and-cc",
+            "evaluation_name": "Falcon+CC"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon_and_cc_eli5_oh_top10p",
+          "aliases": {
+            "internal_slug": "falcon_and_cc_eli5_oh_top10p",
+            "public_slug": "falcon-and-cc-qc-10p",
+            "evaluation_name": "Falcon+CC (QC 10%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon_and_cc_eli5_oh_top20p",
+          "aliases": {
+            "internal_slug": "falcon_and_cc_eli5_oh_top20p",
+            "public_slug": "falcon-and-cc-qc-20p",
+            "evaluation_name": "Falcon+CC (QC 20%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon_and_cc_og_eli5_oh_top10p",
+          "aliases": {
+            "internal_slug": "falcon_and_cc_og_eli5_oh_top10p",
+            "public_slug": "falcon-and-cc-qc-orig-10p",
+            "evaluation_name": "Falcon+CC (QC Orig 10%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:falcon_and_cc_tulu_qc_top10",
+          "aliases": {
+            "internal_slug": "falcon_and_cc_tulu_qc_top10",
+            "public_slug": "falcon-and-cc-qc-tulu-10p",
+            "evaluation_name": "Falcon+CC (QC Tulu 10%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:DCLM-baseline",
+          "aliases": {
+            "internal_slug": "DCLM-baseline",
+            "public_slug": "dclm-baseline",
+            "evaluation_name": "DCLM-Baseline"
+          }
+        },
+        {
+          "recipe_id": "recipe:dolma17-75p-DCLM-baseline-25p",
+          "aliases": {
+            "internal_slug": "dolma17-75p-DCLM-baseline-25p",
+            "public_slug": "dclm-baseline-25p-dolma1.7-75p",
+            "evaluation_name": "DCLM 25% / Dolma 75%"
+          }
+        },
+        {
+          "recipe_id": "recipe:dolma17-50p-DCLM-baseline-50p",
+          "aliases": {
+            "internal_slug": "dolma17-50p-DCLM-baseline-50p",
+            "public_slug": "dclm-baseline-50p-dolma1.7-50p",
+            "evaluation_name": "DCLM 50% / Dolma 50%"
+          }
+        },
+        {
+          "recipe_id": "recipe:dolma17-25p-DCLM-baseline-75p",
+          "aliases": {
+            "internal_slug": "dolma17-25p-DCLM-baseline-75p",
+            "public_slug": "dclm-baseline-75p-dolma1.7-25p",
+            "evaluation_name": "DCLM 75% / Dolma 25%"
+          }
+        },
+        {
+          "recipe_id": "recipe:dclm_ft7percentile_fw2",
+          "aliases": {
+            "internal_slug": "dclm_ft7percentile_fw2",
+            "public_slug": "dclm-baseline-qc-7p-fw2",
+            "evaluation_name": "DCLM (QC 7%, FW2)"
+          }
+        },
+        {
+          "recipe_id": "recipe:dclm_ft7percentile_fw3",
+          "aliases": {
+            "internal_slug": "dclm_ft7percentile_fw3",
+            "public_slug": "dclm-baseline-qc-7p-fw3",
+            "evaluation_name": "DCLM (QC 7%, FW3)"
+          }
+        },
+        {
+          "recipe_id": "recipe:dclm_fw_top10",
+          "aliases": {
+            "internal_slug": "dclm_fw_top10",
+            "public_slug": "dclm-baseline-qc-fw-10p",
+            "evaluation_name": "DCLM (QC FW 10%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:dclm_fw_top3",
+          "aliases": {
+            "internal_slug": "dclm_fw_top3",
+            "public_slug": "dclm-baseline-qc-fw-3p",
+            "evaluation_name": "DCLM (QC FW 3%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:pos_eli5_oh_neg_dclm_refinedweb_steps_2000_lr3e4_top10p",
+          "aliases": {
+            "internal_slug": "pos_eli5_oh_neg_dclm_refinedweb_steps_2000_lr3e4_top10p",
+            "public_slug": "dclm-baseline-qc-10p",
+            "evaluation_name": "DCLM (QC 10%)"
+          }
+        },
+        {
+          "recipe_id": "recipe:pos_eli5_oh_neg_dclm_refinedweb_steps_2000_lr3e4_top20p",
+          "aliases": {
+            "internal_slug": "pos_eli5_oh_neg_dclm_refinedweb_steps_2000_lr3e4_top20p",
+            "public_slug": "dclm-baseline-qc-20p",
+            "evaluation_name": "DCLM (QC 20%)"
+          }
+        }
+      ]
+    },
+    "scales": {
+      "stage": "scale",
+      "coverage": "complete",
+      "primary_key": [
+        "scale_id"
+      ],
+      "path_key": [
+        "recipe_id",
+        "scale_id"
+      ],
+      "foreign_keys": [],
+      "rows": [
+        {
+          "scale_id": "scale:4M",
+          "label": "4M",
+          "non_embedding_parameters": 3744832,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 5725,
+          "scheduled_full_tokens": 375193600,
+          "hidden_size": 64,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.014,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:6M",
+          "label": "6M",
+          "non_embedding_parameters": 6010464,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 9182,
+          "scheduled_full_tokens": 601751552,
+          "hidden_size": 96,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.012,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:8M",
+          "label": "8M",
+          "non_embedding_parameters": 8538240,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 13039,
+          "scheduled_full_tokens": 854523904,
+          "hidden_size": 128,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.011,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:10M",
+          "label": "10M",
+          "non_embedding_parameters": 9900432,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 15117,
+          "scheduled_full_tokens": 990707712,
+          "hidden_size": 144,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.01,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:14M",
+          "label": "14M",
+          "non_embedding_parameters": 14380224,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 21953,
+          "scheduled_full_tokens": 1438711808,
+          "hidden_size": 192,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.0092,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:16M",
+          "label": "16M",
+          "non_embedding_parameters": 16004560,
+          "batch_sequences": 32,
+          "scheduled_full_steps": 24432,
+          "scheduled_full_tokens": 1601175552,
+          "hidden_size": 208,
+          "attention_heads": 8,
+          "layers": 8,
+          "learning_rate": 0.0089,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:20M",
+          "label": "20M",
+          "non_embedding_parameters": 19101888,
+          "batch_sequences": 64,
+          "scheduled_full_steps": 14584,
+          "scheduled_full_tokens": 1911554048,
+          "hidden_size": 192,
+          "attention_heads": 8,
+          "layers": 16,
+          "learning_rate": 0.0084,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:60M",
+          "label": "60M",
+          "non_embedding_parameters": 57078144,
+          "batch_sequences": 96,
+          "scheduled_full_steps": 29042,
+          "scheduled_full_tokens": 5709889536,
+          "hidden_size": 384,
+          "attention_heads": 12,
+          "layers": 16,
+          "learning_rate": 0.0058,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:90M",
+          "label": "90M",
+          "non_embedding_parameters": 97946640,
+          "batch_sequences": 160,
+          "scheduled_full_steps": 29901,
+          "scheduled_full_tokens": 9797959680,
+          "hidden_size": 528,
+          "attention_heads": 12,
+          "layers": 16,
+          "learning_rate": 0.0049,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:150M",
+          "label": "150M",
+          "non_embedding_parameters": 151898880,
+          "batch_sequences": 192,
+          "scheduled_full_steps": 38157,
+          "scheduled_full_tokens": 15003942912,
+          "hidden_size": 768,
+          "attention_heads": 12,
+          "layers": 12,
+          "learning_rate": 0.0042,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:300M",
+          "label": "300M",
+          "non_embedding_parameters": 319980544,
+          "batch_sequences": 320,
+          "scheduled_full_steps": 45787,
+          "scheduled_full_tokens": 30006968320,
+          "hidden_size": 1024,
+          "attention_heads": 16,
+          "layers": 16,
+          "learning_rate": 0.0033,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:530M",
+          "label": "530M",
+          "non_embedding_parameters": 530074944,
+          "batch_sequences": 448,
+          "scheduled_full_steps": 57786,
+          "scheduled_full_tokens": 53018886144,
+          "hidden_size": 1344,
+          "attention_heads": 16,
+          "layers": 16,
+          "learning_rate": 0.0028,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:750M",
+          "label": "750M",
+          "non_embedding_parameters": 681297408,
+          "batch_sequences": 576,
+          "scheduled_full_steps": 63589,
+          "scheduled_full_tokens": 75012636672,
+          "hidden_size": 1536,
+          "attention_heads": 16,
+          "layers": 16,
+          "learning_rate": 0.0025,
+          "scientific_seed_ids": ["seed:6198", "seed:14", "seed:15"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15"]
+        },
+        {
+          "scale_id": "scale:1B",
+          "label": "1B",
+          "non_embedding_parameters": 1176832000,
+          "batch_sequences": 704,
+          "scheduled_full_steps": 69369,
+          "scheduled_full_tokens": 100015669248,
+          "hidden_size": 2048,
+          "attention_heads": 16,
+          "layers": 16,
+          "learning_rate": 0.0021,
+          "scientific_seed_ids": ["seed:6198", "seed:4", "seed:5"],
+          "operational_seed_ids": ["seed:6198", "seed:14", "seed:15", "seed:4", "seed:5"]
+        }
+      ]
+    },
+    "seeds": {
+      "stage": "seed",
+      "coverage": "complete",
+      "primary_key": [
+        "seed_id"
+      ],
+      "path_key": [
+        "recipe_id",
+        "scale_id",
+        "seed_id"
+      ],
+      "foreign_keys": [],
+      "rows": [
+        {
+          "seed_id": "seed:6198",
+          "numeric_seed": 6198,
+          "evaluation_alias": "default",
+          "branch_alias": "default",
+          "scientific_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M", "scale:1B"],
+          "operational_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M", "scale:1B"],
+          "stop_rule": "full-scale-schedule"
+        },
+        {
+          "seed_id": "seed:14",
+          "numeric_seed": 14,
+          "evaluation_alias": "small aux 2",
+          "branch_alias": "small-aux-2",
+          "scientific_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M"],
+          "operational_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M", "scale:1B"],
+          "stop_rule": "min-full-scale-or-quarter-1B-target-compute"
+        },
+        {
+          "seed_id": "seed:15",
+          "numeric_seed": 15,
+          "evaluation_alias": "small aux 3",
+          "branch_alias": "small-aux-3",
+          "scientific_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M"],
+          "operational_scale_ids": ["scale:4M", "scale:6M", "scale:8M", "scale:10M", "scale:14M", "scale:16M", "scale:20M", "scale:60M", "scale:90M", "scale:150M", "scale:300M", "scale:530M", "scale:750M", "scale:1B"],
+          "stop_rule": "min-full-scale-or-quarter-1B-target-compute"
+        },
+        {
+          "seed_id": "seed:4",
+          "numeric_seed": 4,
+          "evaluation_alias": "large aux 2",
+          "branch_alias": "large-aux-2",
+          "scientific_scale_ids": ["scale:1B"],
+          "operational_scale_ids": ["scale:1B"],
+          "stop_rule": "full-scale-schedule"
+        },
+        {
+          "seed_id": "seed:5",
+          "numeric_seed": 5,
+          "evaluation_alias": "large aux 3",
+          "branch_alias": "large-aux-3",
+          "scientific_scale_ids": ["scale:1B"],
+          "operational_scale_ids": ["scale:1B"],
+          "stop_rule": "full-scale-schedule"
+        }
+      ]
+    },
+    "checkpoints": {
+      "stage": "checkpoint",
+      "coverage": "bounded-witnesses",
+      "primary_key": [
+        "checkpoint_id"
+      ],
+      "path_key": [
+        "recipe_id",
+        "scale_id",
+        "seed_id",
+        "step"
+      ],
+      "foreign_keys": [
+        {
+          "fields": ["recipe_id"],
+          "references_table": "recipes",
+          "references_fields": ["recipe_id"]
+        },
+        {
+          "fields": ["scale_id"],
+          "references_table": "scales",
+          "references_fields": ["scale_id"]
+        },
+        {
+          "fields": ["seed_id"],
+          "references_table": "seeds",
+          "references_fields": ["seed_id"]
+        }
+      ],
+      "source_manifest": {
+        "artifact_id": "datadecide-source",
+        "path": "checkpoints/weka_paths.jsonl",
+        "raw_run_rows": 1103,
+        "excluded_legacy_rows": 3,
+        "usable_run_rows": 1100,
+        "usable_checkpoint_revisions": 31404
+      },
+      "rows": [
+        {
+          "checkpoint_id": "checkpoint:c4:4M:6198:5725",
+          "recipe_id": "recipe:c4",
+          "scale_id": "scale:4M",
+          "seed_id": "seed:6198",
+          "step": 5725,
+          "tokens": 375193600,
+          "compute_flops": "8430221996851200",
+          "model_repo_id": "allenai/DataDecide-c4-4M",
+          "revision": {
+            "kind": "branch",
+            "name": "step5725-seed-default",
+            "target_commit_sha": "ca03048362e0fbc9c2d22e0ca1de5433e30570bd"
+          }
+        },
+        {
+          "checkpoint_id": "checkpoint:c4:4M:15:5725",
+          "recipe_id": "recipe:c4",
+          "scale_id": "scale:4M",
+          "seed_id": "seed:15",
+          "step": 5725,
+          "tokens": 375193600,
+          "compute_flops": "8430221996851200",
+          "model_repo_id": "allenai/DataDecide-c4-4M",
+          "revision": {
+            "kind": "branch",
+            "name": "step5725-seed-small-aux-3",
+            "target_commit_sha": "00153e25a853f47f660ce603753db59281e491bb"
+          }
+        },
+        {
+          "checkpoint_id": "checkpoint:dolma17:1B:6198:69369",
+          "recipe_id": "recipe:dolma17",
+          "scale_id": "scale:1B",
+          "seed_id": "seed:6198",
+          "step": 69369,
+          "tokens": 100015669248,
+          "compute_flops": "706209840434774016000",
+          "model_repo_id": "allenai/DataDecide-dolma1_7-1B",
+          "revision": {
+            "kind": "branch",
+            "name": "step69369-seed-default",
+            "target_commit_sha": "c880c1565f57c13eab7e41d53fe3351be2ef38a9"
+          }
+        },
+        {
+          "checkpoint_id": "checkpoint:dolma17:1B:4:69369",
+          "recipe_id": "recipe:dolma17",
+          "scale_id": "scale:1B",
+          "seed_id": "seed:4",
+          "step": 69369,
+          "tokens": 100015669248,
+          "compute_flops": "706209840434774016000",
+          "model_repo_id": "allenai/DataDecide-dolma1_7-1B",
+          "revision": {
+            "kind": "branch",
+            "name": "step69369-seed-large-aux-2",
+            "target_commit_sha": "404b8ab1e836f782e087cbf663c8db94e64b7fe6"
+          }
+        },
+        {
+          "checkpoint_id": "checkpoint:dolma17:1B:5:69369",
+          "recipe_id": "recipe:dolma17",
+          "scale_id": "scale:1B",
+          "seed_id": "seed:5",
+          "step": 69369,
+          "tokens": 100015669248,
+          "compute_flops": "706209840434774016000",
+          "model_repo_id": "allenai/DataDecide-dolma1_7-1B",
+          "revision": {
+            "kind": "branch",
+            "name": "step69369-seed-large-aux-3",
+            "target_commit_sha": "1cf8f2d99f9f244c90bc941326adf84150d3c15d"
+          }
+        }
+      ]
+    },
+    "evaluations": {
+      "stage": "evaluation",
+      "coverage": "bounded-witnesses",
+      "primary_key": [
+        "evaluation_id"
+      ],
+      "path_key": [
+        "recipe_id",
+        "scale_id",
+        "seed_id",
+        "step",
+        "task_id",
+        "protocol_id"
+      ],
+      "foreign_keys": [
+        {
+          "fields": ["checkpoint_id"],
+          "references_table": "checkpoints",
+          "references_fields": ["checkpoint_id"]
+        }
+      ],
+      "source_summary": {
+        "artifact_id": "eval-results",
+        "config": "default",
+        "split": "train",
+        "row_count": 1410750,
+        "metrics_encoding": "python-literal-string",
+        "safe_parse_policy": "retain raw evidence or use a constrained literal parser; never execute with eval"
+      },
+      "rows": [
+        {
+          "evaluation_id": "evaluation:c4:4M:6198:5725:arc_challenge:olmes-cf-all-items",
+          "checkpoint_id": "checkpoint:c4:4M:6198:5725",
+          "task_id": "arc_challenge",
+          "protocol_id": "olmes-cf-all-items",
+          "source_artifact_id": "eval-results",
+          "source_revision": "9919b5a0e61e57a85021263918fa82d6ceaee038",
+          "source_coordinates": {
+            "data": "C4",
+            "params": "4M",
+            "seed": "default",
+            "step": 5725,
+            "chinchilla": "5xC"
+          },
+          "metric": {
+            "name": "primary_metric",
+            "selected_source_metric": "acc_uncond",
+            "value": 0.21843003412969283
+          }
+        },
+        {
+          "evaluation_id": "evaluation:c4:4M:6198:5725:arc_easy:olmes-cf-all-items",
+          "checkpoint_id": "checkpoint:c4:4M:6198:5725",
+          "task_id": "arc_easy",
+          "protocol_id": "olmes-cf-all-items",
+          "source_artifact_id": "eval-results",
+          "source_revision": "9919b5a0e61e57a85021263918fa82d6ceaee038",
+          "source_coordinates": {
+            "data": "C4",
+            "params": "4M",
+            "seed": "default",
+            "step": 5725,
+            "chinchilla": "5xC"
+          },
+          "metric": {
+            "name": "primary_metric",
+            "selected_source_metric": "acc_per_char",
+            "value": 0.29713804713804715
+          }
+        }
+      ]
+    }
+  }
+}

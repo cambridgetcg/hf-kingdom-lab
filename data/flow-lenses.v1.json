@@ -1,0 +1,641 @@
+{
+  "protocol": "hf-kingdom-flow-lenses/v1",
+  "observed_at": "2026-08-01T07:27:49Z",
+  "purpose": "Map how situated human and model observations change across pairs, turns, branches, cultures, perspectives, regions, rubrics, and time without collapsing them into one vibe or quality score.",
+  "definition": {
+    "flow": "The ordered or branching transformation from an artifact and context to one or more observations.",
+    "vibe": "A situated observation pattern tied to an observer, context, moment, instrument, and provenance; never an essence, identity, universal preference, or measure of worth."
+  },
+  "boundary": {
+    "catalogue_is_evidence_not_authority": true,
+    "disagreement_is_data": true,
+    "descriptive_normative_and_control_layers_stay_distinct": true,
+    "no_universal_vibe_score": true,
+    "no_person_worth_or_identity_inference": true,
+    "no_demographic_taste_inference": true,
+    "remote_rows_collected": false,
+    "remote_files_collected": false,
+    "hub_mutation": false
+  },
+  "dimensions": [
+    "intent-constraint",
+    "form-style",
+    "affect-resonance",
+    "coherence-craft",
+    "novelty-surprise",
+    "cultural-linguistic-situation",
+    "agency-consent",
+    "trajectory-repair",
+    "disagreement-tie",
+    "uncertainty-evidence"
+  ],
+  "entries": [
+    {
+      "rank": 1,
+      "repo_id": "HannahRoseKirk/prism-alignment",
+      "hub_object_id": "6626a96c60995500ad5bc2cc",
+      "revision": "18ab5cfb37456f4ec8cbc00212ce54cf7b1239f6",
+      "canonical_url": "https://huggingface.co/datasets/HannahRoseKirk/prism-alignment",
+      "domain": "conversation",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2024-04-25T09:11:35.000Z",
+        "downloads": 1504,
+        "likes": 103,
+        "hub_license_tag": "license:cc"
+      },
+      "license": {
+        "status": "component-specific",
+        "expression": "Human text CC-BY-4.0; model responses CC-BY-NC-4.0 plus provider terms",
+        "scope": "The generic Hub license:cc tag is not an actionable blanket licence, and the human and model components have different terms."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["descriptive", "normative"],
+        "identity_surface": "sensitive-pseudonymous",
+        "observation_unit": "one participant, one conversation branch, one turn or end-of-conversation reflection, and its collection context",
+        "dimensions": [
+          "intent-constraint",
+          "form-style",
+          "coherence-craft",
+          "novelty-surprise",
+          "cultural-linguistic-situation",
+          "agency-consent",
+          "trajectory-repair",
+          "disagreement-tie",
+          "uncertainty-evidence"
+        ],
+        "disagreement": "partially-preserved"
+      },
+      "flow": {
+        "axis": "conversation-branch",
+        "stages": [
+          "opening prompt and four independently rated model responses",
+          "participant chooses a response and continues for two to twenty-two turns",
+          "later A/B choices alter the branch",
+          "end feedback records attributes and open reflection"
+        ],
+        "preserves": ["turn order", "chosen branches", "model identity", "per-conversation feedback"],
+        "loses": ["counterfactual conversation after each rejected branch", "full meaning of a participant's evolving intent"]
+      },
+      "viewer": {
+        "status": "partial",
+        "configs": ["conversations/train", "survey/train", "utterances/train"],
+        "reported_rows": "8,011 conversations; 1,500 surveys; 68,371 utterances",
+        "schema": ["conversation_history", "score", "if_chosen", "performance_attributes", "choice_attributes", "open_feedback", "survey demographics"],
+        "note": "The main configs are available, but the PII/safety metadata config fails because pii_manual_flag changes type from numeric to boolean. It is not an operational safety filter."
+      },
+      "route": {
+        "mode": "aggregate-after-review",
+        "next_artifact": "A sealed turn/branch transition census with k-anonymity-style suppression and no text, user identifiers, free-form identity fields, or narrow demographic slices.",
+        "forbidden": ["universal-vibe-score", "demographic-inference", "reidentification", "raw-user-text", "licence-flattening"]
+      },
+      "nuances": [
+        "Stated preferences, turn choices, and end feedback can disagree; that disagreement is signal rather than an error to erase.",
+        "Joinable free text, timestamps, location, religion, ethnicity, and participant identifiers create a meaningful reidentification surface.",
+        "The terms explicitly prohibit deanonymisation or triangulation; census-matched US/UK subsets do not make the whole sample representative."
+      ],
+      "risks": ["participant privacy", "licence mixing", "selection effects", "false demographic generalization"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/HannahRoseKirk/prism-alignment",
+        "https://arxiv.org/abs/2404.16019"
+      ]
+    },
+    {
+      "rank": 2,
+      "repo_id": "amaai-lab/MERP",
+      "hub_object_id": "6a362123b57803e616332ddf",
+      "revision": "04d90b60d92f079f2e25759e48f233094f7af84a",
+      "canonical_url": "https://huggingface.co/datasets/amaai-lab/MERP",
+      "domain": "music",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2026-06-22T14:03:48.000Z",
+        "downloads": 318,
+        "likes": 2,
+        "hub_license_tag": "license:cc-by-4.0"
+      },
+      "license": {
+        "status": "component-specific",
+        "expression": "Annotations and profiles CC-BY-4.0; audio uses per-track CC BY, CC BY-SA, or CC BY-NC terms",
+        "scope": "The repository-level CC-BY-4.0 tag does not replace each audio track's licence."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["descriptive"],
+        "identity_surface": "sensitive-pseudonymous",
+        "observation_unit": "one listener's valence and arousal trace for one song, nominally labelled 10 Hz in the card but with the filtered sampling grid unresolved, linked to a pseudonymous profile",
+        "dimensions": ["affect-resonance", "cultural-linguistic-situation", "trajectory-repair", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "preserved"
+      },
+      "flow": {
+        "axis": "continuous-time",
+        "stages": [
+          "listener hears a full-length track",
+          "listener moves valence and arousal controls in a raw capture the card labels as 0.1-second sampling",
+          "anchor-track and response-range checks filter raters",
+          "per-rater rescaling and smoothing create the published filtered trace"
+        ],
+        "preserves": ["raw and filtered trace variants", "pseudonymous rater linkage", "music-background context"],
+        "loses": ["absolute comparability after per-rater rescaling", "short-lived changes blurred by smoothing"]
+      },
+      "viewer": {
+        "status": "mismatched",
+        "configs": ["default/train"],
+        "reported_rows": "54 audio rows in Viewer; 3,482 filtered annotations, 6,176 raw annotations, and 196 profiles in repository Parquet files",
+        "schema": ["audio"],
+        "note": "The Viewer exposes the audiofolder only and omits the time-series annotation and profile tables that make the research artifact useful."
+      },
+      "route": {
+        "mode": "schema-only",
+        "next_artifact": "A licence-aware, profile-suppressed trace-shape study that compares raw versus transformed dynamics without retaining audio or individual profiles.",
+        "forbidden": ["universal-vibe-score", "demographic-inference", "reidentification", "audio-copy", "licence-flattening"]
+      },
+      "nuances": [
+        "Filtering, rescaling, and smoothing change the emotional trajectory rather than merely cleaning it.",
+        "The card reports 452 participants in one summary and 447 raw raters in its corpus table; the paper's raw stage reports 358 participants and 4,441 trials, so raw names different pipeline stages.",
+        "Filtered arrays are consistent with a 0.5-second downsampled stage even though the card labels both tables 10 Hz; exact transform order and response lag remain unresolved.",
+        "Only 191 of 196 profile IDs occur in filtered annotations, while many filtered raters have no profile; profile joins must preserve missingness."
+      ],
+      "risks": ["profile privacy", "per-track licence variance", "instrument-induced emotion model", "transformation drift"],
+      "primary_sources": ["https://huggingface.co/datasets/amaai-lab/MERP"]
+    },
+    {
+      "rank": 3,
+      "repo_id": "m-a-p/Writing-Preference-Bench",
+      "hub_object_id": "68f0e92946e9fc01d89bef4e",
+      "revision": "676d7114ce37ad5d8eff5b39f3648b855730bf77",
+      "canonical_url": "https://huggingface.co/datasets/m-a-p/Writing-Preference-Bench",
+      "domain": "writing",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2025-10-17T06:38:59.000Z",
+        "downloads": 205,
+        "likes": 5,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "conflicting",
+        "expression": "Hub YAML/API Apache-2.0; README body ODC-By-1.0 with additional research/education language",
+        "scope": "No content route should assume one of the contradictory declarations wins."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["normative"],
+        "identity_surface": "none",
+        "observation_unit": "one English or Chinese writing prompt, two model responses, and an expert-validated pairwise preference",
+        "dimensions": ["form-style", "affect-resonance", "coherence-craft", "novelty-surprise", "cultural-linguistic-situation", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "aggregated-away"
+      },
+      "flow": {
+        "axis": "preference-pair",
+        "stages": [
+          "instructors design and validate a genre-specific prompt",
+          "multiple models generate candidates",
+          "expert annotators score candidates on a four-point rubric",
+          "only agreed, score-separated pairs become chosen/rejected examples"
+        ],
+        "preserves": ["language", "genre tag", "source model", "chosen and rejected scores", "token and length fields"],
+        "loses": ["raw individual rater votes", "rater rationales", "discarded candidates"]
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": ["default/train"],
+        "reported_rows": "1,800 preference pairs",
+        "schema": ["prompt", "prompt_id", "tag", "chosen.response", "chosen.score", "chosen.model", "rejected.response", "rejected.score", "rejected.model"],
+        "note": "The current Dataset Server reports a complete 25,126,178-byte table."
+      },
+      "route": {
+        "mode": "schema-only",
+        "next_artifact": "A language/category and length-bias audit that requires licence clarification before any response text is collected.",
+        "forbidden": ["universal-vibe-score", "chosen-equals-good", "licence-guessing", "culture-from-language-inference"]
+      },
+      "nuances": [
+        "The public files contradict the card's length-matched framing: chosen responses are materially longer on average, especially in English.",
+        "Agreement filtering hides the shape of disagreement and can make subjective judgments appear more objective than the raw annotation process."
+      ],
+      "risks": ["licence conflict", "length confound", "expert-panel narrowness", "pairwise preference universalization"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/m-a-p/Writing-Preference-Bench",
+        "https://arxiv.org/abs/2510.14616"
+      ]
+    },
+    {
+      "rank": 4,
+      "repo_id": "youssef101/artelingo",
+      "hub_object_id": "64be60668e051085ba1d8c8f",
+      "revision": "6846fac8d7b2e3daf9493148efcd8476c064f023",
+      "canonical_url": "https://huggingface.co/datasets/youssef101/artelingo",
+      "domain": "visual-art",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2023-09-11T08:21:07.000Z",
+        "downloads": 28,
+        "likes": 9,
+        "hub_license_tag": "license:other"
+      },
+      "license": {
+        "status": "custom",
+        "expression": "Custom ArtEmis/WikiArt research terms",
+        "scope": "The terms attach conditions to access and copyrighted WikiArt works; license:other is not a general open-data grant."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["descriptive"],
+        "identity_surface": "none",
+        "observation_unit": "one artwork, one native-language annotator response, one emotion label, and one affective caption",
+        "dimensions": ["affect-resonance", "cultural-linguistic-situation", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "preserved"
+      },
+      "flow": {
+        "axis": "culture-language",
+        "stages": [
+          "a WikiArt work is selected through the inherited ArtEmis collection",
+          "native English, Arabic, or Chinese speakers choose an emotion and write a caption",
+          "multiple annotations remain attached to the same artwork",
+          "cross-language analyses compare distributions without declaring one culture canonical"
+        ],
+        "preserves": ["artwork linkage", "language", "emotion label", "caption multiplicity"],
+        "loses": ["culture beyond language-group sampling", "contexts absent from WikiArt's collection"]
+      },
+      "viewer": {
+        "status": "unsupported",
+        "configs": [],
+        "reported_rows": "Card claims ArtEmis plus roughly 790,000 Arabic/Chinese and 4,800 Spanish annotations",
+        "schema": ["image", "art_style", "painting", "emotion", "language", "text"],
+        "note": "The live Dataset Server cannot process the arbitrary Python loader, whose current S3 split URLs return 403 and carry no source hashes."
+      },
+      "route": {
+        "mode": "metadata-only",
+        "next_artifact": "A cultural-coverage and terms review; any future analysis must keep artwork rights and annotation language attached.",
+        "forbidden": ["universal-vibe-score", "culture-essentialism", "artwork-copy", "licence-flattening"]
+      },
+      "nuances": [
+        "Difference between language groups is not proof of an intrinsic cultural trait.",
+        "The card itself notes that assuming WikiArt represents the cultures of interest is a limitation.",
+        "The card says three languages while the paper also reports a small Spanish cohort; split totals and paper totals differ materially.",
+        "The loader re-enumerates ids within each split, so a future cross-language join needs a stable artwork/content identity rather than uid alone."
+      ],
+      "risks": ["artwork copyright", "custom terms", "Western-skewed source collection", "language-as-culture proxy"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/youssef101/artelingo",
+        "https://arxiv.org/abs/2211.10780"
+      ]
+    },
+    {
+      "rank": 5,
+      "repo_id": "kixlab/DiscoverLLM-multiturn-preferences",
+      "hub_object_id": "6a017c35640473533d50b06c",
+      "revision": "c857bbf6265bdd573938eb7eac79a7a3131fa7ca",
+      "canonical_url": "https://huggingface.co/datasets/kixlab/DiscoverLLM-multiturn-preferences",
+      "domain": "conversation",
+      "role": "control-artifact",
+      "hub_observation": {
+        "last_modified": "2026-06-02T09:27:46.000Z",
+        "downloads": 86,
+        "likes": 3,
+        "hub_license_tag": "license:cc-by-4.0"
+      },
+      "license": {
+        "status": "component-specific",
+        "expression": "Generated layer CC-BY-4.0; upstream creative, technical, and SVG sources carry separate terms",
+        "scope": "The generated dataset licence does not clear Reddit-derived, Media Cloud, or mixed-licence upstream artifacts."
+      },
+      "evidence": {
+        "observer_origin": "model",
+        "epistemic_layers": ["control"],
+        "identity_surface": "pseudonymous",
+        "observation_unit": "one simulated collaborative turn, its artifact, criteria-history snapshot, completion, and model-derived score",
+        "dimensions": ["intent-constraint", "form-style", "coherence-craft", "novelty-surprise", "trajectory-repair", "uncertainty-evidence"],
+        "disagreement": "not-applicable"
+      },
+      "flow": {
+        "axis": "turn-sequence",
+        "stages": [
+          "an initial artifact and latent criteria seed the exchange",
+          "simulated interaction reveals or revises criteria",
+          "criteria_history records the evolving control tree",
+          "a reward model scores each completion"
+        ],
+        "preserves": ["turn id", "artifact id", "criteria history", "source dataset and source id"],
+        "loses": ["real human preference", "unmodeled goals outside the simulator", "upstream context not carried into the generated row"]
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": ["creative_writing/train", "svg_drawing/train", "technical_writing/train"],
+        "reported_rows": "9,318 rows across three configs",
+        "schema": ["artifact_id", "turn_id", "assistant_index", "prompt", "completion", "score", "criteria_history", "source_dataset", "source_id"],
+        "note": "The Dataset Server exposes all three declared configs."
+      },
+      "route": {
+        "mode": "schema-only",
+        "next_artifact": "Reuse the criteria-history topology with invented local fixtures; do not import simulated scores as human preference labels.",
+        "forbidden": ["human-ground-truth-claim", "universal-vibe-score", "upstream-rights-erasure", "raw-source-copy", "reidentification"]
+      },
+      "nuances": [
+        "Its hidden gem is the evolving criteria tree, not the scalar score.",
+        "A simulator can test whether a protocol tracks changing intent, but cannot establish what people actually prefer."
+      ],
+      "risks": ["synthetic preference laundering", "upstream licence variance", "reward-model circularity"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/kixlab/DiscoverLLM-multiturn-preferences",
+        "https://arxiv.org/abs/2602.03429"
+      ]
+    },
+    {
+      "rank": 6,
+      "repo_id": "bethgelab/PAMELA",
+      "hub_object_id": "69d64de6dd0ebed360d8e901",
+      "revision": "31f79afb29d88bab46e65886ec5fd0c4298b3a65",
+      "canonical_url": "https://huggingface.co/datasets/bethgelab/PAMELA",
+      "domain": "visual-art",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2026-04-14T13:09:45.000Z",
+        "downloads": 117,
+        "likes": 7,
+        "hub_license_tag": "license:cc-by-4.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "CC-BY-4.0",
+        "scope": "The repository declares CC-BY-4.0, but that does not remove privacy duties or validate the card's broad copyright claims about generated images."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["normative"],
+        "identity_surface": "sensitive-pseudonymous",
+        "observation_unit": "one participant's repeated aesthetic rating of one generated image, linked to image metadata and a pseudonymous profile",
+        "dimensions": ["form-style", "affect-resonance", "cultural-linguistic-situation", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "preserved"
+      },
+      "flow": {
+        "axis": "repeated-observer",
+        "stages": [
+          "a prompt and style configuration generate an image",
+          "a participant rates the image on a one-to-five aesthetic instrument",
+          "repeated ratings reveal within-person and between-person variation",
+          "seen-user and unseen-user splits test personalization transfer"
+        ],
+        "preserves": ["pseudonymous person linkage", "image linkage", "prompt and style", "original and categorical score"],
+        "loses": ["why a participant chose a rating", "distinction between beautiful, liked, preferred, and attention-grabbing"]
+      },
+      "viewer": {
+        "status": "mismatched",
+        "configs": ["default/train"],
+        "reported_rows": "5,083 image rows in Viewer versus 69,904 ratings described in the card",
+        "schema": ["image"],
+        "note": "Ratings and profiles are nested in a ZIP, the Viewer only sees images, and a macOS resource-fork image causes row post-processing errors."
+      },
+      "route": {
+        "mode": "metadata-only",
+        "next_artifact": "A privacy and packaging repair proposal centered on per-person trajectories and ties, never demographic taste prediction.",
+        "forbidden": ["universal-vibe-score", "demographic-inference", "reidentification", "narrow-subgroup-claim", "raw-profile-storage"]
+      },
+      "nuances": [
+        "The card warns that 199 participants across 23 nationalities are not globally representative.",
+        "Card field counts disagree for visual groups and style categories; the archive also contains a parallel __MACOSX tree."
+      ],
+      "risks": ["reidentification", "small subgroup claims", "single-instrument collapse", "packaging ambiguity"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/bethgelab/PAMELA",
+        "https://arxiv.org/abs/2604.07427"
+      ]
+    },
+    {
+      "rank": 7,
+      "repo_id": "Rapidata/text-2-image-Rich-Human-Feedback",
+      "hub_object_id": "677c1f196b1653e3955dbce7",
+      "revision": "0821569087db08c6a9be9935cef0c82c54cec534",
+      "canonical_url": "https://huggingface.co/datasets/Rapidata/text-2-image-Rich-Human-Feedback",
+      "domain": "visual-art",
+      "role": "hidden-gem",
+      "hub_observation": {
+        "last_modified": "2025-03-07T10:56:35.000Z",
+        "downloads": 288,
+        "likes": 37,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "Apache-2.0",
+        "scope": "The repository declares Apache-2.0; model/image provenance is still too incomplete to infer upstream rights from the wrapper."
+      },
+      "evidence": {
+        "observer_origin": "human",
+        "epistemic_layers": ["descriptive", "normative"],
+        "identity_surface": "none",
+        "observation_unit": "one generated image and prompt with aggregated alignment, coherence, and style feedback plus localized low-score evidence",
+        "dimensions": ["intent-constraint", "form-style", "coherence-craft", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "aggregated-away"
+      },
+      "flow": {
+        "axis": "localized-region",
+        "stages": [
+          "a text prompt and an undisclosed generator produce an image",
+          "human responses separately assess alignment, coherence, and style",
+          "missing prompt words and low-scoring image regions localize negative evidence",
+          "release rows expose averages and heatmaps rather than rater distributions"
+        ],
+        "preserves": ["separate feedback dimensions", "word-level miss signals", "localized low-score heatmaps"],
+        "loses": ["individual rater distributions", "country context", "generator identity", "reasons behind style scores"]
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": ["default/train"],
+        "reported_rows": "13,024 rows; approximately 17.94 GB converted size",
+        "schema": ["image", "prompt", "word_scores", "alignment_score", "coherence_score", "style_score", "alignment_heatmap", "coherence_heatmap"],
+        "note": "The Viewer is complete, but it exposes only aggregates, not the claimed 1.5 million underlying responses."
+      },
+      "route": {
+        "mode": "schema-only",
+        "next_artifact": "Prototype a local negative-evidence sidecar with invented images and region masks; keep each dimension separate.",
+        "forbidden": ["universal-vibe-score", "representativeness-claim", "generator-provenance-invention", "image-copy"]
+      },
+      "nuances": [
+        "Localized failure evidence is more actionable than the overall style average.",
+        "The attached arXiv identifier describes a predecessor method, not this release, so it cannot substitute for release-specific provenance."
+      ],
+      "risks": ["lossy aggregation", "missing generator provenance", "image rights ambiguity", "unsupported representativeness claim"],
+      "primary_sources": ["https://huggingface.co/datasets/Rapidata/text-2-image-Rich-Human-Feedback"]
+    },
+    {
+      "rank": 8,
+      "repo_id": "vicgalle/creative-rubrics",
+      "hub_object_id": "67c2ea75be05f412aa3c8817",
+      "revision": "fc24d2c7dfb0578550604cc6cf319f9f46e5c727",
+      "canonical_url": "https://huggingface.co/datasets/vicgalle/creative-rubrics",
+      "domain": "writing",
+      "role": "control-artifact",
+      "hub_observation": {
+        "last_modified": "2025-06-17T06:56:52.000Z",
+        "downloads": 128,
+        "likes": 8,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "Apache-2.0",
+        "scope": "The checked-in generated dataset is declared Apache-2.0."
+      },
+      "evidence": {
+        "observer_origin": "model",
+        "epistemic_layers": ["control"],
+        "identity_surface": "none",
+        "observation_unit": "one prompt, one explicit creative rubric, one low/moderate/high control qualifier, and one model response",
+        "dimensions": ["intent-constraint", "form-style", "coherence-craft", "novelty-surprise", "uncertainty-evidence"],
+        "disagreement": "not-applicable"
+      },
+      "flow": {
+        "axis": "rubric-grid",
+        "stages": [
+          "a writing prompt receives one explicit style rubric",
+          "a low, moderate, or high qualifier sets the requested degree",
+          "a teacher model generates a controlled response",
+          "a separate model-derived preference set ranks rubric compliance"
+        ],
+        "preserves": ["rubric text", "control level", "prompt", "source model"],
+        "loses": ["human preference", "open-ended qualities outside the selected rubric"]
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": ["default/train"],
+        "reported_rows": "1,328 control rows; companion preference repository has 900 rows",
+        "schema": ["prompt", "qualifier", "rubric", "response", "model", "full_prompt"],
+        "note": "The companion vicgalle/creative-rubrics-preferences is pinned separately in the sources, not silently merged."
+      },
+      "route": {
+        "mode": "bounded-sample-after-review",
+        "next_artifact": "A local rubric-control fixture showing that requested shape and observer preference are different layers.",
+        "forbidden": ["human-ground-truth-claim", "universal-vibe-score", "rubric-compliance-equals-quality"]
+      },
+      "nuances": [
+        "The reversible low/moderate/high control is the useful mechanism; the model judge is not evidence of human taste.",
+        "Explicit controls make it possible to ask for a shape without claiming the shape is better."
+      ],
+      "risks": ["synthetic judge circularity", "rubric tunnel vision", "control-preference conflation"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/vicgalle/creative-rubrics",
+        "https://huggingface.co/datasets/vicgalle/creative-rubrics-preferences",
+        "https://arxiv.org/abs/2506.11702"
+      ]
+    },
+    {
+      "rank": 9,
+      "repo_id": "Shuaimyself/MMArt",
+      "hub_object_id": "69d3eb9f3df99c9484afb048",
+      "revision": "ee0626506aa9f90a557d6a7548d32ef88dd40779",
+      "canonical_url": "https://huggingface.co/datasets/Shuaimyself/MMArt",
+      "domain": "visual-art",
+      "role": "control-artifact",
+      "hub_observation": {
+        "last_modified": "2026-04-10T12:32:25.000Z",
+        "downloads": 138,
+        "likes": 2,
+        "hub_license_tag": "license:cc-by-4.0"
+      },
+      "license": {
+        "status": "conflicting",
+        "expression": "README applies CC-BY-4.0 to original text annotations and says painting images are not included; live repository conversion includes an image column and about 25.4 GB",
+        "scope": "The current bytes contradict the card's component boundary, so neither the global tag nor the prose is sufficient for an image-content route."
+      },
+      "evidence": {
+        "observer_origin": "mixed",
+        "epistemic_layers": ["descriptive", "control"],
+        "identity_surface": "none",
+        "observation_unit": "one WikiArt painting, four model-generated interpretive perspectives, inherited human emotion grounding, and one model-synthesized caption",
+        "dimensions": ["form-style", "affect-resonance", "coherence-craft", "cultural-linguistic-situation", "uncertainty-evidence"],
+        "disagreement": "aggregated-away"
+      },
+      "flow": {
+        "axis": "perspective-synthesis",
+        "stages": [
+          "image and metadata condition narrative, formal, emotional, and historical model prompts",
+          "the emotional lane also consumes ARTEMIS-v2 crowd grounding",
+          "four generated perspectives remain as separate fields",
+          "a text model harmonizes them into one unified caption"
+        ],
+        "preserves": ["four perspective fields", "artist/style/date metadata", "ARTEMIS coverage flag", "RAG similarity"],
+        "loses": ["individual human reactions", "conflicts softened by the unified synthesis", "certainty boundaries inside fluent captions"]
+      },
+      "viewer": {
+        "status": "mismatched",
+        "configs": ["default/train"],
+        "reported_rows": "74,234 paintings; 25,436,722,331 converted bytes",
+        "schema": ["image_id", "title", "artist", "style", "date", "e_narrative", "e_formal", "e_emotional", "e_historical", "e_unified", "dominant_emotion", "image"],
+        "note": "The live schema and byte size include image data despite the README saying images are not redistributed."
+      },
+      "route": {
+        "mode": "metadata-only",
+        "next_artifact": "A packaging and rights audit; reuse the four-perspective topology only with local or clearly licensed fixtures.",
+        "forbidden": ["human-ground-truth-claim", "universal-vibe-score", "artwork-copy", "licence-guessing", "synthesis-as-consensus"]
+      },
+      "nuances": [
+        "Multiple fluent perspectives are still model outputs, not independent human interpretations.",
+        "The unified caption can erase productive contradiction between perspectives."
+      ],
+      "risks": ["card-byte contradiction", "artwork copyright", "synthetic authority", "perspective collapse"],
+      "primary_sources": ["https://huggingface.co/datasets/Shuaimyself/MMArt"]
+    },
+    {
+      "rank": 10,
+      "repo_id": "OpenAssistant/oasst2",
+      "hub_object_id": "6587ff94509bcae23f71024d",
+      "revision": "179dd21fc55192153d94adb0e0ce8f69e222bf75",
+      "canonical_url": "https://huggingface.co/datasets/OpenAssistant/oasst2",
+      "domain": "conversation",
+      "role": "calibration-anchor",
+      "hub_observation": {
+        "last_modified": "2024-01-11T06:09:29.000Z",
+        "downloads": 21811,
+        "likes": 298,
+        "hub_license_tag": "license:apache-2.0"
+      },
+      "license": {
+        "status": "declared",
+        "expression": "Apache-2.0",
+        "scope": "The repository declares Apache-2.0; public user text and pseudonymous IDs still require privacy and content review."
+      },
+      "evidence": {
+        "observer_origin": "mixed",
+        "epistemic_layers": ["descriptive", "normative"],
+        "identity_surface": "pseudonymous",
+        "observation_unit": "one message in a multilingual conversation tree with parent, rank, review, emoji, label, and synthetic/model context",
+        "dimensions": ["intent-constraint", "form-style", "affect-resonance", "coherence-craft", "novelty-surprise", "cultural-linguistic-situation", "trajectory-repair", "disagreement-tie", "uncertainty-evidence"],
+        "disagreement": "partially-preserved"
+      },
+      "flow": {
+        "axis": "conversation-branch",
+        "stages": [
+          "a message enters a multilingual tree",
+          "human or synthetic replies create branches",
+          "reviews, labels, emojis, and sibling rank annotate branches",
+          "ready, all, spam, prompt, train, and validation exports apply different inclusion views"
+        ],
+        "preserves": ["parent and tree ids", "role", "language", "rank", "review counts", "labels", "emojis", "synthetic/model marker"],
+        "loses": ["context outside the exported tree", "reviewer-specific rationales", "meaning hidden by aggregate rank"]
+      },
+      "viewer": {
+        "status": "ready",
+        "configs": ["default/train", "default/validation"],
+        "reported_rows": "128,575 train and 6,599 validation messages; card also exposes tree-oriented exports",
+        "schema": ["message_id", "parent_id", "user_id", "created_date", "text", "role", "lang", "review_count", "review_result", "rank", "synthetic", "model_name", "message_tree_id", "emojis", "labels"],
+        "note": "The tabular Viewer is a flat message view; the repository's tree exports retain a different conversation shape."
+      },
+      "route": {
+        "mode": "aggregate-after-review",
+        "next_artifact": "A text-free branch-shape calibration census that suppresses user identifiers and rare-language slices.",
+        "forbidden": ["universal-vibe-score", "reidentification", "raw-user-text", "rank-equals-worth", "synthetic-human-conflation"]
+      },
+      "nuances": [
+        "A flat Viewer row is not a conversation; branch structure must be reconstructed from parent and tree ids.",
+        "Deleted or negative-review exports can reveal why a clean training view looks smoother than the underlying process."
+      ],
+      "risks": ["public user text", "pseudonymous identifiers", "multilingual sparsity", "rank overinterpretation"],
+      "primary_sources": [
+        "https://huggingface.co/datasets/OpenAssistant/oasst2",
+        "https://arxiv.org/abs/2304.07327"
+      ]
+    }
+  ]
+}

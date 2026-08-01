@@ -5,5 +5,7 @@
 .venv/
 __pycache__/
 dist/
+site-dist/
 node_modules/
+*.tgz
 *.log

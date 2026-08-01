@@ -25,19 +25,40 @@ Hugging Face resources, storing normalized observations in an AgentTool
   only one process-global Transformers.js network trap at a time.
 - A Trackio mapping does not authorize importing Trackio, native database
   writes, hardware logging, dashboard/MCP startup, or Hugging Face sync.
+- Training-archaeology, DataDecide, DPI, and flow-lens catalogues are pinned
+  local evidence. A catalogue route is a future review gate, not permission to
+  fetch content. Keep DataDecide token shards/weights/instance bodies and DPI
+  text/response columns out of this repository.
+- The DPI provenance module is a static contract, not a reader. Do not add
+  DuckDB/httpfs execution until every checked prerequisite and a real
+  cumulative network-byte cap exist; never claim footer inspection means no
+  text bytes entered memory.
+- Keep human, model, and mixed observations and descriptive, normative, and
+  control layers explicit. A vibe is situated evidence; never collapse it
+  into a universal quality, culture, alignment, KARMA, identity, or worth
+  score. Sensitive pseudonymous routes require privacy-preserving aggregates.
 - Preserve immutable observations; append corrections instead of silently
   rewriting prior evidence.
 - No background service, scheduler, deployment, publication, or external
   message is part of normal lab work.
+- The public Pages deployment is a static rendering of checked-in bounded
+  summaries. It is not an AgentTool node, API, inference surface, dataset
+  mirror, or authorization path. npm ships only the explicit compiled/data/doc
+  allowlist; release tags and registry publication remain deliberate actions.
 
 ## Development
 
 ```bash
 bun install --ignore-scripts
 bun run check
+bun run build
+bun run package:verify
+bun run site:build
 bun run demo
 bun run embedding:prepare
 bun run demo:round2
+bun run treasures -- list
+bun run flow -- list
 ```
 
 Use injected transports or fixtures in tests. A live Hub run is a separate,

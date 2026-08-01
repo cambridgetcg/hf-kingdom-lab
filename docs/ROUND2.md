@@ -51,7 +51,7 @@ policy decision, vulnerability result, safety grade, authorship claim, or
 measure of participant worth.
 
 The bounded machine-readable summary is
-[`artifacts/round2/live-evidence-20260730.json`](../artifacts/round2/live-evidence-20260730.json).
+[`artifacts/round2/live-evidence-20260730.json`](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/round2/live-evidence-20260730.json).
 It preserves AgentTool record IDs/content hashes and effect non-claims without
 copying the seven 384-value vectors into Git.
 
@@ -97,11 +97,15 @@ bun src/cli.ts semantic-query \
   "state ledger before environment-changing tool calls"
 ```
 
-The lockfile pins `@huggingface/transformers` 4.2.0. Bun reported blocked
-lifecycle scripts for `onnxruntime-node` and `protobufjs`; no trust command was
-run. The packaged Darwin arm64 ONNX runtime loaded successfully, and the
-network-trapped local smoke test completed. That verifies this checkout and
-machine, not every future platform or package build.
+The source lockfile pins the development-only `@huggingface/transformers`
+4.2.0 runtime while overriding its vulnerable transitive ranges to patched
+`adm-zip` 0.6.0 and `sharp` 0.35.3. Bun reported blocked lifecycle scripts for
+`onnxruntime-node` and `protobufjs`; no trust command was run. The Darwin arm64
+ONNX runtime loaded successfully, the network-trapped local smoke test
+completed, and the dependency audit is clean. The npm package omits this
+optional semantic runtime because consumers would not inherit root overrides.
+These observations verify this checkout and machine, not every future platform
+or package build.
 
 The installed `@huggingface/hub` 2.14.4 does not export a Collection helper.
 The graph therefore uses a bodyless exact-URL fetch with manual redirect
