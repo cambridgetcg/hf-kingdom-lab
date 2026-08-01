@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { HubResourceSnapshot } from "../src/hub.ts";
 import {
+  resolveDefaultDataRoot,
   ingestResources,
   inspectLab,
   queryLab,
@@ -19,6 +20,28 @@ afterEach(async () => {
 });
 
 describe("local AgentTool data integration", () => {
+  test("keeps installed-package state out of node_modules by default", () => {
+    expect(resolveDefaultDataRoot({}, "darwin", "/Users/demo"))
+      .toBe("/Users/demo/Library/Application Support/hf-kingdom-lab");
+    expect(resolveDefaultDataRoot({}, "linux", "/home/demo"))
+      .toBe("/home/demo/.local/share/hf-kingdom-lab");
+    expect(resolveDefaultDataRoot(
+      { XDG_DATA_HOME: "/srv/agent-data" },
+      "linux",
+      "/home/demo",
+    )).toBe("/srv/agent-data/hf-kingdom-lab");
+    expect(resolveDefaultDataRoot(
+      { HFKL_DATA_ROOT: "/tmp/explicit-hfkl" },
+      "linux",
+      "/home/demo",
+    )).toBe("/tmp/explicit-hfkl");
+    expect(() => resolveDefaultDataRoot(
+      { HFKL_DATA_ROOT: "relative/path" },
+      "linux",
+      "/home/demo",
+    )).toThrow("HFKL_DATA_ROOT must be a bounded absolute path");
+  });
+
   test("deduplicates resource bytes while recording each run receipt", async () => {
     const root = await mkdtemp(join(tmpdir(), "hf-kingdom-lab-"));
     roots.push(root);

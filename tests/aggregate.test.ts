@@ -4,6 +4,7 @@ import {
   MCP_SHIELD_QUERY,
   MCP_SHIELD_URL,
   PROJECT_PYTHON,
+  resolveProjectPython,
   sqlSubprocessCommand,
   validateDatasetAggregate,
 } from "../src/aggregate.ts";
@@ -44,6 +45,13 @@ function validDocument(): unknown {
 }
 
 describe("fixed DuckDB aggregate boundary", () => {
+  test("accepts only an explicit absolute Python override", () => {
+    expect(resolveProjectPython({ HFKL_PYTHON: "/opt/hfkl/bin/python" }))
+      .toBe("/opt/hfkl/bin/python");
+    expect(() => resolveProjectPython({ HFKL_PYTHON: "./python" }))
+      .toThrow("HFKL_PYTHON must be a bounded absolute path");
+  });
+
   test("accepts the closed aggregate schema", () => {
     expect(validateDatasetAggregate(validDocument())).toMatchObject({
       protocol: "hf-kingdom-dataset-aggregate/v1",

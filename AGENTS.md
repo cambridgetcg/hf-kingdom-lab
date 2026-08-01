@@ -41,12 +41,19 @@ Hugging Face resources, storing normalized observations in an AgentTool
   rewriting prior evidence.
 - No background service, scheduler, deployment, publication, or external
   message is part of normal lab work.
+- The public Pages deployment is a static rendering of checked-in bounded
+  summaries. It is not an AgentTool node, API, inference surface, dataset
+  mirror, or authorization path. npm ships only the explicit compiled/data/doc
+  allowlist; release tags and registry publication remain deliberate actions.
 
 ## Development
 
 ```bash
 bun install --ignore-scripts
 bun run check
+bun run build
+bun run package:verify
+bun run site:build
 bun run demo
 bun run embedding:prepare
 bun run demo:round2

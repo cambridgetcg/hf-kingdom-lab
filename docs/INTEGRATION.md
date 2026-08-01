@@ -177,30 +177,36 @@ KINGDOM integration.
 
 ## Dependency provenance
 
-`@agenttool/data` is pinned to the public 0.3.1 tarball URL. The corresponding
-AgentTool LOVE manifest identifies source revision
+`@agenttool/data` is pinned to public registry version 0.3.1, and Bun's lock
+records the registry artifact's SHA-512 integrity. The corresponding AgentTool
+LOVE manifest identifies source revision
 `d0e131cbf6610552b23cff143d6499dfb2c51eb1`, tarball size `101008`, and
 SHA-256 `8be9c7950e3479d356e62abc624d602d6d6e949d57509a2a8cae2924731ce0b7`.
 
-Bun's URL lock entry does not carry that integrity digest. A separate
-point-in-time tarball verification can establish that the downloaded public
-artifact matched the manifest during verification, but it does not make every
-future install cryptographically bound to that digest. Vendoring a
-digest-pinned artifact or adding a preinstall verifier would be needed for
-that stronger property. On 2026-07-30, a fresh HTTPS download was verified as
-exactly 101008 bytes with the manifest SHA-256 above; the temporary verifier
-copy was then removed.
+On 2026-07-30, a fresh HTTPS download was independently verified as exactly
+101008 bytes with the manifest SHA-256 above; the current registry artifact is
+byte-identical. The lock integrity binds installs to those registry bytes. It
+does not prove the source revision, package ownership, or safety of the code;
+those remain separate provenance and review claims.
 
-`@huggingface/transformers` is exactly 4.2.0 in `package.json` and Bun's
-lockfile. Its model is the Apache-2.0 community conversion
+The source checkout keeps `@huggingface/transformers` exactly 4.2.0 as a
+development-only research runtime. Its declared `adm-zip` and `sharp` ranges
+still admit versions covered by high-severity advisories, so the root lock
+overrides them to patched `adm-zip` 0.6.0 and `sharp` 0.35.3. Both a complete
+dependency audit and the real 384-dimensional local inference smoke pass with
+that graph. npm consumers do not inherit root-package overrides, so the public
+package intentionally omits the Transformers runtime instead of presenting an
+unsafe transitive graph as a normal dependency.
+
+The fixed model is the Apache-2.0 community conversion
 `Xenova/all-MiniLM-L6-v2` at commit
 `751bff37182d3f1213fa05d7196b954e230abad9`; the four-file application
 manifest totals 23,685,047 bytes and has canonical manifest SHA-256
 `07dbea9de5d2118cc16e01bbfca811e3589bb2dcd8cf5b27bd3ed51489d677d9`.
 Bun blocked lifecycle scripts for `onnxruntime-node` and `protobufjs`; no trust
-command was run. The packaged Darwin arm64 runtime nevertheless passed the
-local network-trapped smoke test. This is observed compatibility on this
-checkout, not a universal supply-chain or platform guarantee.
+command was run. The Darwin arm64 runtime nevertheless passed the local
+network-trapped smoke test. This is observed compatibility on this checkout,
+not a universal supply-chain or platform guarantee.
 
 ## Safe extensions
 

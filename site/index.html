@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#11100f">
+    <meta
+      name="description"
+      content="A bounded view of HF Kingdom Lab's checked-in DataDecide, DPI provenance, and Flow & Vibe evidence."
+    >
+    <title>HF Kingdom Lab — evidence has edges</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the evidence</a>
+
+    <header class="masthead">
+      <a class="wordmark" href="#top" aria-label="HF Kingdom Lab home">
+        <span class="wordmark-mark" aria-hidden="true">HF<span>KL</span></span>
+        <span>Kingdom Lab</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#artifacts">Artifacts</a>
+        <a href="#boundaries">Boundaries</a>
+        <a href="#flow">Flow atlas</a>
+        <a href="https://github.com/cambridgetcg/hf-kingdom-lab">Repository <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse" aria-hidden="true"></span> Local-first · pinned · inspectable</p>
+          <h1 id="hero-title">Evidence has<br><em>edges.</em></h1>
+          <p class="hero-deck">
+            A small laboratory for seeing how training decisions, provenance, and situated
+            observations change shape—without turning them into universal truth.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#artifacts">Read the evidence</a>
+            <a class="button button-quiet" href="https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/INTEGRATION.md">Integration notes <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <div class="orbit orbit-one"><span>recipe</span></div>
+          <div class="orbit orbit-two"><span>provenance</span></div>
+          <div class="orbit orbit-three"><span>vibe ≠ verdict</span></div>
+          <div class="orbit-core">observe<br>without<br>flattening</div>
+        </div>
+      </section>
+
+      <aside class="truth-strip" aria-label="Important scope">
+        <p><strong>What lives here</strong> Pinned public metadata, explicit joins, contradictions, and review routes.</p>
+        <p><strong>What does not</strong> Dataset bodies, model weights, participant text, universal rankings, or live Hub calls.</p>
+      </aside>
+
+      <section class="section" id="artifacts" aria-labelledby="artifacts-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / Three instruments</p>
+            <h2 id="artifacts-title">The checked-in evidence</h2>
+          </div>
+          <p>
+            This page is compiled from three versioned JSON artifacts in the repository.
+            The summaries are deliberately smaller than their sources.
+          </p>
+        </div>
+
+        <div id="artifact-summary" class="artifact-grid" aria-live="polite" aria-busy="false">
+          <article class="artifact-card loading-card" hidden>
+            <p class="card-kicker">Loading local summary</p>
+            <h3>Reading bounded evidence…</h3>
+            <p>No remote dataset request is made.</p>
+          </article>
+        </div>
+        <noscript>
+          <p class="notice">JavaScript is needed to render the local JSON summary. The project boundaries and documentation links remain available below.</p>
+        </noscript>
+      </section>
+
+      <section class="section boundary-section" id="boundaries" aria-labelledby="boundaries-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / Honest machinery</p>
+            <h2 id="boundaries-title">Capability is not permission</h2>
+          </div>
+          <p>
+            Every route is narrower than the source it describes. Ambiguity stays visible;
+            a convenient API or Viewer does not become authority.
+          </p>
+        </div>
+
+        <div class="boundary-grid">
+          <article class="boundary-card does">
+            <p class="boundary-label"><span aria-hidden="true">✓</span> The lab does</p>
+            <ul>
+              <li>pin public repository identities and revisions</li>
+              <li>preserve joins, drift, missingness, and disagreement</li>
+              <li>separate human, model, and mixed observations</li>
+              <li>record bounded local evidence receipts</li>
+              <li>fail closed when a shape changes unexpectedly</li>
+            </ul>
+          </article>
+          <article class="boundary-card does-not">
+            <p class="boundary-label"><span aria-hidden="true">×</span> The lab does not</p>
+            <ul>
+              <li>mirror dataset rows, weights, audio, or response text</li>
+              <li>infer identity, demographic taste, culture, or person-worth</li>
+              <li>turn licences or publisher metadata into legal authority</li>
+              <li>erase contradictions by silently choosing one count</li>
+              <li>republish remote dataset bodies, mutate the Hub, or start a service</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section flow-section" id="flow" aria-labelledby="flow-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / Plural sensing</p>
+            <h2 id="flow-title">Flow &amp; Vibe atlas</h2>
+          </div>
+          <p>
+            “Vibe” means a situated pattern tied to an observer, context, moment,
+            instrument, and provenance—never an essence or universal score.
+          </p>
+        </div>
+
+        <div class="lens-definitions" id="lens-definitions" aria-live="polite"></div>
+        <div class="flow-controls" id="flow-controls" role="group" aria-label="Filter atlas by domain"></div>
+        <div class="flow-grid" id="flow-grid" aria-live="polite" aria-busy="false"></div>
+      </section>
+
+      <section class="section field-notes" aria-labelledby="notes-title">
+        <div>
+          <p class="eyebrow">Continue reading</p>
+          <h2 id="notes-title">Follow the uncertainty</h2>
+        </div>
+        <div class="note-links">
+          <a href="https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/DATADECIDE-LEDGER.md">
+            <span>DataDecide ledger</span><small>Recipes, scales, seeds, checkpoints, evaluations</small>
+          </a>
+          <a href="https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/DPI-PROVENANCE.md">
+            <span>DPI provenance contract</span><small>Why the reader is intentionally deferred</small>
+          </a>
+          <a href="https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/FLOW-AND-VIBE.md">
+            <span>Flow &amp; Vibe notes</span><small>Observer, transformation, disagreement, route</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built from bounded, checked-in evidence. No application analytics or remote scripts. No dataset-body fetches.</p>
+      <a href="https://github.com/cambridgetcg/hf-kingdom-lab">View source <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
+</html>

@@ -71,21 +71,21 @@ As of 2026-07-30, the live demos have:
   Trackio 0.34.0 concepts without importing Trackio, writing native Trackio
   storage, starting hardware logging, a dashboard, MCP, or Hugging Face sync.
 
-See [docs/ROUND2.md](docs/ROUND2.md) for the exact live result and
-[bounded live evidence](artifacts/round2/live-evidence-20260730.json) for the
+See [docs/ROUND2.md](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/ROUND2.md) for the exact live result and
+[bounded live evidence](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/round2/live-evidence-20260730.json) for the
 record IDs, hashes, effects, and limitations. DTap's 10,000-entry result is
 Hub-order partial and explicitly not a representative dataset distribution.
 Semantic similarity is a derived English-language signal, not a truth or
 safety decision.
 
 The saved SQL evidence snapshot is
-[artifacts/hf/mcpshield-grade-aggregate-20260730-direct-python.json](artifacts/hf/mcpshield-grade-aggregate-20260730-direct-python.json).
+[artifacts/hf/mcpshield-grade-aggregate-20260730-direct-python.json](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/hf/mcpshield-grade-aggregate-20260730-direct-python.json).
 Scanner grades are evidence to investigate, not established vulnerabilities.
 The associated MCP security study reports that fewer than half of sampled
 scanner alerts survived manual validation.
 
 The companion
-[artifacts/hf/public-resource-ingest-20260730.json](artifacts/hf/public-resource-ingest-20260730.json)
+[artifacts/hf/public-resource-ingest-20260730.json](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/hf/public-resource-ingest-20260730.json)
 is the exact effects receipt and record index for the four-resource Hub run.
 
 ## Training decisions, provenance, and situated flow
@@ -93,16 +93,16 @@ is the exact effects receipt and record index for the four-resource Hub run.
 The 2026-08-01 deep pass turns three promising research seams into bounded
 local artifacts:
 
-- the [DataDecide phase ledger](docs/DATADECIDE-LEDGER.md) preserves exact
+- the [DataDecide phase ledger](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/DATADECIDE-LEDGER.md) preserves exact
   recipe aliases, all 14 scales, five seed identities, branch-qualified
   checkpoint witnesses, and evaluation joins without mirroring roughly 19 TB
   of token shards or 123 GB of instance evaluations;
-- the [DPI provenance contract](docs/DPI-PROVENANCE.md) pins the three source
+- the [DPI provenance contract](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/DPI-PROVENANCE.md) pins the three source
   exports, ten Viewer Parquet shards, nested provenance schema, immutable
   revisions, count discrepancy, column boundary, and prerequisites for a
   future aggregate reader. No reader is implemented because the current
   DuckDB/httpfs boundary cannot yet enforce the claimed network-byte ceiling;
-- the [flow and vibe atlas](docs/FLOW-AND-VIBE.md) maps ten writing, visual-art,
+- the [flow and vibe atlas](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/FLOW-AND-VIBE.md) maps ten writing, visual-art,
   music, and conversation artifacts across pair, turn, branch, culture/language,
   observer, region, rubric, perspective, and time-series shapes.
 
@@ -133,13 +133,13 @@ that is an inference rather than an observed output-channel marker. The
 evidence explicitly does **not** claim a complete Cantonese answer, and the run
 was not repeated to manufacture a cleaner result.
 
-See the [run receipt](artifacts/local-model/receipt.json),
-[metrics and model file hashes](artifacts/local-model/metrics.json), and
-[bounded recovered output](artifacts/local-model/selected-output.txt).
+See the [run receipt](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/local-model/receipt.json),
+[metrics and model file hashes](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/local-model/metrics.json), and
+[bounded recovered output](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/artifacts/local-model/selected-output.txt).
 
 ## Run it
 
-Requirements: Bun 1.3+, `uv`, and network access to the public Hugging Face
+Requirements: Bun 1.3.5+, `uv`, and network access to the public Hugging Face
 resource being observed.
 
 ```bash
@@ -172,7 +172,9 @@ off and replace its fetch transport with a failing network trap.
 the project `.venv` and may contact the configured Python package index to
 install the locked DuckDB wheel. `sql-demo` then executes that environment's
 Python directly; it does not run `uv`, sync dependencies, or contact a package
-index as part of the recorded aggregate operation.
+index as part of the recorded aggregate operation. An installed npm package
+can instead use an explicitly provisioned absolute interpreter through
+`HFKL_PYTHON`; that override does not install or trust Python dependencies.
 
 Observe one additional named public repository:
 
@@ -180,9 +182,38 @@ Observe one additional named public repository:
 bun src/cli.ts ingest dataset AI-Secure/DTap-Bench-Agent-Trajectories
 ```
 
-Local records live under `.hf-kingdom-data/`, which is ignored by Git. The
-demo's public metadata and source bytes can change over time, so every stored
-document carries its observation time or source digest.
+Local records use the platform user-data directory (`~/Library/Application
+Support/hf-kingdom-lab` on macOS, `$XDG_DATA_HOME/hf-kingdom-lab` or
+`~/.local/share/hf-kingdom-lab` on Linux). `HFKL_DATA_ROOT` may name a bounded
+absolute override. State therefore stays outside `node_modules` and survives a
+package update. The demo's public metadata and source bytes can change over
+time, so every stored document carries its observation time or source digest.
+
+## Public package and atlas
+
+The Apache-2.0 npm package ships compiled Bun ESM, explicit subpath exports,
+three CLIs, the four closed JSON catalogues/contracts, and documentation. It
+does not ship the experiment receipts, source tree, test fixtures, remote
+dataset bodies, model weights, or prepared local AgentTool node.
+
+The npm install also deliberately omits the optional local Transformers
+runtime. As of this release, Transformers 4.2.0 still declares transitive
+ranges containing two high-severity advisory families. The source checkout
+keeps that research lane available behind audited lockfile overrides to
+`adm-zip` 0.6.0 and `sharp` 0.35.3; the published package does not silently
+impose those root-only overrides on consumers. Its catalogue APIs and the
+`hfkl-flow`/`hfkl-treasures` CLIs do not need the semantic runtime.
+
+```bash
+bun add --exact @agenttool/hf-kingdom-lab@0.1.0
+bunx --package @agenttool/hf-kingdom-lab@0.1.0 hfkl-flow list
+bunx --package @agenttool/hf-kingdom-lab@0.1.0 hfkl-treasures list
+```
+
+The [public atlas](https://cambridgetcg.github.io/hf-kingdom-lab/) is a static
+rendering of bounded checked-in summaries. GitHub Pages serves no AgentTool
+node, dataset row, inference endpoint, credential, scheduler, or remote-action
+API.
 
 ## Honest boundaries
 
@@ -233,5 +264,5 @@ document carries its observation time or source digest.
 - `RIGHTS.md` adopts `xenia.rights/0.1`. Rights, account permissions, and
   authorization remain distinct.
 
-See [docs/HF-RESOURCE-MAP.md](docs/HF-RESOURCE-MAP.md) for the wider playground
-and [docs/INTEGRATION.md](docs/INTEGRATION.md) for the bridge contract.
+See [docs/HF-RESOURCE-MAP.md](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/HF-RESOURCE-MAP.md) for the wider playground
+and [docs/INTEGRATION.md](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/INTEGRATION.md) for the bridge contract.

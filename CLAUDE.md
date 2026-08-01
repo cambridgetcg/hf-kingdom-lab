@@ -3,7 +3,9 @@
 What this is: a small local research bridge between Hugging Face, AgentTool's
 local `agent-data/v1` reference node, and the KINGDOM registry.
 
-Status: experimental and local-only.
+Status: experimental. Runtime data and active operations remain local-only;
+the source, bounded npm artifact, and static summary atlas are public release
+surfaces.
 
 What it does:
 
@@ -33,7 +35,9 @@ What it does not do:
   inference credits;
 - claim that metadata, popularity, publisher text, or model output is true;
 - project collected records into AgentTool memory or call AgentTool production;
-- start an HTTP server, sync peers, schedule itself, deploy, or publish.
+- have any runtime command start an HTTP server, sync peers, schedule itself,
+  deploy, or publish; release and Pages workflows remain explicit maintainer
+  actions.
 - treat a path count, paper/Collection claim, vector score, or Trackio mapping
   as verified truth, policy, native Trackio storage, or authority.
 - treat model controls as human preference, demographics as culture, or a
@@ -58,7 +62,17 @@ bun run flow -- list
 bun run flow -- trace amaai-lab/MERP
 ```
 
-The default local node lives at `.hf-kingdom-data/` and is ignored by Git.
+The default local node lives in the platform user-data directory, outside the
+repository and `node_modules`. `HFKL_DATA_ROOT` may specify a bounded absolute
+override. The npm package and static Pages atlas do not expose that node.
+The npm distribution also omits the optional Transformers inference runtime;
+the source checkout keeps it as a development dependency with reviewed
+`adm-zip` and `sharp` security overrides.
+
+The repository does contain explicit release mechanisms: `bun run build`
+creates compiled Bun ESM, `bun run package:verify` packs and installs the exact
+npm allowlist without lifecycle scripts, and `bun run site:build` creates the
+static Pages artifact. Their presence does not itself publish or deploy.
 Files intentionally saved under `artifacts/` are bounded experiment receipts,
 not the database itself. `artifacts/local-model/receipt.json` records one
 accepted public local MLX run; it reports successful inference but incomplete

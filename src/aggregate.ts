@@ -1,4 +1,4 @@
-import { resolve } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import {
   canonicalJson,
   type DataNode,
@@ -12,13 +12,25 @@ import {
 
 export const MCP_SHIELD_DATASET = "MCPShield/mcp-security-scan-2026";
 export const MCP_SHIELD_URL = "https://huggingface.co/datasets/MCPShield/mcp-security-scan-2026/resolve/refs%2Fconvert%2Fparquet/default/train/0000.parquet";
-export const PROJECT_PYTHON = resolve(
-  import.meta.dir,
-  "..",
-  ".venv",
-  "bin",
-  "python",
-);
+export const PROJECT_PYTHON = resolveProjectPython();
+
+export function resolveProjectPython(
+  env: Readonly<Record<string, string | undefined>> = process.env,
+): string {
+  const explicit = env.HFKL_PYTHON;
+  if (explicit !== undefined) {
+    if (
+      explicit.length === 0
+      || explicit.length > 4_096
+      || explicit.includes("\0")
+      || !isAbsolute(explicit)
+    ) {
+      throw new TypeError("HFKL_PYTHON must be a bounded absolute path");
+    }
+    return resolve(explicit);
+  }
+  return resolve(import.meta.dir, "..", ".venv", "bin", "python");
+}
 export const MCP_SHIELD_QUERY = [
   "SELECT",
   "  grade,",
@@ -67,7 +79,9 @@ export interface DatasetAggregate {
 export async function runMcpShieldSql(): Promise<DatasetAggregate> {
   const script = resolve(import.meta.dir, "mcpshield_sql.py");
   if (!(await Bun.file(PROJECT_PYTHON).exists())) {
-    throw new Error("project Python environment is missing; run `uv sync --frozen` first");
+    throw new Error(
+      "SQL demo Python is missing; in a source checkout run `uv sync --frozen`, or set HFKL_PYTHON to an authorized absolute Python path with the locked DuckDB dependencies",
+    );
   }
   const process = Bun.spawn(sqlSubprocessCommand(script), {
     cwd: resolve(import.meta.dir, ".."),

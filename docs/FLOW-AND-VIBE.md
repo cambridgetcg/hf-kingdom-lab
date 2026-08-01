@@ -8,8 +8,8 @@ universal aesthetic score.
 The checked-in catalogue is
 [`data/flow-lenses.v1.json`](../data/flow-lenses.v1.json). Its validator and
 exact-allowlist CLI are
-[`src/flow-lenses.ts`](../src/flow-lenses.ts) and
-[`src/flow-cli.ts`](../src/flow-cli.ts).
+[`src/flow-lenses.ts`](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/src/flow-lenses.ts) and
+[`src/flow-cli.ts`](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/src/flow-cli.ts).
 
 In this project:
 

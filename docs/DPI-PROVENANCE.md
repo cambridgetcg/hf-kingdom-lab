@@ -6,7 +6,7 @@ closed-schema validation, and makes no network request.
 
 The canonical artifact is
 [`data/dpi-provenance-contract.v1.json`](../data/dpi-provenance-contract.v1.json).
-[`src/dpi-provenance.ts`](../src/dpi-provenance.ts) validates every pinned
+[`src/dpi-provenance.ts`](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/src/dpi-provenance.ts) validates every pinned
 identity, file manifest, schema field, count, endpoint, column boundary, and
 reader prerequisite.
 
