@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Local-first Hugging Face resource experiments with AgentTool evidence and KINGDOM discovery.",
   "bin": {
-    "hfkl": "./src/cli.ts"
+    "hfkl": "./src/cli.ts",
+    "hfkl-flow": "./src/flow-cli.ts",
+    "hfkl-treasures": "./src/treasure-cli.ts"
   },
   "scripts": {
     "check": "bun run typecheck && bun test",
@@ -13,7 +15,9 @@
     "demo:sql": "bun src/cli.ts sql-demo",
     "demo:round2": "bun src/cli.ts round2-demo",
     "embedding:prepare": "bun src/cli.ts embedding-prepare",
+    "flow": "bun src/flow-cli.ts",
     "test": "bun test",
+    "treasures": "bun src/treasure-cli.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

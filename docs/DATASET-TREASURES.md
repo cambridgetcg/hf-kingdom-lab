@@ -216,10 +216,15 @@ What each component does **not** do matters:
 
 ## Recommended build order
 
-1. **DataDecide recipe ledger.** Highest knowledge-per-byte and no body read is
-   needed for the first useful graph.
-2. **DPI provenance census.** Query only source/licence metadata and return no
-   text; record the exact exported Parquet digest and count discrepancy.
+1. **DataDecide recipe ledger — implemented.** The
+   [bounded five-stage ledger](DATADECIDE-LEDGER.md) preserves exact aliases,
+   scale/seed roles, branch target SHAs, evaluation joins, and known drift
+   without token shards, weights, or instance bodies.
+2. **DPI provenance census — contract implemented, reader deferred.** The
+   [static provenance contract](DPI-PROVENANCE.md) pins source/conversion
+   manifests, schema, columns, and the 128-row discrepancy. A live aggregate
+   reader remains out of scope until its pinned `httpfs`, subprocess, redirect,
+   and hard network-byte-cap prerequisites are actually satisfied.
 3. **FineMath exclusion-witness contract.** Use invented local fixtures until
    the missing dataset licence is clarified.
 4. **CodeTraceBench verified census.** Aggregate stage/error distributions;

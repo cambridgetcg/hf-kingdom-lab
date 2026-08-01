@@ -19,6 +19,12 @@ What it does:
   CPU/q8 English semantic signals tied to source record hashes;
 - emits a Trackio 0.34.0 capability mapping without importing or starting
   Trackio;
+- validates a static DataDecide recipe → scale → seed → checkpoint →
+  evaluation ledger without token shards, weights, or instance bodies;
+- validates a static DPI source/licence manifest and future-reader contract
+  without running DuckDB/httpfs or reading dataset rows;
+- exposes exact-allowlist training-treasure and situated flow/vibe catalogues;
+  optional record commands store public Hub metadata and receipts only;
 - declares itself to KINGDOM through the root `kingdom.yaml`.
 
 What it does not do:
@@ -30,6 +36,11 @@ What it does not do:
 - start an HTTP server, sync peers, schedule itself, deploy, or publish.
 - treat a path count, paper/Collection claim, vector score, or Trackio mapping
   as verified truth, policy, native Trackio storage, or authority.
+- treat model controls as human preference, demographics as culture, or a
+  situated aesthetic/affect observation as universal quality, identity, or
+  worth;
+- read DataDecide token shards, DPI text/response columns, artistic media,
+  participant profiles, or conversation bodies through catalogue commands.
 
 Commands:
 
@@ -42,6 +53,9 @@ bun src/cli.ts sql-demo
 bun src/cli.ts embedding-prepare
 bun src/cli.ts round2-demo
 bun src/cli.ts semantic-query "effects receipts and policy checks"
+bun run treasures -- list
+bun run flow -- list
+bun run flow -- trace amaai-lab/MERP
 ```
 
 The default local node lives at `.hf-kingdom-data/` and is ignored by Git.

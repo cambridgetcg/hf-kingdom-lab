@@ -9,7 +9,7 @@ import {
 } from "../src/treasures.ts";
 
 describe("pinned treasure recording", () => {
-  test("reuses one validated snapshot for the exact local AgentTool write", async () => {
+  test("reconstructs one exact narrow snapshot for the local AgentTool write", async () => {
     const catalogue = await loadTreasureCatalogue();
     const treasure = findTreasure(catalogue, "NJU-LINK/CodeTraceBench");
     const snapshot = snapshotFor(treasure);
@@ -37,8 +37,12 @@ describe("pinned treasure recording", () => {
       ingester: async (options) => {
         calls += 1;
         received = options;
-        const reused = await options.observer?.("dataset", treasure.repo_id);
-        expect(reused).toBe(snapshot);
+        const recorded = await options.observer?.("dataset", treasure.repo_id);
+        expect(recorded).not.toBe(snapshot);
+        expect(recorded).toEqual(snapshot);
+        expect(recorded?.resource).not.toBe(snapshot.resource);
+        expect(recorded?.observation_boundary).not.toBe(snapshot.observation_boundary);
+        expect(recorded?.resource.tags).not.toBe(snapshot.resource.tags);
         return agenttool;
       },
     });
@@ -55,13 +59,15 @@ describe("pinned treasure recording", () => {
       pinned_revision: treasure.revision,
       agenttool,
     }));
+    expect(result.limits.join(" ")).toContain("newly reconstructed allowlisted copy");
+    expect(result.limits.join(" ")).toContain("No dataset row");
   });
 
-  test("refuses identity drift before calling the local ingester", async () => {
+  test("refuses last-modified identity drift before calling the local ingester", async () => {
     const catalogue = await loadTreasureCatalogue();
     const treasure = catalogue.entries[0]!;
     const moved = snapshotFor(treasure);
-    moved.resource.revision = "0".repeat(40);
+    moved.resource.updated_at = "2026-08-01T00:00:00.000Z";
     let calls = 0;
 
     await expect(recordTreasureMetadata(treasure, {
@@ -71,6 +77,25 @@ describe("pinned treasure recording", () => {
         throw new Error("must not run");
       },
     })).rejects.toThrow("identity changed");
+    expect(calls).toBe(0);
+  });
+
+  test("rejects injected resource text before invoking AgentTool", async () => {
+    const catalogue = await loadTreasureCatalogue();
+    const treasure = catalogue.entries[0]!;
+    const injected = snapshotFor(treasure) as unknown as {
+      resource: Record<string, unknown>;
+    };
+    injected.resource.raw_user_text = "must never reach AgentTool";
+    let calls = 0;
+
+    await expect(recordTreasureMetadata(treasure, {
+      observer: async () => injected as unknown as HubResourceSnapshot,
+      ingester: async () => {
+        calls += 1;
+        throw new Error("must not run");
+      },
+    })).rejects.toThrow("snapshot.resource contains unexpected fields");
     expect(calls).toBe(0);
   });
 });

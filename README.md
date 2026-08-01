@@ -25,11 +25,23 @@ fixed DTap tree + exact Collection/Paper roots
   -> hash-verified local MiniLM CPU/q8 embeddings
   -> bounded semantic scan + Trackio capability mapping
   -> separate AgentTool evidence collections
+
+pinned training/data archaeology
+  -> DataDecide recipe -> scale -> seed -> checkpoint -> evaluation ledger
+  -> DPI source/licence manifest and fail-closed future-reader contract
+  -> situated artistic/conversation/music flow lenses
+  -> optional exact metadata-only AgentTool receipt
 ```
 
 It does **not** start a service, call AgentTool production, project anything
 into memory, enumerate private repositories, invoke a Space, submit a Job, use
 Inference Providers, or write to Hugging Face.
+
+The archaeology lane also contains no training token shards, checkpoint
+weights, evaluation-instance archives, DPI text, prompts/responses, images,
+audio, participant profiles, or verbatim/full remote dataset rows. The
+DataDecide ledger intentionally retains two normalized aggregate-result
+witnesses with exact source coordinates.
 
 ## What works
 
@@ -76,6 +88,31 @@ The companion
 [artifacts/hf/public-resource-ingest-20260730.json](artifacts/hf/public-resource-ingest-20260730.json)
 is the exact effects receipt and record index for the four-resource Hub run.
 
+## Training decisions, provenance, and situated flow
+
+The 2026-08-01 deep pass turns three promising research seams into bounded
+local artifacts:
+
+- the [DataDecide phase ledger](docs/DATADECIDE-LEDGER.md) preserves exact
+  recipe aliases, all 14 scales, five seed identities, branch-qualified
+  checkpoint witnesses, and evaluation joins without mirroring roughly 19 TB
+  of token shards or 123 GB of instance evaluations;
+- the [DPI provenance contract](docs/DPI-PROVENANCE.md) pins the three source
+  exports, ten Viewer Parquet shards, nested provenance schema, immutable
+  revisions, count discrepancy, column boundary, and prerequisites for a
+  future aggregate reader. No reader is implemented because the current
+  DuckDB/httpfs boundary cannot yet enforce the claimed network-byte ceiling;
+- the [flow and vibe atlas](docs/FLOW-AND-VIBE.md) maps ten writing, visual-art,
+  music, and conversation artifacts across pair, turn, branch, culture/language,
+  observer, region, rubric, perspective, and time-series shapes.
+
+The flow atlas treats a vibe as a situated observation rather than an essence
+or universal score. It machine-separates human, model, and mixed evidence;
+descriptive, normative, and control lanes; component licences; identity
+surfaces; Viewer mismatches; and what each transformation preserves or loses.
+Its exact-allowlist `record` command stores a newly reconstructed narrow copy
+of current public Hub metadata and an effects receipt only.
+
 ## Local 20B result
 
 One public, unauthenticated MLX run of
@@ -118,6 +155,10 @@ bun run demo:round2
 bun src/cli.ts semantic-query \
   "tool side effects, policy checks, receipts, and security evidence"
 bun src/cli.ts doctor
+
+bun run treasures -- list
+bun run flow -- list
+bun run flow -- trace amaai-lab/MERP
 ```
 
 `embedding:prepare` is the only model-asset network step. It accepts no model
@@ -174,6 +215,18 @@ document carries its observation time or source digest.
 - The aggregate path validates an exact closed document schema before
   collection. Arbitrary URLs, SQL, datasets, and row-level output are not
   accepted.
+- The DataDecide ledger is checked-in, static evidence. It retains exact alias
+  joins and branch target SHAs, but its bounded checkpoint/evaluation rows are
+  witnesses rather than a materialized copy of all 31,404 revisions or 1.41M
+  result rows.
+- The DPI module is a static contract, not a dataset reader. Hub LFS hashes are
+  publisher/Hub assertions because the 1.23 GB source and 1.89 GB conversion
+  were not downloaded and rehashed. A future range reader must also account
+  honestly for text min/max statistics present in Parquet footers.
+- Flow-lens `list`, `show`, and `trace` are local. `drift` reads one exact public
+  dataset's metadata; `record` refuses identity drift and stores that same
+  metadata only. A future content route still needs the listed licence,
+  privacy, representation, and aggregate gates.
 - The KINGDOM card makes this lab discoverable as a local `nervous`-layer
   project. It does not register a production runtime or grant authority over
   AgentTool, KINGDOM, Hugging Face, or any participant.

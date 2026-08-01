@@ -62,8 +62,8 @@ export async function recordTreasureMetadata(
     agenttool,
     limits: [
       "The checked-in treasure analysis remains in the versioned catalogue",
-      "AgentTool received public Hub metadata and an effects receipt only",
-      "No dataset row or repository file was read or stored",
+      "AgentTool received a newly reconstructed allowlisted copy of current public Hub metadata and an effects receipt only",
+      "No dataset row, repository file, prompt, response, profile, or participant/user identifier was read or stored",
     ],
   };
 }

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
   assertRepoId,
+  normalizePublicDatasetSnapshot,
   observePublicResource,
   type HubResourceSnapshot,
 } from "./hub.ts";
@@ -184,12 +185,27 @@ export function assertTreasureCatalogue(
   value: unknown,
 ): asserts value is TreasureCatalogue {
   const catalogue = objectValue(value, "catalogue");
+  exactKeys(catalogue, [
+    "protocol",
+    "observed_at",
+    "purpose",
+    "boundary",
+    "entries",
+  ], "catalogue");
   if (catalogue.protocol !== "hf-kingdom-dataset-treasures/v1") {
     throw new TypeError("catalogue protocol must be hf-kingdom-dataset-treasures/v1");
   }
   isoInstant(catalogue.observed_at, "catalogue.observed_at");
   nonemptyString(catalogue.purpose, "catalogue.purpose");
   const boundary = objectValue(catalogue.boundary, "catalogue.boundary");
+  exactKeys(boundary, [
+    "catalogue_is_evidence_not_authority",
+    "remote_rows_collected",
+    "remote_files_collected",
+    "hub_mutation",
+    "license_claims_are_publisher_assertions",
+    "popularity_is_not_quality",
+  ], "catalogue.boundary");
   for (const key of [
     "catalogue_is_evidence_not_authority",
     "license_claims_are_publisher_assertions",
@@ -203,12 +219,31 @@ export function assertTreasureCatalogue(
   if (!Array.isArray(catalogue.entries) || catalogue.entries.length === 0) {
     throw new TypeError("catalogue.entries must be a non-empty array");
   }
+  assertDenseDataArray(catalogue.entries, "catalogue.entries");
 
   const repoIds = new Set<string>();
   const ranks = new Set<number>();
   for (const [index, rawEntry] of catalogue.entries.entries()) {
     const label = `catalogue.entries[${index}]`;
     const entry = objectValue(rawEntry, label);
+    exactKeys(entry, [
+      "rank",
+      "repo_id",
+      "hub_object_id",
+      "revision",
+      "canonical_url",
+      "phase",
+      "discovery_class",
+      "hub_observation",
+      "license",
+      "viewer",
+      "scale",
+      "treasure",
+      "kingdom_route",
+      "known_drift",
+      "risks",
+      "primary_sources",
+    ], label);
     const rank = positiveInteger(entry.rank, `${label}.rank`);
     if (ranks.has(rank)) throw new TypeError(`duplicate treasure rank: ${rank}`);
     ranks.add(rank);
@@ -234,6 +269,13 @@ export function assertTreasureCatalogue(
     enumValue(entry.discovery_class, DISCOVERY_CLASSES, `${label}.discovery_class`);
 
     const observation = objectValue(entry.hub_observation, `${label}.hub_observation`);
+    exactKeys(observation, [
+      "observed_at",
+      "last_modified",
+      "downloads",
+      "likes",
+      "hub_license_tag",
+    ], `${label}.hub_observation`);
     isoInstant(observation.observed_at, `${label}.hub_observation.observed_at`);
     isoInstant(observation.last_modified, `${label}.hub_observation.last_modified`);
     nonnegativeInteger(observation.downloads, `${label}.hub_observation.downloads`);
@@ -247,6 +289,7 @@ export function assertTreasureCatalogue(
     }
 
     const license = objectValue(entry.license, `${label}.license`);
+    exactKeys(license, ["status", "expression", "scope"], `${label}.license`);
     const licenseStatus = enumValue(
       license.status,
       LICENSE_STATES,
@@ -278,6 +321,7 @@ export function assertTreasureCatalogue(
     }
 
     const viewer = objectValue(entry.viewer, `${label}.viewer`);
+    exactKeys(viewer, ["status", "configs", "schema", "note"], `${label}.viewer`);
     const viewerStatus = enumValue(viewer.status, VIEWER_STATES, `${label}.viewer.status`);
     stringArray(viewer.configs, `${label}.viewer.configs`, true);
     stringArray(viewer.schema, `${label}.viewer.schema`, true);
@@ -286,6 +330,7 @@ export function assertTreasureCatalogue(
     nonemptyString(entry.scale, `${label}.scale`);
     nonemptyString(entry.treasure, `${label}.treasure`);
     const route = objectValue(entry.kingdom_route, `${label}.kingdom_route`);
+    exactKeys(route, ["mode", "next_artifact", "does_not"], `${label}.kingdom_route`);
     const mode = enumValue(route.mode, CONTENT_ROUTES, `${label}.kingdom_route.mode`);
     nonemptyString(route.next_artifact, `${label}.kingdom_route.next_artifact`);
     stringArray(route.does_not, `${label}.kingdom_route.does_not`);
@@ -368,13 +413,18 @@ export async function observeTreasure(
 ): Promise<{ snapshot: HubResourceSnapshot; drift: TreasureDriftReport }> {
   const observer = options.observer
     ?? ((repoId: string) => observePublicResource("dataset", repoId));
-  const snapshot = await observer(treasure.repo_id);
-  assertObservedTreasureSnapshot(snapshot, treasure);
-  const liveLicenseTag = snapshot.resource.tags
-    ?.find((tag) => tag.startsWith("license:")) ?? null;
-  const liveRevision = snapshot.resource.revision ?? null;
-  const liveGated = snapshot.resource.gated ?? null;
-  const liveDisabled = snapshot.resource.disabled ?? null;
+  const observedSnapshot = await observer(treasure.repo_id);
+  const snapshot = normalizePublicDatasetSnapshot(observedSnapshot, {
+    repo_id: treasure.repo_id,
+    canonical_url: treasure.canonical_url,
+    hub_object_id: treasure.hub_object_id,
+    observer_label: "treasure",
+  });
+  const resource = snapshot.resource;
+  const liveLicenseTag = extractLicenseTag(resource.tags);
+  const liveRevision = resource.revision ?? null;
+  const liveGated = resource.gated ?? null;
+  const liveDisabled = resource.disabled ?? null;
   const drift: TreasureDriftReport = {
     protocol: "hf-kingdom-dataset-treasure-drift/v1",
     checked_at: validNow(options.now ?? (() => new Date())).toISOString(),
@@ -386,22 +436,23 @@ export async function observeTreasure(
       hub_license_tag: treasure.hub_observation.hub_license_tag,
     },
     live: {
-      hub_object_id: snapshot.resource.hub_object_id,
+      hub_object_id: resource.hub_object_id,
       revision: liveRevision,
-      last_modified: snapshot.resource.updated_at,
+      last_modified: resource.updated_at,
       hub_license_tag: liveLicenseTag,
       gated: liveGated,
       disabled: liveDisabled,
     },
     identity_changed:
-      snapshot.resource.hub_object_id !== treasure.hub_object_id
+      resource.hub_object_id !== treasure.hub_object_id
       || liveRevision !== treasure.revision
+      || resource.updated_at !== treasure.hub_observation.last_modified
       || liveLicenseTag !== treasure.hub_observation.hub_license_tag
       || liveGated !== false
       || liveDisabled !== false,
     attention_delta: {
-      downloads: (snapshot.resource.downloads ?? 0) - treasure.hub_observation.downloads,
-      likes: snapshot.resource.likes - treasure.hub_observation.likes,
+      downloads: (resource.downloads ?? 0) - treasure.hub_observation.downloads,
+      likes: resource.likes - treasure.hub_observation.likes,
     },
     boundary: {
       public_metadata_read_only: true,
@@ -412,55 +463,12 @@ export async function observeTreasure(
   return { snapshot, drift };
 }
 
-function assertObservedTreasureSnapshot(
-  snapshot: HubResourceSnapshot,
-  treasure: DatasetTreasure,
-): void {
-  const resource = snapshot.resource;
-  const boundary = snapshot.observation_boundary;
-  if (
-    snapshot.protocol !== "hf-kingdom-resource/v1"
-    || resource.resource_type !== "dataset"
-    || resource.repo_id !== treasure.repo_id
-    || resource.canonical_url !== treasure.canonical_url
-    || resource.hub_object_id !== treasure.hub_object_id
-  ) {
-    throw new Error("treasure observer returned a different resource identity");
+function extractLicenseTag(tags: string[] | undefined): string | null {
+  const licenses = (tags ?? []).filter((tag) => tag.startsWith("license:"));
+  if (licenses.length > 1) {
+    throw new Error("treasure observer returned multiple Hub licence tags");
   }
-  if (resource.private !== false) {
-    throw new Error("treasure observer returned a private resource");
-  }
-  if (
-    boundary.access !== "public-read-without-token"
-    || boundary.transport !== "@huggingface/hub"
-    || boundary.assertions_are_untrusted !== true
-    || boundary.private_resources_in_scope !== false
-    || boundary.hub_mutation_in_scope !== false
-  ) {
-    throw new Error("treasure observer returned an unsafe observation boundary");
-  }
-  nonnegativeInteger(resource.likes, "observed resource likes");
-  if (resource.downloads !== undefined) {
-    nonnegativeInteger(resource.downloads, "observed resource downloads");
-  }
-  isoInstant(resource.updated_at, "observed resource updated_at");
-  if (resource.revision !== undefined && !SHA40.test(resource.revision)) {
-    throw new Error("treasure observer returned an invalid revision");
-  }
-  if (
-    resource.gated !== undefined
-    && resource.gated !== false
-    && resource.gated !== "auto"
-    && resource.gated !== "manual"
-  ) {
-    throw new Error("treasure observer returned an invalid gated state");
-  }
-  if (resource.disabled !== undefined && typeof resource.disabled !== "boolean") {
-    throw new Error("treasure observer returned an invalid disabled state");
-  }
-  if (resource.tags !== undefined && !resource.tags.every((tag) => typeof tag === "string")) {
-    throw new Error("treasure observer returned invalid tags");
-  }
+  return licenses[0] ?? null;
 }
 
 function objectValue(value: unknown, label: string): Record<string, unknown> {
@@ -468,6 +476,43 @@ function objectValue(value: unknown, label: string): Record<string, unknown> {
     throw new TypeError(`${label} must be an object`);
   }
   return value as Record<string, unknown>;
+}
+
+function exactKeys(
+  value: Record<string, unknown>,
+  expected: readonly string[],
+  label: string,
+): void {
+  const actual = ownStringKeys(value, label).sort();
+  const wanted = [...expected].sort();
+  if (
+    actual.length !== wanted.length
+    || actual.some((key, index) => key !== wanted[index])
+  ) {
+    throw new TypeError(`${label} must contain exactly: ${wanted.join(", ")}`);
+  }
+}
+
+function ownStringKeys(value: Record<string, unknown>, label: string): string[] {
+  const keys = Reflect.ownKeys(value);
+  if (keys.some((key) => typeof key !== "string")) {
+    throw new TypeError(`${label} contains unexpected symbol fields`);
+  }
+  return keys as string[];
+}
+
+function assertDenseDataArray(value: unknown[], label: string): void {
+  const keys = Reflect.ownKeys(value);
+  const expected = new Set([
+    "length",
+    ...Array.from({ length: value.length }, (_, index) => String(index)),
+  ]);
+  if (
+    keys.some((key) => typeof key !== "string" || !expected.has(key))
+    || keys.length !== expected.size
+  ) {
+    throw new TypeError(`${label} must be a dense data-only array`);
+  }
 }
 
 function nonemptyString(value: unknown, label: string): string {
@@ -519,6 +564,7 @@ function stringArray(value: unknown, label: string, allowEmpty = false): string[
   if (!Array.isArray(value) || (!allowEmpty && value.length === 0) || value.length > 64) {
     throw new TypeError(`${label} must be a bounded string array`);
   }
+  assertDenseDataArray(value, label);
   const strings = value.map((item, index) => nonemptyString(item, `${label}[${index}]`));
   if (new Set(strings).size !== strings.length) {
     throw new TypeError(`${label} must not contain duplicates`);

@@ -30,6 +30,52 @@ describe("training archaeology atlas", () => {
     }));
   });
 
+  test("closes every catalogue object and array to hidden body channels", async () => {
+    const catalogue = await loadTreasureCatalogue();
+
+    const topLevel = structuredClone(catalogue) as unknown as Record<string, unknown>;
+    topLevel.raw_dataset_rows = [];
+    expect(() => assertTreasureCatalogue(topLevel)).toThrow(
+      "catalogue must contain exactly",
+    );
+
+    const hiddenEntry = structuredClone(catalogue) as unknown as {
+      entries: Array<Record<string, unknown>>;
+    };
+    Object.defineProperty(hiddenEntry.entries[0]!, "hidden_body", {
+      value: "must never be accepted",
+      enumerable: false,
+    });
+    expect(() => assertTreasureCatalogue(hiddenEntry)).toThrow(
+      "catalogue.entries[0] must contain exactly",
+    );
+
+    const symbolNested = structuredClone(catalogue) as unknown as {
+      entries: Array<{ viewer: Record<string | symbol, unknown> }>;
+    };
+    symbolNested.entries[0]!.viewer[Symbol("body")] = "must never be accepted";
+    expect(() => assertTreasureCatalogue(symbolNested)).toThrow(
+      "catalogue.entries[0].viewer contains unexpected symbol fields",
+    );
+
+    const customEntries = structuredClone(catalogue);
+    Object.defineProperty(customEntries.entries, "instance_body", {
+      value: "must never be accepted",
+      enumerable: false,
+    });
+    expect(() => assertTreasureCatalogue(customEntries)).toThrow(
+      "catalogue.entries must be a dense data-only array",
+    );
+
+    const customNestedArray = structuredClone(catalogue);
+    (customNestedArray.entries[0]!.risks as unknown as Record<symbol, unknown>)[
+      Symbol("body")
+    ] = "must never be accepted";
+    expect(() => assertTreasureCatalogue(customNestedArray)).toThrow(
+      "catalogue.entries[0].risks must be a dense data-only array",
+    );
+  });
+
   test("keeps missing licences on metadata/schema-only routes", async () => {
     const catalogue = await loadTreasureCatalogue();
     const missing = catalogue.entries.filter((entry) => entry.license.status === "missing");
@@ -97,10 +143,20 @@ describe("training archaeology atlas", () => {
       downloads: treasure.hub_observation.downloads + 11,
       likes: treasure.hub_observation.likes + 2,
     });
+    snapshot.resource.author = "NJU-LINK";
+    snapshot.resource.created_at = "2026-04-01T00:00:00.000Z";
+    snapshot.resource.arrays_truncated = false;
     const observed = await observeTreasure(treasure, {
       observer: async () => snapshot,
       now: () => new Date("2026-07-31T19:00:00.000Z"),
     });
+    expect(observed.snapshot).not.toBe(snapshot);
+    expect(observed.snapshot).toEqual(snapshot);
+    expect(observed.snapshot.resource).not.toBe(snapshot.resource);
+    expect(observed.snapshot.observation_boundary).not.toBe(snapshot.observation_boundary);
+    if (snapshot.resource.tags) {
+      expect(observed.snapshot.resource.tags).not.toBe(snapshot.resource.tags);
+    }
     expect(observed.drift.identity_changed).toBe(false);
     expect(observed.drift.attention_delta).toEqual({ downloads: 11, likes: 2 });
     expect(observed.drift.boundary).toEqual({
@@ -116,6 +172,14 @@ describe("training archaeology atlas", () => {
       now: () => new Date("2026-07-31T19:01:00.000Z"),
     });
     expect(drifted.drift.identity_changed).toBe(true);
+
+    const updated = structuredClone(snapshot);
+    updated.resource.updated_at = "2026-04-14T09:07:54.000Z";
+    const timestampDrift = await observeTreasure(treasure, {
+      observer: async () => updated,
+      now: () => new Date("2026-07-31T19:01:30.000Z"),
+    });
+    expect(timestampDrift.drift.identity_changed).toBe(true);
 
     const missingDisabled = structuredClone(snapshot);
     delete missingDisabled.resource.disabled;
@@ -154,6 +218,124 @@ describe("training archaeology atlas", () => {
     await expect(observeTreasure(treasure, {
       observer: async () => unsafe as unknown as HubResourceSnapshot,
     })).rejects.toThrow("unsafe observation boundary");
+  });
+
+  test("rejects hidden snapshot fields and optional-field body channels", async () => {
+    const catalogue = await loadTreasureCatalogue();
+    const treasure = catalogue.entries[0]!;
+
+    const outerExtra = snapshotFor(treasure) as unknown as Record<string, unknown>;
+    outerExtra.raw_user_text = "must never reach AgentTool";
+    await expect(observeTreasure(treasure, {
+      observer: async () => outerExtra as unknown as HubResourceSnapshot,
+    })).rejects.toThrow("treasure snapshot must contain exactly");
+
+    const boundaryExtra = snapshotFor(treasure) as unknown as {
+      observation_boundary: Record<string, unknown>;
+    };
+    boundaryExtra.observation_boundary.raw_user_text = "must never reach AgentTool";
+    await expect(observeTreasure(treasure, {
+      observer: async () => boundaryExtra as unknown as HubResourceSnapshot,
+    })).rejects.toThrow("treasure snapshot.observation_boundary must contain exactly");
+
+    const resourceExtra = snapshotFor(treasure) as unknown as {
+      resource: Record<string, unknown>;
+    };
+    resourceExtra.resource.raw_user_text = "must never reach AgentTool";
+    await expect(observeTreasure(treasure, {
+      observer: async () => resourceExtra as unknown as HubResourceSnapshot,
+    })).rejects.toThrow("treasure snapshot.resource contains unexpected fields");
+
+    const hiddenResource = snapshotFor(treasure);
+    Object.defineProperty(hiddenResource.resource, "hidden_body", {
+      value: "must never reach AgentTool",
+      enumerable: false,
+    });
+    await expect(observeTreasure(treasure, {
+      observer: async () => hiddenResource,
+    })).rejects.toThrow("treasure snapshot.resource contains unexpected fields");
+
+    const symbolResource = snapshotFor(treasure) as unknown as {
+      resource: Record<string | symbol, unknown>;
+    };
+    symbolResource.resource[Symbol("body")] = "must never reach AgentTool";
+    await expect(observeTreasure(treasure, {
+      observer: async () => symbolResource as unknown as HubResourceSnapshot,
+    })).rejects.toThrow("treasure snapshot.resource contains unexpected symbol fields");
+
+    const bodyChannels: Array<{
+      field: "author" | "created_at" | "arrays_truncated" | "tags";
+      value: unknown;
+      message: string;
+    }> = [
+      {
+        field: "author",
+        value: { raw_user_text: "secret body" },
+        message: "observed resource author must be a bounded non-empty string",
+      },
+      {
+        field: "author",
+        value: "x".repeat(257),
+        message: "observed resource author must be a bounded non-empty string",
+      },
+      {
+        field: "created_at",
+        value: "not-an-instant",
+        message: "observed resource created_at must be an ISO UTC instant",
+      },
+      {
+        field: "arrays_truncated",
+        value: { instance_body: "payload" },
+        message: "invalid arrays_truncated state",
+      },
+      {
+        field: "tags",
+        value: Array.from({ length: 101 }, (_, index) => `tag-${index}`),
+        message: "observed resource tags must contain 0-100 strings",
+      },
+      {
+        field: "tags",
+        value: ["x".repeat(513)],
+        message: "observed resource tags[0] must be a bounded non-empty string",
+      },
+    ];
+    for (const bodyChannel of bodyChannels) {
+      const injected = snapshotFor(treasure) as unknown as {
+        resource: Record<string, unknown>;
+      };
+      injected.resource[bodyChannel.field] = bodyChannel.value;
+      await expect(observeTreasure(treasure, {
+        observer: async () => injected as unknown as HubResourceSnapshot,
+      })).rejects.toThrow(bodyChannel.message);
+    }
+
+    const objectRevision = snapshotFor(treasure) as unknown as {
+      resource: { revision: unknown };
+    };
+    objectRevision.resource.revision = {
+      toString: () => treasure.revision,
+      raw_instance_body: "payload",
+    };
+    await expect(observeTreasure(treasure, {
+      observer: async () => objectRevision as unknown as HubResourceSnapshot,
+    })).rejects.toThrow("invalid revision");
+
+    for (const property of ["string", "symbol"] as const) {
+      const tagged = snapshotFor(treasure);
+      if (!tagged.resource.tags) tagged.resource.tags = ["language:en"];
+      if (property === "string") {
+        Object.defineProperty(tagged.resource.tags, "instance_body", {
+          value: "payload",
+          enumerable: false,
+        });
+      } else {
+        (tagged.resource.tags as unknown as Record<symbol, unknown>)[Symbol("body")] =
+          "payload";
+      }
+      await expect(observeTreasure(treasure, {
+        observer: async () => tagged,
+      })).rejects.toThrow("observed resource tags must be a dense data-only array");
+    }
   });
 });
 
