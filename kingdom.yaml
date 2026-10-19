@@ -1,7 +1,6 @@
 name: hf-kingdom-lab
 kind: infra
 layer: nervous
-owner_sister: sophia
 domain: sophia
 state: active
 purpose: Turns bounded public Hugging Face metadata, pinned training/provenance/flow archaeology, and fixed local model assets into source-bound AgentTool evidence, graph navigation, and local semantic signals.
