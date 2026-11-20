@@ -194,7 +194,8 @@ time, so every stored document carries its observation time or source digest.
 The Apache-2.0 npm package ships compiled Bun ESM, explicit subpath exports,
 three CLIs, the four closed JSON catalogues/contracts, and documentation. It
 does not ship the experiment receipts, source tree, test fixtures, remote
-dataset bodies, model weights, or prepared local AgentTool node.
+dataset bodies, model weights, prepared local AgentTool node, or the
+[model rights register](https://github.com/cambridgetcg/hf-kingdom-lab/blob/main/docs/INTEGRATION.md#model-rights-register).
 
 The npm install also deliberately omits the optional local Transformers
 runtime. As of this release, Transformers 4.2.0 still declares transitive

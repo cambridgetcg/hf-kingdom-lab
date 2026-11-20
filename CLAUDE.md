@@ -25,6 +25,9 @@ What it does:
   evaluation ledger without token shards, weights, or instance bodies;
 - validates a static DPI source/licence manifest and future-reader contract
   without running DuckDB/httpfs or reading dataset rows;
+- keeps a static model rights register (commit pins, declared licence tags,
+  working licence classes, duties) in the source checkout, checked by the
+  test suite; it downloads, seeds and ships nothing;
 - exposes exact-allowlist training-treasure and situated flow/vibe catalogues;
   optional record commands store public Hub metadata and receipts only;
 - declares itself to KINGDOM through the root `kingdom.yaml`.

@@ -44,7 +44,10 @@
   },
   "files": [
     "dist",
+    "!dist/model-rights.js",
+    "!dist/model-rights.d.ts",
     "data",
+    "!data/model-rights.v1.json",
     "docs",
     "README.md",
     "RIGHTS.md",

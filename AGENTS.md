@@ -29,6 +29,13 @@ Hugging Face resources, storing normalized observations in an AgentTool
   local evidence. A catalogue route is a future review gate, not permission to
   fetch content. Keep DataDecide token shards/weights/instance bodies and DPI
   text/response columns out of this repository.
+- The model rights register is a working licence reading, not legal advice
+  or a clearance. Reseed stays `not-cleared` on every row: the format has no
+  other value, and a licence review does not clear a re-seed. Keep a class
+  `unreviewed` until a named person has read the licence text at the pin.
+  Copy file and licence values only from public estate files; never download
+  or hash weights to fill a row, and run no metadata drift check without new
+  written authority.
 - The DPI provenance module is a static contract, not a reader. Do not add
   DuckDB/httpfs execution until every checked prerequisite and a real
   cumulative network-byte cap exist; never claim footer inspection means no
