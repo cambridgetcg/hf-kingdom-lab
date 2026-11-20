@@ -67,6 +67,18 @@ file manifests, schema, count drift, endpoint/column boundaries, and the
 prerequisites for a future reader. It is deliberately not a reader: no
 DuckDB/httpfs execution or data URL is accepted.
 
+`src/model-rights.ts` validates the static model rights register in
+`data/model-rights.v1.json`. It is a pure check over parsed JSON: a 40-hex
+revision and reseed `not-cleared` on every row; a class that is `unreviewed`
+or carries a named reviewer and a date, and class P or T only where a licence
+tag and Hub flags saying the repository is not gated, private or disabled are
+recorded; files that are `pending` or carry a size, SHA-256 and allowed
+format; an ONNX external data check that counts as done only with its date and
+source; sources only in the repositories the validator names; no file whose
+declared format or extension is pickle-based, a drift list whose dates never
+go backwards, and no unknown fields. It performs no network call and reads no
+model file. See [Model rights register](#model-rights-register).
+
 `src/flow-lenses.ts` validates ten situated writing, art, music, and
 conversation lenses. Human, model, and mixed origins; descriptive, normative,
 and control layers; identity surfaces; licence scope; Viewer representation;
@@ -207,6 +219,56 @@ Bun blocked lifecycle scripts for `onnxruntime-node` and `protobufjs`; no trust
 command was run. The Darwin arm64 runtime nevertheless passed the local
 network-trapped smoke test. This is observed compatibility on this checkout,
 not a universal supply-chain or platform guarantee.
+
+## Model rights register
+
+`data/model-rights.v1.json` holds the first three rows of a register of models
+the estate pins at an exact commit: the fixed embedding model above,
+`HuggingFaceTB/SmolLM2-135M-Instruct`, and the estate's own checkpoint that
+was fine-tuned from it. Other models pinned in public estate files, such as
+the MLX model in `artifacts/local-model/receipt.json`, are not yet rows. Every
+revision, file path, size, SHA-256, licence tag and Hub flag cites the public
+estate file (repository, path and commit) it was copied from, and a file's
+format is the one its name declares. A value no such file records is left
+`pending`, `not recorded` or null. The register was added under the owner's
+decision of 2026-11-14, recorded privately; no other decision follows from it.
+It concerns model licences only and is unrelated to `RIGHTS.md`, which records
+this repository's adoption of `xenia.rights/0.1` as a collaboration
+commitment.
+
+What the register is:
+
+- a pointer to upstream, commit-pinned Hugging Face URLs;
+- the licence tag a publisher declared at the pin, where a public estate file
+  records one, and otherwise `not recorded`;
+- the estate's working licence class: P (perpetual and unrestricted), T
+  (conditional or terminable) or N (none, gated or unreviewed). A row stays
+  `unreviewed`, with no duties, until a named person has read the licence text
+  at that commit;
+- a drift list: later observations that a pin, tag or flag changed are
+  appended to it. The validator can check only that its dates never go
+  backwards, not that earlier entries were left unchanged.
+
+What it is not:
+
+- legal advice, a licence grant or a clearance. Every row has reseed
+  `not-cleared`, and the schema has no other value;
+- a mirror, a seed or a download list. It holds no weights. Building it made no
+  request to a model host and read or hashed no model file;
+- complete. It has three rows, files stay `pending` where no public estate
+  file records a SHA-256, and the external data check on the one ONNX file is
+  still pending;
+- part of the npm package. `package.json` excludes the register and its
+  compiled validator, `src/index.ts` does not export it, and
+  `scripts/verify-package.ts` fails if any of those files is packed.
+
+Allowed formats are safetensors, GGUF and ONNX, plus JSON for tokenizer and
+configuration files. An ONNX file may be listed while its external data check
+is pending; it counts as an allowed weight format only once a check that it
+names no external data files is recorded with its date and source.
+Pickle-based files are never listed. Who reviews licence texts, whether a
+metadata drift check may recur, and whether the register ships in a release
+are the owner's decisions and have not been taken.
 
 ## Safe extensions
 

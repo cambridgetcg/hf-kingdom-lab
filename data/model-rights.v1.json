@@ -1,0 +1,244 @@
+{
+  "protocol": "hf-kingdom-model-rights/v1",
+  "compiled_on": "2026-11-14",
+  "purpose": "A first register of models whose weights the estate pins at an exact commit: which files, which licence the publisher declared at that commit, the estate's working licence class and the duties it carries, and whether the estate may re-seed the files. It holds three rows; other models pinned in public estate files are not yet listed. It points at upstream and holds no weights.",
+  "basis": "Built as a pull request under the owner's decision of 2026-11-14, recorded privately. No other decision is implied by this file.",
+  "boundary": {
+    "register_is_evidence_not_authority": true,
+    "classes_are_working_reading_not_legal_advice": true,
+    "license_tags_are_publisher_assertions": true,
+    "points_at_upstream_commit_pinned_urls": true,
+    "weights_published_or_seeded_by_this_register": false,
+    "reseed_cleared_for_any_row": false,
+    "network_requests_made_to_build": false,
+    "model_files_read_or_hashed_to_build": false
+  },
+  "notice": [
+    "The licence classes in this file are the estate's working reading. They are not legal advice, and they neither grant nor clear any right.",
+    "Every row has reseed 'not-cleared'. Nothing in this file permits the estate to re-seed, mirror or republish a model file.",
+    "The estate points at upstream commit-pinned URLs. Through this register it publishes, mirrors and seeds no weights.",
+    "A licence tag is what a publisher declared on the Hub. Only a named person who has read the licence text at the pinned commit may set a class other than 'unreviewed'.",
+    "Every revision, file path, size, SHA-256, licence tag and Hub flag, and the date each tag or flag was observed, was copied from the public estate file cited beside it. A file's format is the one its name declares; no file was parsed. No model host was contacted and no model file was read or hashed to build this file."
+  ],
+  "formats": {
+    "weights": [
+      "safetensors",
+      "gguf",
+      "onnx"
+    ],
+    "auxiliary": [
+      "json"
+    ],
+    "never": [
+      "pickle"
+    ],
+    "onnx_rule": "An ONNX file may be listed while its external_data_check is 'pending'. It counts as an allowed weight format only once a check that it names no external data files is recorded, as 'no-external-data' with the date and source in external_data_evidence.",
+    "pickle_rule": "Pickle-based files are never listed, whatever their extension (.bin, .pt, .pth, .ckpt, .pkl, .pickle)."
+  },
+  "classes": {
+    "P": "perpetual and unrestricted",
+    "T": "conditional or terminable",
+    "N": "none, gated or unreviewed",
+    "unreviewed": "no named person has yet read the licence text at the pinned commit; treated as N"
+  },
+  "open_decisions": [
+    "Who reads a licence text and records a class is the owner's decision. It has not been taken, so every row stays 'unreviewed'.",
+    "Whether a metadata drift check may recur, and under which written authority, is the owner's decision. It has not been taken, and no drift run built or checked this file.",
+    "Whether this register ships in an npm release is the owner's decision. By default it does not."
+  ],
+  "entries": [
+    {
+      "repo_id": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+      "origin": "third-party",
+      "upstream_url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/tree/751bff37182d3f1213fa05d7196b954e230abad9",
+      "pin_sources": [
+        {
+          "repository": "cambridgetcg/hf-kingdom-lab",
+          "path": "src/embedding.ts",
+          "commit": "d8e48068bd9af7689f3fea6cbb8d05d4e10e312a",
+          "locator": "EMBEDDING_REVISION"
+        }
+      ],
+      "files": [
+        {
+          "path": "config.json",
+          "size": 650,
+          "sha256": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7",
+          "format": "json",
+          "external_data_check": "not-applicable",
+          "external_data_evidence": null,
+          "upstream_url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/config.json",
+          "source": {
+            "repository": "cambridgetcg/hf-kingdom-lab",
+            "path": "src/embedding.ts",
+            "commit": "d8e48068bd9af7689f3fea6cbb8d05d4e10e312a",
+            "locator": "EMBEDDING_ASSETS"
+          }
+        },
+        {
+          "path": "tokenizer.json",
+          "size": 711661,
+          "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+          "format": "json",
+          "external_data_check": "not-applicable",
+          "external_data_evidence": null,
+          "upstream_url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer.json",
+          "source": {
+            "repository": "cambridgetcg/hf-kingdom-lab",
+            "path": "src/embedding.ts",
+            "commit": "d8e48068bd9af7689f3fea6cbb8d05d4e10e312a",
+            "locator": "EMBEDDING_ASSETS"
+          }
+        },
+        {
+          "path": "tokenizer_config.json",
+          "size": 366,
+          "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+          "format": "json",
+          "external_data_check": "not-applicable",
+          "external_data_evidence": null,
+          "upstream_url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer_config.json",
+          "source": {
+            "repository": "cambridgetcg/hf-kingdom-lab",
+            "path": "src/embedding.ts",
+            "commit": "d8e48068bd9af7689f3fea6cbb8d05d4e10e312a",
+            "locator": "EMBEDDING_ASSETS"
+          }
+        },
+        {
+          "path": "onnx/model_quantized.onnx",
+          "size": 22972370,
+          "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1",
+          "format": "onnx",
+          "external_data_check": "pending",
+          "external_data_evidence": null,
+          "upstream_url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff37182d3f1213fa05d7196b954e230abad9/onnx/model_quantized.onnx",
+          "source": {
+            "repository": "cambridgetcg/hf-kingdom-lab",
+            "path": "src/embedding.ts",
+            "commit": "d8e48068bd9af7689f3fea6cbb8d05d4e10e312a",
+            "locator": "EMBEDDING_ASSETS"
+          }
+        }
+      ],
+      "license": {
+        "tag_at_pin": "apache-2.0",
+        "observed_on": "2026-10-27",
+        "source": {
+          "repository": "cambridgetcg/KINGDOM-OS",
+          "path": "records/2026-10-27-dark-continent-hf-pin-drift/evidence/observations.json",
+          "commit": "b31e37be542552e98a8e2e20b18e7cbab7f68b0c",
+          "locator": "resources entry Xenova/all-MiniLM-L6-v2, observed.pinned_revision.license"
+        }
+      },
+      "class": "unreviewed",
+      "reviewer": null,
+      "reviewed_on": null,
+      "duties": [],
+      "hub_flags": {
+        "gated": false,
+        "private": false,
+        "disabled": false,
+        "observed_on": "2026-10-27",
+        "source": {
+          "repository": "cambridgetcg/KINGDOM-OS",
+          "path": "records/2026-10-27-dark-continent-hf-pin-drift/evidence/observations.json",
+          "commit": "b31e37be542552e98a8e2e20b18e7cbab7f68b0c",
+          "locator": "resources entry Xenova/all-MiniLM-L6-v2, observed.current"
+        }
+      },
+      "drift": [],
+      "reseed": "not-cleared",
+      "notes": [
+        "The files are the four that the lab's fixed embedding manifest names, not every file in the upstream repository.",
+        "The ONNX external data check is pending. The lab ran local inference from these four files with its network transport trapped, which suggests, but does not record, that the graph names no external data file.",
+        "The licence tag and the gated, private and disabled flags come from one anonymous metadata observation on 2026-10-27, when the repository head equalled this pin. The flags are repository settings, which can change without a commit."
+      ]
+    },
+    {
+      "repo_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "origin": "third-party",
+      "upstream_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/tree/12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "pin_sources": [
+        {
+          "repository": "cambridgetcg/agenttool",
+          "path": "packages/trials/hf/revocable-feedback/provenance/training-recipe.json",
+          "commit": "ee916989523648087aaace58b1cf06931d999eee",
+          "locator": "base_model_revision"
+        },
+        {
+          "repository": "cambridgetcg/agenttool",
+          "path": "packages/trials/hf/revocable-feedback-model/src/xenia_revocable_feedback_model/core.py",
+          "commit": "ee916989523648087aaace58b1cf06931d999eee",
+          "locator": "BASE_MODEL_REVISION"
+        }
+      ],
+      "files": "pending",
+      "license": {
+        "tag_at_pin": "not recorded",
+        "observed_on": null,
+        "source": null
+      },
+      "class": "unreviewed",
+      "reviewer": null,
+      "reviewed_on": null,
+      "duties": [],
+      "hub_flags": {
+        "gated": null,
+        "private": null,
+        "disabled": null,
+        "observed_on": null,
+        "source": null
+      },
+      "drift": [],
+      "reseed": "not-cleared",
+      "notes": [
+        "This is the base model of the estate's own checkpoint listed below.",
+        "No public estate file records a file SHA-256 for this revision, so its files are pending.",
+        "No public estate file records the licence the publisher declared at this revision."
+      ]
+    },
+    {
+      "repo_id": "Yu-and-Ai/xenia-revocable-feedback-smollm2-135m",
+      "revision": "7064e2e29f34a9519b57181fee10d233beba21f1",
+      "origin": "estate",
+      "upstream_url": "https://huggingface.co/Yu-and-Ai/xenia-revocable-feedback-smollm2-135m/tree/7064e2e29f34a9519b57181fee10d233beba21f1",
+      "pin_sources": [
+        {
+          "repository": "cambridgetcg/agenttool",
+          "path": "docs/REVOCABLE-FEEDBACK-RELEASE.md",
+          "commit": "ee916989523648087aaace58b1cf06931d999eee",
+          "locator": "Public release receipt table, model row"
+        }
+      ],
+      "files": "pending",
+      "license": {
+        "tag_at_pin": "not recorded",
+        "observed_on": null,
+        "source": null
+      },
+      "class": "unreviewed",
+      "reviewer": null,
+      "reviewed_on": null,
+      "duties": [],
+      "hub_flags": {
+        "gated": null,
+        "private": null,
+        "disabled": null,
+        "observed_on": null,
+        "source": null
+      },
+      "drift": [],
+      "reseed": "not-cleared",
+      "notes": [
+        "The estate's own bounded experimental checkpoint. The release record cited as its pin source says it was publicly released on the Hub on 2026-08-30.",
+        "The release record gives the weights as one 538,090,408-byte model.safetensors file in safetensors format, but no public estate file records a SHA-256 for it or for the other files at this revision, so its files are pending.",
+        "The model export ID in the release record is a domain-separated digest over the export's file inventory (path, bytes and SHA-256 of each file), computed by the package's core.py. It is not the SHA-256 of any one file.",
+        "The model card template in cambridgetcg/agenttool (packages/trials/hf/revocable-feedback-model/MODEL_CARD.md.template at ee916989523648087aaace58b1cf06931d999eee) declares license: apache-2.0. No public estate file records the card as published at this revision, so the tag at the pin is 'not recorded'.",
+        "Its base model is HuggingFaceTB/SmolLM2-135M-Instruct at 12fd25f77366fa6b3b4b768ec3050bf629380bac."
+      ]
+    }
+  ]
+}

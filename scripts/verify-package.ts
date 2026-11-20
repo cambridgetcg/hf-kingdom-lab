@@ -43,6 +43,14 @@ const ALLOWED_ROOT_FILES = new Set([
   "uv.lock",
 ]);
 const ALLOWED_DIRECTORIES = ["data/", "dist/", "docs/"];
+// The model rights register and its validator stay in the source
+// checkout. Shipping them is an owner decision; until it is taken, the
+// package.json "files" negations keep them out and this check proves it.
+const FORBIDDEN_FILES = new Set([
+  "data/model-rights.v1.json",
+  "dist/model-rights.js",
+  "dist/model-rights.d.ts",
+]);
 
 const root = resolve(import.meta.dir, "..");
 const releaseDirectory = await parseReleaseDirectory(Bun.argv.slice(2));
@@ -154,6 +162,7 @@ try {
       `if (typeof m.assertDpiProvenanceContract !== "function") process.exit(1);`,
       `if (typeof m.assertFlowLensCatalogue !== "function") process.exit(1);`,
       `if ((await m.loadFlowLensCatalogue()).entries.length !== 10) process.exit(1);`,
+      `if ("assertModelRightsRegister" in m) process.exit(1);`,
       `});`,
     ].join(""),
   ], installDirectory);
@@ -239,6 +248,9 @@ function assertAllowedPath(path: string): void {
     || path.split("/").includes("..")
   ) {
     throw new Error(`unsafe packed path: ${path}`);
+  }
+  if (FORBIDDEN_FILES.has(path)) {
+    throw new Error(`npm artifact must not ship the unreleased model rights register: ${path}`);
   }
   if (
     !ALLOWED_ROOT_FILES.has(path)
